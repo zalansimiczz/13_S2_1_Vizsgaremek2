@@ -388,48 +388,66 @@
         <div class="overflow-x-auto">
             <table class="w-full text-left">
                 <thead>
-                <tr class="text-gray-300 border-b border-white/10">
-                    <th class="py-3 pr-4">Név</th>
-                    <th class="py-3 pr-4">Telefon</th>
-                    <th class="py-3 pr-4">Státusz</th>
-                    <th class="py-3 text-right">Műveletek</th>
-                </tr>
+                    <tr class="text-gray-300 border-b border-white/10">
+                        <th class="py-3 pr-4">Név</th>
+                        <th class="py-3 pr-4">Telefon</th>
+                        <th class="py-3 pr-4">Személyi ID</th>
+                        <th class="py-3 pr-4">Státusz</th>
+                        <th class="py-3 text-right">Műveletek</th>
+                    </tr>
                 </thead>
-                <tbody class="text-gray-200">
-@forelse($drivers as $d)
-    <tr class="border-b border-white/10 hover:bg-white/5 transition">
-        <td class="py-3 pr-4">{{ $d->nev }}</td>
-        <td class="py-3 pr-4">{{ $d->telefonszam }}</td>
-        <td class="py-3 pr-4">-</td>
-        <td class="py-3 pr-4">-</td>
-        <td class="py-3 pr-4">
-            @if($d->aktiv)
-                <span class="px-2 py-1 rounded-md text-sm bg-green-600/25 text-green-200">Aktív</span>
-            @else
-                <span class="px-2 py-1 rounded-md text-sm bg-gray-600/25 text-gray-200">Inaktív</span>
-            @endif
-        </td>
-        <td class="py-3 text-right">
-            {{-- később: módosít/töröl --}}
-        </td>
-    </tr>
-@empty
-    {{-- ha nincs driver --}}
-@endforelse
-</tbody>
+                <tbody class="text-gray-200" id="driverTableBody">
+                @forelse($drivers as $d)
+                    <tr class="border-b border-white/10 hover:bg-white/5 transition">
+                        <td class="py-3 pr-4">{{ $d->nev }}</td>
+                        <td class="py-3 pr-4">{{ $d->telefonszam }}</td>
+                        <td class="py-3 pr-4">{{ $d->szemelyi_azonosito ?? '-' }}</td>
+                        <td class="py-3 pr-4">
+                            @if($d->aktiv)
+                                <span class="px-2 py-1 rounded-md text-sm bg-green-600/25 text-green-200">Aktív</span>
+                            @else
+                                <span class="px-2 py-1 rounded-md text-sm bg-gray-600/25 text-gray-200">Inaktív</span>
+                            @endif
+                        </td>
+                        <td class="py-3 text-right space-x-2">
+                            <form action="{{ route('partner.soforok.toggle', $d->id) }}" method="POST" class="inline">
+                                @csrf
+                                <button type="submit" title="Státusz váltása" class="text-sky-400 hover:text-sky-300">
+                                    <i class="fas fa-power-off"></i>
+                                </button>
+                            </form>
+
+                            <button onclick='editDriver(@json($d))' title="Szerkesztés" class="text-amber-400 hover:text-amber-300">
+                                <i class="fas fa-edit"></i>
+                            </button>
+
+                            <form action="{{ route('partner.soforok.destroy', $d->id) }}" method="POST" class="inline" onsubmit="return confirm('Biztosan törölni szeretné ezt a sofőrt?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" title="Törlés" class="text-red-400 hover:text-red-300">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="5" class="py-10 text-center text-gray-500 italic">Nincs még rögzített sofőr.</td>
+                    </tr>
+                @endforelse
+                </tbody>
             </table>
         </div>
 
-        <div id="driversEmptyState" class="mt-6 text-gray-400 {{ (isset($drivers) && $drivers->count() > 0) ? 'hidden' : '' }}">
-    Nincs még rögzített sofőr. Kattints az <b>Új sofőr</b> gombra a felvitelhez.
-</div>
+        <div id="driversEmptyState" class="mt-6 text-gray-400 {{ (count($drivers) > 0) ? 'hidden' : '' }}">
+            Nincs még rögzített sofőr. Kattints az <b>Új sofőr</b> gombra a felvitelhez.
+        </div>
     </div>
 
-    <!-- MODAL -->
     <div id="driverModal" class="fixed inset-0 z-50 hidden items-center justify-center">
-        <div id="driverModalBackdrop" class="absolute inset-0 bg-black/60"></div>
+        <div id="driverModalBackdrop" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
 
-        <div class="relative w-[95%] max-w-2xl glassmorphism-element p-6 rounded-xl">
+        <div class="relative w-[95%] max-w-2xl glassmorphism-element p-6 rounded-xl shadow-2xl">
             <div class="flex items-center justify-between mb-4">
                 <h3 id="driverModalTitle" class="text-white text-lg font-semibold">Új sofőr</h3>
                 <button type="button" id="closeDriverModal"
@@ -439,14 +457,12 @@
             <form id="driverForm" method="POST" action="{{ route('partner.soforok.store') }}"
                   class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 @csrf
-
-                <input type="hidden" id="driverId" name="id" value="">
-                <input type="hidden" id="driverFormMethod" name="_method" value="POST">
+                <div id="methodField"></div>
 
                 <div>
                     <label class="block text-gray-300 mb-1">Aktív</label>
                     <select id="driverActive" name="aktiv" required
-                            class="w-full bg-transparent border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20">
+                            class="w-full bg-slate-800 border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20">
                         <option value="1">Igen</option>
                         <option value="0">Nem</option>
                     </select>
@@ -455,37 +471,37 @@
                 <div>
                     <label class="block text-gray-300 mb-1">Név</label>
                     <input id="driverName" name="nev" type="text" required
-                           class="w-full bg-transparent border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20">
+                           class="w-full bg-slate-800 border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20">
                 </div>
 
                 <div>
                     <label class="block text-gray-300 mb-1">Személyi azonosító</label>
                     <input id="driverPersonalId" name="szemelyi_azonosito" type="text"
-                           class="w-full bg-transparent border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20">
+                           class="w-full bg-slate-800 border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20">
                 </div>
 
                 <div>
                     <label class="block text-gray-300 mb-1">Születési dátum</label>
                     <input id="driverBirthDate" name="szuletesi_datum" type="date"
-                           class="w-full bg-transparent border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20">
+                           class="w-full bg-slate-800 border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20">
                 </div>
 
                 <div>
                     <label class="block text-gray-300 mb-1">Telefonszám</label>
                     <input id="driverPhone" name="telefonszam" type="text" required
-                           class="w-full bg-transparent border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20">
+                           class="w-full bg-slate-800 border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20">
                 </div>
 
                 <div class="md:col-span-2">
                     <label class="block text-gray-300 mb-1">Cím</label>
                     <input id="driverAddress" name="cim" type="text"
-                           class="w-full bg-transparent border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20">
+                           class="w-full bg-slate-800 border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20">
                 </div>
 
                 <div class="md:col-span-2">
                     <label class="block text-gray-300 mb-1">Adószám</label>
                     <input id="driverTax" name="adoszam" type="text"
-                           class="w-full bg-transparent border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20">
+                           class="w-full bg-slate-800 border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20">
                 </div>
 
                 <div class="md:col-span-2 flex justify-end gap-2 pt-2">
@@ -502,8 +518,6 @@
         </div>
     </div>
 </div>
-
-
 
 
         <!-- FLOTTA -->
@@ -795,6 +809,52 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeModal();
   });
+});
+
+// MODAL MEGNYITÁSA SZERKESZTÉSHEZ (ezt tedd a DOMContentLoaded-en kívülre)
+function editDriver(driver) {
+    const modal = document.getElementById('driverModal');
+    const form = document.getElementById('driverForm');
+    const title = document.getElementById('driverModalTitle');
+    const methodField = document.getElementById('methodField');
+
+    title.innerText = "Sofőr adatainak módosítása";
+    form.action = `/partner/soforok/${driver.id}/update`;
+    methodField.innerHTML = ''; // Mivel a backend POST-ot vár az update-re is
+
+    // Adatok betöltése
+    document.getElementById('driverName').value = driver.nev;
+    document.getElementById('driverPhone').value = driver.telefonszam;
+    document.getElementById('driverPersonalId').value = driver.szemelyi_azonosito || '';
+    document.getElementById('driverBirthDate').value = driver.szuletesi_datum || '';
+    document.getElementById('driverAddress').value = driver.cim || '';
+    document.getElementById('driverTax').value = driver.adoszam || '';
+    document.getElementById('driverActive').value = driver.aktiv;
+
+    modal.classList.replace('hidden', 'flex');
+}
+
+// ESEMÉNYKEZELŐK (ezt a DOMContentLoaded-be tedd)
+document.addEventListener('DOMContentLoaded', () => {
+    const addBtn = document.getElementById('addDriverBtn');
+    const modal = document.getElementById('driverModal');
+    const form = document.getElementById('driverForm');
+
+    // Új sofőr gomb: form ürítése és action visszaállítása
+    addBtn?.addEventListener('click', () => {
+        form.reset();
+        document.getElementById('driverModalTitle').innerText = "Új sofőr hozzáadása";
+        form.action = "{{ route('partner.soforok.store') }}";
+        document.getElementById('methodField').innerHTML = "";
+        modal.classList.replace('hidden', 'flex');
+    });
+
+    // Modal bezárás gombok
+    [document.getElementById('closeDriverModal'), document.getElementById('cancelDriverModal'), document.getElementById('driverModalBackdrop')].forEach(el => {
+        el?.addEventListener('click', () => {
+            modal.classList.replace('flex', 'hidden');
+        });
+    });
 });
 </script>
 
