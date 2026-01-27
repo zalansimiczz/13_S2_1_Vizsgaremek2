@@ -126,11 +126,8 @@
             <a href="#addUserContent" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
                 <i class="fas fa-users-cog fa-fw w-5 text-center"></i><span class="font-medium">Alkalmazottak</span>
             </a>
-            <a href="#dataManagementContent" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
-                <i class="fas fa-file-excel fa-fw w-5 text-center"></i><span class="font-medium">Adatkezelés</span>
-            </a>
-            <a href="#billingContent" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
-                <i class="fas fa-file-invoice-dollar fa-fw w-5 text-center"></i><span class="font-medium">Számlázás</span>
+            <a href="#driversContent" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
+                <i class="fas fa-id-card fa-fw w-5 text-center"></i><span class="font-medium">Sofőrök</span>
             </a>
             <a href="#fleetContent" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
                 <i class="fas fa-truck fa-fw w-5 text-center"></i><span class="font-medium">Flotta</span>
@@ -370,22 +367,144 @@
 </div>
             </div>
         </div>
+   <!-- SOFŐRÖK -->
+<div id="driversContent" class="content-section">
+    <h2 class="font-poppins text-xl font-semibold text-white mb-6">Sofőrök nyilvántartása</h2>
 
-        <!-- ADATKEZELÉS -->
-        <div id="dataManagementContent" class="content-section">
-            <h2 class="font-poppins text-xl font-semibold text-white mb-6">Adatkezelés (Import/Export)</h2>
-            <div class="glassmorphism-element p-6 rounded-xl">
-                <p class="text-muted">Ez a felület szolgál majd az Excel táblázatokból történő adatbeolvasásra és riportok exportálására. (Fejlesztés alatt)</p>
+    <div class="glassmorphism-element p-6 rounded-xl">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-5">
+            <div class="flex-1">
+                <input id="driverSearch" type="text"
+                       class="w-full bg-transparent border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20"
+                       placeholder="Keresés név, telefon alapján...">
             </div>
+
+            <button type="button" id="addDriverBtn"
+                    class="px-4 py-2 rounded-lg bg-blue-600/80 hover:bg-blue-600 text-white font-medium transition">
+                + Új sofőr
+            </button>
         </div>
 
-        <!-- SZÁMLÁZÁS -->
-        <div id="billingContent" class="content-section">
-            <h2 class="font-poppins text-xl font-semibold text-white mb-6">Számlázás</h2>
-            <div class="glassmorphism-element p-6 rounded-xl">
-                <p class="text-muted">Itt tekintheti meg és kezelheti számláit, valamint itt lesz elérhető az online számlázó rendszerekkel való integráció. (Fejlesztés alatt)</p>
-            </div>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left">
+                <thead>
+                <tr class="text-gray-300 border-b border-white/10">
+                    <th class="py-3 pr-4">Név</th>
+                    <th class="py-3 pr-4">Telefon</th>
+                    <th class="py-3 pr-4">Státusz</th>
+                    <th class="py-3 text-right">Műveletek</th>
+                </tr>
+                </thead>
+                <tbody class="text-gray-200">
+@forelse($drivers as $d)
+    <tr class="border-b border-white/10 hover:bg-white/5 transition">
+        <td class="py-3 pr-4">{{ $d->nev }}</td>
+        <td class="py-3 pr-4">{{ $d->telefonszam }}</td>
+        <td class="py-3 pr-4">-</td>
+        <td class="py-3 pr-4">-</td>
+        <td class="py-3 pr-4">
+            @if($d->aktiv)
+                <span class="px-2 py-1 rounded-md text-sm bg-green-600/25 text-green-200">Aktív</span>
+            @else
+                <span class="px-2 py-1 rounded-md text-sm bg-gray-600/25 text-gray-200">Inaktív</span>
+            @endif
+        </td>
+        <td class="py-3 text-right">
+            {{-- később: módosít/töröl --}}
+        </td>
+    </tr>
+@empty
+    {{-- ha nincs driver --}}
+@endforelse
+</tbody>
+            </table>
         </div>
+
+        <div id="driversEmptyState" class="mt-6 text-gray-400 {{ (isset($drivers) && $drivers->count() > 0) ? 'hidden' : '' }}">
+    Nincs még rögzített sofőr. Kattints az <b>Új sofőr</b> gombra a felvitelhez.
+</div>
+    </div>
+
+    <!-- MODAL -->
+    <div id="driverModal" class="fixed inset-0 z-50 hidden items-center justify-center">
+        <div id="driverModalBackdrop" class="absolute inset-0 bg-black/60"></div>
+
+        <div class="relative w-[95%] max-w-2xl glassmorphism-element p-6 rounded-xl">
+            <div class="flex items-center justify-between mb-4">
+                <h3 id="driverModalTitle" class="text-white text-lg font-semibold">Új sofőr</h3>
+                <button type="button" id="closeDriverModal"
+                        class="text-gray-300 hover:text-white text-xl leading-none">×</button>
+            </div>
+
+            <form id="driverForm" method="POST" action="{{ route('partner.soforok.store') }}"
+                  class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                @csrf
+
+                <input type="hidden" id="driverId" name="id" value="">
+                <input type="hidden" id="driverFormMethod" name="_method" value="POST">
+
+                <div>
+                    <label class="block text-gray-300 mb-1">Aktív</label>
+                    <select id="driverActive" name="aktiv" required
+                            class="w-full bg-transparent border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20">
+                        <option value="1">Igen</option>
+                        <option value="0">Nem</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-gray-300 mb-1">Név</label>
+                    <input id="driverName" name="nev" type="text" required
+                           class="w-full bg-transparent border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20">
+                </div>
+
+                <div>
+                    <label class="block text-gray-300 mb-1">Személyi azonosító</label>
+                    <input id="driverPersonalId" name="szemelyi_azonosito" type="text"
+                           class="w-full bg-transparent border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20">
+                </div>
+
+                <div>
+                    <label class="block text-gray-300 mb-1">Születési dátum</label>
+                    <input id="driverBirthDate" name="szuletesi_datum" type="date"
+                           class="w-full bg-transparent border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20">
+                </div>
+
+                <div>
+                    <label class="block text-gray-300 mb-1">Telefonszám</label>
+                    <input id="driverPhone" name="telefonszam" type="text" required
+                           class="w-full bg-transparent border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20">
+                </div>
+
+                <div class="md:col-span-2">
+                    <label class="block text-gray-300 mb-1">Cím</label>
+                    <input id="driverAddress" name="cim" type="text"
+                           class="w-full bg-transparent border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20">
+                </div>
+
+                <div class="md:col-span-2">
+                    <label class="block text-gray-300 mb-1">Adószám</label>
+                    <input id="driverTax" name="adoszam" type="text"
+                           class="w-full bg-transparent border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20">
+                </div>
+
+                <div class="md:col-span-2 flex justify-end gap-2 pt-2">
+                    <button type="button" id="cancelDriverModal"
+                            class="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-gray-200 transition">
+                        Mégse
+                    </button>
+                    <button type="submit"
+                            class="px-4 py-2 rounded-lg bg-blue-600/80 hover:bg-blue-600 text-white font-medium transition">
+                        Mentés
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
 
         <!-- FLOTTA -->
         <div id="fleetContent" class="content-section">
@@ -640,6 +759,46 @@ if (tab) {
     switchContent(sidebarLinks[0].getAttribute('href'));
 }
 
-    </script>
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('driverModal');
+  const openBtn = document.getElementById('addDriverBtn');
+  const closeBtn = document.getElementById('closeDriverModal');
+  const cancelBtn = document.getElementById('cancelDriverModal');
+  const backdrop = document.getElementById('driverModalBackdrop');
+
+  if (!modal || !openBtn) {
+    console.error("Driver modal elemek hiányoznak!", { modal, openBtn });
+    return;
+  }
+
+  function openModal() {
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  }
+
+  function closeModal() {
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  }
+
+  openBtn.addEventListener('click', () => {
+    console.log("Új sofőr gomb kattintva");
+    openModal();
+  });
+
+  closeBtn?.addEventListener('click', closeModal);
+  cancelBtn?.addEventListener('click', closeModal);
+  backdrop?.addEventListener('click', closeModal);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+});
+</script>
+
+
+
 </body>
 </html>
