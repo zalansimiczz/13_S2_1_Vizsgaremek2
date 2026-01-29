@@ -23,7 +23,6 @@ namespace TollÚtdíj
             this.ActiveControl = txbusername;
             UIkisegito = new Bejelentkezessegito(
                 lblhibas,
-                pictureBox1,
                 lbluser,
                 lblpass,
                 txbpass,
@@ -39,7 +38,6 @@ namespace TollÚtdíj
         public class Bejelentkezessegito
         {
             private Label lblHibas;
-            private PictureBox pictureBox1;
             private Label lblUser;
             private Label lblPass;
             private TextBox txbPass;
@@ -50,7 +48,6 @@ namespace TollÚtdíj
 
             public Bejelentkezessegito(
                 Label lblHibas,
-                PictureBox pictureBox1,
                 Label lblUser,
                 Label lblPass,
                 TextBox txbPass,
@@ -60,7 +57,6 @@ namespace TollÚtdíj
                 CheckBox chkrememberme)
             {
                 this.lblHibas = lblHibas;
-                this.pictureBox1 = pictureBox1;
                 this.lblUser = lblUser;
                 this.lblPass = lblPass;
                 this.txbPass = txbPass;
@@ -73,7 +69,6 @@ namespace TollÚtdíj
             public void ShowErrorState()
             {
                 lblHibas.Visible = true;
-                pictureBox1.Visible = true;
                 lblUser.Visible = true;
                 lblPass.Visible = true;
                 txbPass.Visible = true;
@@ -232,5 +227,12 @@ namespace TollÚtdíj
         {
 
         }
+
+        /* Jelenlegi hibák:
+         * - ha bejelentkezési adat rossz eltűnik a logó
+         * - új sofőr hozzáadásánál mégse gombra nyomva nem hozza vissza az eddigi sofőr adatait
+         * - új jármű hozzáadásánál mégse gombra nyomva nem hozza vissza a jármű euro besorolását
+         * - első bezárásnál a bejelentkezési form üresen megnyitva marad
+          */
     }
 }

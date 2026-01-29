@@ -36,7 +36,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btntrackkez = new System.Windows.Forms.Button();
             this.btnsofor = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -47,7 +47,7 @@
             this.btncegkezeles.Name = "btncegkezeles";
             this.btncegkezeles.Size = new System.Drawing.Size(130, 23);
             this.btncegkezeles.TabIndex = 0;
-            this.btncegkezeles.Text = "Cégek kezelése";
+            this.btncegkezeles.Text = "Cég áttekintése";
             this.btncegkezeles.UseCompatibleTextRendering = true;
             this.btncegkezeles.UseVisualStyleBackColor = true;
             this.btncegkezeles.Click += new System.EventHandler(this.btncegkezeles_Click);
@@ -70,6 +70,7 @@
             this.btnjogsik.TabIndex = 2;
             this.btnjogsik.Text = "Jogosítványok kezelése";
             this.btnjogsik.UseVisualStyleBackColor = true;
+            this.btnjogsik.Click += new System.EventHandler(this.btnjogsik_Click);
             // 
             // btnlogout
             // 
@@ -109,14 +110,15 @@
             this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
             // 
-            // button1
+            // btntrackkez
             // 
-            this.button1.Location = new System.Drawing.Point(37, 180);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(130, 23);
-            this.button1.TabIndex = 15;
-            this.button1.Text = "Trackerek kezelése";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btntrackkez.Location = new System.Drawing.Point(37, 180);
+            this.btntrackkez.Name = "btntrackkez";
+            this.btntrackkez.Size = new System.Drawing.Size(130, 23);
+            this.btntrackkez.TabIndex = 15;
+            this.btntrackkez.Text = "Trackerek megtekintése";
+            this.btntrackkez.UseVisualStyleBackColor = true;
+            this.btntrackkez.Click += new System.EventHandler(this.btntrackkez_Click);
             // 
             // btnsofor
             // 
@@ -126,6 +128,7 @@
             this.btnsofor.TabIndex = 16;
             this.btnsofor.Text = "Sofőrök kezelése";
             this.btnsofor.UseVisualStyleBackColor = true;
+            this.btnsofor.Click += new System.EventHandler(this.btnsofor_Click);
             // 
             // userinterface
             // 
@@ -133,7 +136,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(544, 261);
             this.Controls.Add(this.btnsofor);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btntrackkez);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
@@ -142,7 +145,9 @@
             this.Controls.Add(this.btnjarmukez);
             this.Controls.Add(this.btncegkezeles);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(560, 300);
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(560, 300);
             this.Name = "userinterface";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -162,7 +167,7 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btntrackkez;
         private System.Windows.Forms.Button btnsofor;
     }
 }

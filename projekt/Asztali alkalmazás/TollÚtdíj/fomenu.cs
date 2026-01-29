@@ -72,13 +72,48 @@ namespace TollÚtdíj
             f.Show();
         }
 
-
-
-        
-
         private void btnjarmukez_Click(object sender, EventArgs e)
         {
             var f = new jarmukezeles(role, cegId);
+            f.FormClosed += (s, args) =>
+            {
+                this.Show();
+                this.Activate();
+            };
+
+            this.Hide();
+            f.Show();
+        }
+
+        private void btnsofor_Click(object sender, EventArgs e)
+        {
+            var f = new soforkezeles(role, cegId);
+            f.FormClosed += (s, args) =>
+            {
+                this.Show();
+                this.Activate();
+            };
+
+            this.Hide();
+            f.Show();
+        }
+
+        private void btnjogsik_Click(object sender, EventArgs e)
+        {
+            var f = new jogsikezeles(role, cegId);
+            f.FormClosed += (s, args) =>
+            {
+                this.Show();
+                this.Activate();
+            };
+
+            this.Hide();
+            f.Show();
+        }
+
+        private void btntrackkez_Click(object sender, EventArgs e)
+        {
+            var f = new trackerkezeles(role, cegId);
             f.FormClosed += (s, args) =>
             {
                 this.Show();

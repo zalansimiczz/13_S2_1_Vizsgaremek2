@@ -1,49 +1,61 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "F:\\github\\13_S2_1_vizsgaremek\\13_S2_1_vizsgaremek\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\",
+  "WorkspaceRootPath": "F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|f:\\github\\13_s2_1_vizsgaremek\\13_s2_1_vizsgaremek\\asztali alkalmaz\u00E1s\\toll\u00FAtd\u00EDj\\cegkezeles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|solutionrelative:cegkezeles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|f:\\github\\teszt\\teszt\\asztali alkalmaz\u00E1s\\toll\u00FAtd\u00EDj\\trackerkezeles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|solutionrelative:trackerkezeles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|f:\\github\\13_s2_1_vizsgaremek\\13_s2_1_vizsgaremek\\asztali alkalmaz\u00E1s\\toll\u00FAtd\u00EDj\\fomenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|solutionrelative:fomenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\soforkezeles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|solutionrelative:soforkezeles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|f:\\github\\13_s2_1_vizsgaremek\\13_s2_1_vizsgaremek\\asztali alkalmaz\u00E1s\\toll\u00FAtd\u00EDj\\cegkezeles.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|solutionrelative:cegkezeles.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|f:\\github\\13_s2_1_vizsgaremek\\13_s2_1_vizsgaremek\\asztali alkalmaz\u00E1s\\toll\u00FAtd\u00EDj\\bejelentkezes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|solutionrelative:bejelentkezes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|f:\\github\\13_s2_1_vizsgaremek\\13_s2_1_vizsgaremek\\asztali alkalmaz\u00E1s\\toll\u00FAtd\u00EDj\\bejelentkezes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|solutionrelative:bejelentkezes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|f:\\github\\13_s2_1_vizsgaremek\\13_s2_1_vizsgaremek\\asztali alkalmaz\u00E1s\\toll\u00FAtd\u00EDj\\bejelentkezes.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\bejelentkezes.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|solutionrelative:bejelentkezes.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|f:\\github\\13_s2_1_vizsgaremek\\13_s2_1_vizsgaremek\\asztali alkalmaz\u00E1s\\toll\u00FAtd\u00EDj\\fomenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|solutionrelative:fomenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\jogsikezeles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|solutionrelative:jogsikezeles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|f:\\github\\13_s2_1_vizsgaremek\\13_s2_1_vizsgaremek\\asztali alkalmaz\u00E1s\\toll\u00FAtd\u00EDj\\jarmukezeles.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|solutionrelative:jarmukezeles.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\fomenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|solutionrelative:fomenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|f:\\github\\13_s2_1_vizsgaremek\\13_s2_1_vizsgaremek\\asztali alkalmaz\u00E1s\\toll\u00FAtd\u00EDj\\jarmukezeles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\bejelentkezes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|solutionrelative:bejelentkezes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|f:\\github\\teszt\\teszt\\asztali alkalmaz\u00E1s\\toll\u00FAtd\u00EDj\\jogsikezeles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|solutionrelative:jogsikezeles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\soforkezeles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|solutionrelative:soforkezeles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\jarmukezeles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|solutionrelative:jarmukezeles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|F:\\github\\13_S2_1_vizsgaremek\\13_S2_1_vizsgaremek\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\jarmukezeles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\jarmukezeles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|solutionrelative:jarmukezeles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|f:\\github\\13_s2_1_vizsgaremek\\13_s2_1_vizsgaremek\\asztali alkalmaz\u00E1s\\toll\u00FAtd\u00EDj\\cegkezeles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\fomenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|solutionrelative:fomenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\bejelentkezes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|solutionrelative:bejelentkezes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\cegkezeles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|solutionrelative:cegkezeles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\cegkezeles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|solutionrelative:cegkezeles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
@@ -54,67 +66,79 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "jarmukezeles.Designer.cs",
-              "DocumentMoniker": "F:\\github\\13_S2_1_vizsgaremek\\13_S2_1_vizsgaremek\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\jarmukezeles.Designer.cs",
-              "RelativeDocumentMoniker": "jarmukezeles.Designer.cs",
-              "ToolTip": "F:\\github\\13_S2_1_vizsgaremek\\13_S2_1_vizsgaremek\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\jarmukezeles.Designer.cs",
-              "RelativeToolTip": "jarmukezeles.Designer.cs",
-              "ViewState": "AgIAACcAAAAAAAAAAAAkwDsAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "trackerkezeles.cs",
+              "DocumentMoniker": "F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\trackerkezeles.cs",
+              "RelativeDocumentMoniker": "trackerkezeles.cs",
+              "ToolTip": "F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\trackerkezeles.cs*",
+              "RelativeToolTip": "trackerkezeles.cs*",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAgwBkAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-20T20:06:42.215Z",
+              "WhenOpened": "2026-01-29T13:27:36.889Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "fomenu.cs",
-              "DocumentMoniker": "F:\\github\\13_S2_1_vizsgaremek\\13_S2_1_vizsgaremek\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\fomenu.cs",
-              "RelativeDocumentMoniker": "fomenu.cs",
-              "ToolTip": "F:\\github\\13_S2_1_vizsgaremek\\13_S2_1_vizsgaremek\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\fomenu.cs",
-              "RelativeToolTip": "fomenu.cs",
-              "ViewState": "AgIAADwAAAAAAAAAAAAiwFAAAAAYAAAAAAAAAA==",
+              "Title": "jogsikezeles.cs",
+              "DocumentMoniker": "F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\jogsikezeles.cs",
+              "RelativeDocumentMoniker": "jogsikezeles.cs",
+              "ToolTip": "F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\jogsikezeles.cs*",
+              "RelativeToolTip": "jogsikezeles.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T10:05:45.183Z",
+              "WhenOpened": "2026-01-27T09:30:12.099Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
+              "Title": "jogsikezeles.cs [Design]",
+              "DocumentMoniker": "F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\jogsikezeles.cs",
+              "RelativeDocumentMoniker": "jogsikezeles.cs",
+              "ToolTip": "F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\jogsikezeles.cs [Design]*",
+              "RelativeToolTip": "jogsikezeles.cs [Design]*",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-27T09:29:51.251Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "bejelentkezes.Designer.cs",
-              "DocumentMoniker": "F:\\github\\13_S2_1_vizsgaremek\\13_S2_1_vizsgaremek\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\bejelentkezes.Designer.cs",
+              "DocumentMoniker": "F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\bejelentkezes.Designer.cs",
               "RelativeDocumentMoniker": "bejelentkezes.Designer.cs",
-              "ToolTip": "F:\\github\\13_S2_1_vizsgaremek\\13_S2_1_vizsgaremek\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\bejelentkezes.Designer.cs",
+              "ToolTip": "F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\bejelentkezes.Designer.cs",
               "RelativeToolTip": "bejelentkezes.Designer.cs",
-              "ViewState": "AgIAAIMAAAAAAAAAAAAkwJsAAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-20T20:02:30.929Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 11,
               "Title": "bejelentkezes.cs",
-              "DocumentMoniker": "F:\\github\\13_S2_1_vizsgaremek\\13_S2_1_vizsgaremek\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\bejelentkezes.cs",
+              "DocumentMoniker": "F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\bejelentkezes.cs",
               "RelativeDocumentMoniker": "bejelentkezes.cs",
-              "ToolTip": "F:\\github\\13_S2_1_vizsgaremek\\13_S2_1_vizsgaremek\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\bejelentkezes.cs",
+              "ToolTip": "F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\bejelentkezes.cs",
               "RelativeToolTip": "bejelentkezes.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACkAAAArAAAAAAAAAA==",
+              "ViewState": "AgIAAMUAAAAAAAAAAAAIwOsAAABJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-20T20:02:09.138Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "bejelentkezes.cs [Design]",
-              "DocumentMoniker": "F:\\github\\13_S2_1_vizsgaremek\\13_S2_1_vizsgaremek\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\bejelentkezes.cs",
+              "DocumentMoniker": "F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\bejelentkezes.cs",
               "RelativeDocumentMoniker": "bejelentkezes.cs",
-              "ToolTip": "F:\\github\\13_S2_1_vizsgaremek\\13_S2_1_vizsgaremek\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\bejelentkezes.cs [Design]",
+              "ToolTip": "F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\bejelentkezes.cs [Design]",
               "RelativeToolTip": "bejelentkezes.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-20T20:01:55.254Z",
@@ -122,63 +146,85 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "cegkezeles.Designer.cs",
-              "DocumentMoniker": "F:\\github\\13_S2_1_vizsgaremek\\13_S2_1_vizsgaremek\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\cegkezeles.Designer.cs",
-              "RelativeDocumentMoniker": "cegkezeles.Designer.cs",
-              "ToolTip": "F:\\github\\13_S2_1_vizsgaremek\\13_S2_1_vizsgaremek\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\cegkezeles.Designer.cs",
-              "RelativeToolTip": "cegkezeles.Designer.cs",
-              "ViewState": "AgIAAIcAAAAAAAAAAAAhwDQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-20T19:53:57.606Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "fomenu.cs [Design]",
-              "DocumentMoniker": "F:\\github\\13_S2_1_vizsgaremek\\13_S2_1_vizsgaremek\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\fomenu.cs",
+              "DocumentMoniker": "F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\fomenu.cs",
               "RelativeDocumentMoniker": "fomenu.cs",
-              "ToolTip": "F:\\github\\13_S2_1_vizsgaremek\\13_S2_1_vizsgaremek\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\fomenu.cs [Design]",
-              "RelativeToolTip": "fomenu.cs [Design]",
+              "ToolTip": "F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\fomenu.cs [Design]*",
+              "RelativeToolTip": "fomenu.cs [Design]*",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-07T10:05:45.184Z",
               "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "cegkezeles.cs",
-              "DocumentMoniker": "F:\\github\\13_S2_1_vizsgaremek\\13_S2_1_vizsgaremek\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\cegkezeles.cs",
-              "RelativeDocumentMoniker": "cegkezeles.cs",
-              "ToolTip": "F:\\github\\13_S2_1_vizsgaremek\\13_S2_1_vizsgaremek\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\cegkezeles.cs",
-              "RelativeToolTip": "cegkezeles.cs",
-              "ViewState": "AgIAAI8AAAAAAAAAAAAwwMEAAAAvAAAAAAAAAA==",
+              "DocumentIndex": 7,
+              "Title": "soforkezeles.cs",
+              "DocumentMoniker": "F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\soforkezeles.cs",
+              "RelativeDocumentMoniker": "soforkezeles.cs",
+              "ToolTip": "F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\soforkezeles.cs",
+              "RelativeToolTip": "soforkezeles.cs",
+              "ViewState": "AgIAAA0AAABA/f////81wCwAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T10:09:01.676Z",
+              "WhenOpened": "2026-01-22T14:13:55.115Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "cegkezeles.cs [Design]",
-              "DocumentMoniker": "F:\\github\\13_S2_1_vizsgaremek\\13_S2_1_vizsgaremek\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\cegkezeles.cs",
-              "RelativeDocumentMoniker": "cegkezeles.cs",
-              "ToolTip": "F:\\github\\13_S2_1_vizsgaremek\\13_S2_1_vizsgaremek\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\cegkezeles.cs [Design]",
-              "RelativeToolTip": "cegkezeles.cs [Design]",
+              "DocumentIndex": 1,
+              "Title": "soforkezeles.cs [Design]",
+              "DocumentMoniker": "F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\soforkezeles.cs",
+              "RelativeDocumentMoniker": "soforkezeles.cs",
+              "ToolTip": "F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\soforkezeles.cs [Design]",
+              "RelativeToolTip": "soforkezeles.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T10:08:42.035Z",
+              "WhenOpened": "2026-01-22T14:13:44.953Z",
               "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "fomenu.cs",
+              "DocumentMoniker": "F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\fomenu.cs",
+              "RelativeDocumentMoniker": "fomenu.cs",
+              "ToolTip": "F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\fomenu.cs*",
+              "RelativeToolTip": "fomenu.cs*",
+              "ViewState": "AgIAAGEAAAAAAAAAAAAEwHcAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-07T10:05:45.183Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "cegkezeles.cs",
+              "DocumentMoniker": "F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\cegkezeles.cs",
+              "RelativeDocumentMoniker": "cegkezeles.cs",
+              "ToolTip": "F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\cegkezeles.cs",
+              "RelativeToolTip": "cegkezeles.cs",
+              "ViewState": "AgIAAMEAAAAAAAAAAAAcwMEAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-07T10:09:01.676Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "cegkezeles.cs [Design]",
+              "DocumentMoniker": "F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\cegkezeles.cs",
+              "RelativeDocumentMoniker": "cegkezeles.cs",
+              "ToolTip": "C:\\Users\\bobanpetrik\\Documents\\GitHub\\teszt2\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\cegkezeles.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-07T10:08:42.035Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
               "Title": "jarmukezeles.cs",
-              "DocumentMoniker": "F:\\github\\13_S2_1_vizsgaremek\\13_S2_1_vizsgaremek\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\jarmukezeles.cs",
+              "DocumentMoniker": "F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\jarmukezeles.cs",
               "RelativeDocumentMoniker": "jarmukezeles.cs",
-              "ToolTip": "F:\\github\\13_S2_1_vizsgaremek\\13_S2_1_vizsgaremek\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\jarmukezeles.cs",
+              "ToolTip": "F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\jarmukezeles.cs",
               "RelativeToolTip": "jarmukezeles.cs",
-              "ViewState": "AgIAAL0AAAAAAAAAAAAAANcAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAALIAAAAAAAAAAAAvwMwAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-20T07:57:09.22Z",
               "EditorCaption": ""
@@ -187,9 +233,9 @@
               "$type": "Document",
               "DocumentIndex": 9,
               "Title": "jarmukezeles.cs [Design]",
-              "DocumentMoniker": "F:\\github\\13_S2_1_vizsgaremek\\13_S2_1_vizsgaremek\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\jarmukezeles.cs",
+              "DocumentMoniker": "F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\jarmukezeles.cs",
               "RelativeDocumentMoniker": "jarmukezeles.cs",
-              "ToolTip": "F:\\github\\13_S2_1_vizsgaremek\\13_S2_1_vizsgaremek\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\jarmukezeles.cs [Design]",
+              "ToolTip": "F:\\github\\teszt\\teszt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\jarmukezeles.cs [Design]",
               "RelativeToolTip": "jarmukezeles.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-20T07:56:55.611Z",

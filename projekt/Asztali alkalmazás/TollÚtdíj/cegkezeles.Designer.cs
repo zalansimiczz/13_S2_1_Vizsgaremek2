@@ -28,9 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.btnvissza = new System.Windows.Forms.Button();
+            this.lblinfo = new System.Windows.Forms.Label();
             this.lblhibas = new System.Windows.Forms.Label();
             this.btnmentes = new System.Windows.Forms.Button();
-            this.btnvissza = new System.Windows.Forms.Button();
             this.txbcegnev = new System.Windows.Forms.TextBox();
             this.txbcegszam = new System.Windows.Forms.TextBox();
             this.txbcegcim = new System.Windows.Forms.TextBox();
@@ -38,9 +39,30 @@
             this.lbl1 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.lblinfo = new System.Windows.Forms.Label();
             this.cbbceglista = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
+            // 
+            // btnvissza
+            // 
+            this.btnvissza.Location = new System.Drawing.Point(460, 261);
+            this.btnvissza.Name = "btnvissza";
+            this.btnvissza.Size = new System.Drawing.Size(75, 23);
+            this.btnvissza.TabIndex = 3;
+            this.btnvissza.Text = "Vissza";
+            this.btnvissza.UseVisualStyleBackColor = true;
+            this.btnvissza.Click += new System.EventHandler(this.btnvissza_Click);
+            // 
+            // lblinfo
+            // 
+            this.lblinfo.AutoSize = true;
+            this.lblinfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblinfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblinfo.Location = new System.Drawing.Point(6, 252);
+            this.lblinfo.Name = "lblinfo";
+            this.lblinfo.Size = new System.Drawing.Size(354, 40);
+            this.lblinfo.TabIndex = 11;
+            this.lblinfo.Text = "ⓘ Amennyiben új céget szeretne létrehozni,\r\n a webes felületen van lehetősége ezt" +
+    " megteheti!";
             // 
             // lblhibas
             // 
@@ -59,16 +81,6 @@
             this.btnmentes.Text = "Változtatások mentése";
             this.btnmentes.UseVisualStyleBackColor = true;
             this.btnmentes.Click += new System.EventHandler(this.btnmentes_Click);
-            // 
-            // btnvissza
-            // 
-            this.btnvissza.Location = new System.Drawing.Point(460, 261);
-            this.btnvissza.Name = "btnvissza";
-            this.btnvissza.Size = new System.Drawing.Size(75, 23);
-            this.btnvissza.TabIndex = 3;
-            this.btnvissza.Text = "Vissza";
-            this.btnvissza.UseVisualStyleBackColor = true;
-            this.btnvissza.Click += new System.EventHandler(this.btnvissza_Click);
             // 
             // txbcegnev
             // 
@@ -127,18 +139,6 @@
             this.label2.TabIndex = 10;
             this.label2.Text = "Cím:";
             // 
-            // lblinfo
-            // 
-            this.lblinfo.AutoSize = true;
-            this.lblinfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblinfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblinfo.Location = new System.Drawing.Point(6, 252);
-            this.lblinfo.Name = "lblinfo";
-            this.lblinfo.Size = new System.Drawing.Size(354, 40);
-            this.lblinfo.TabIndex = 11;
-            this.lblinfo.Text = "ⓘ Amennyiben új céget szeretne létrehozni,\r\n a webes felületen van lehetősége ezt" +
-    " megteheti!";
-            // 
             // cbbceglista
             // 
             this.cbbceglista.FormattingEnabled = true;
@@ -177,10 +177,10 @@
         }
 
         #endregion
-
+        private System.Windows.Forms.Button btnvissza;
+        private System.Windows.Forms.Label lblinfo;
         private System.Windows.Forms.Label lblhibas;
         private System.Windows.Forms.Button btnmentes;
-        private System.Windows.Forms.Button btnvissza;
         private System.Windows.Forms.TextBox txbcegnev;
         private System.Windows.Forms.TextBox txbcegszam;
         private System.Windows.Forms.TextBox txbcegcim;
@@ -188,7 +188,6 @@
         private System.Windows.Forms.Label lbl1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label lblinfo;
         private System.Windows.Forms.ComboBox cbbceglista;
     }
 }
