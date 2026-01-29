@@ -1,4 +1,3 @@
-{{-- resources/views/partner/register.blade.php --}}
 <!DOCTYPE html>
 <html lang="hu">
 <head>
@@ -72,14 +71,14 @@
             <p class="text-[var(--color-primary)] mt-2 text-lg font-medium">Partner Regisztráció</p>
         </div>
 
-        {{-- Általános hiba (pl. try/catch) --}}
+        <!--altalanos hiba-->
         @if ($errors->has('general'))
             <div class="mb-4 p-4 rounded-lg bg-red-900/40 border border-red-600 text-sm text-red-200">
                 {{ $errors->first('general') }}
             </div>
         @endif
 
-        {{-- Validációs hibák listája --}}
+        <!--validacios hiba-->
         @if ($errors->any() && !$errors->has('general'))
             <div class="mb-4 p-4 rounded-lg bg-red-900/40 border border-red-600 text-sm text-red-200">
                 <ul class="list-disc list-inside space-y-1">
@@ -93,7 +92,7 @@
         <form method="POST" action="{{ route('partner.register.post') }}" class="grid grid-cols-1 md:grid-cols-2 gap-6">
             @csrf
 
-            {{-- Cég adatok --}}
+            <!--ceg adatik bekerese-->
             <div class="md:col-span-2">
                 <h2 class="font-poppins text-lg font-semibold text-sky-200 mb-2">Cég adatai</h2>
             </div>
@@ -129,7 +128,7 @@
                        value="{{ old('cim') }}">
             </div>
 
-            {{-- Kapcsolattartó / belépési adatok --}}
+            <!--belepesi adatok bekerese-->
             <div class="md:col-span-2 mt-2">
                 <h2 class="font-poppins text-lg font-semibold text-sky-200 mb-2">Kapcsolattartó és belépési adatok</h2>
             </div>

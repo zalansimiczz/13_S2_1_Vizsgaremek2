@@ -68,7 +68,7 @@
 <body class="antialiased">
     <div class="login-container w-full max-w-md p-8 md:p-12 rounded-2xl">
 
-        <!-- Logo -->
+        <!--logo megjelenites-->
         <div class="logo-container text-center mb-10">
             <a href="/" class="flex items-center justify-center space-x-3" title="Vissza a főoldalra">
                 <i class="fas fa-road-bridge fa-3x text-[var(--color-primary)]"></i>
@@ -79,7 +79,7 @@
             <p class="text-[var(--color-primary)] mt-2 text-lg font-medium">Partner Portál</p>
         </div>
 
-        <!-- Hibaüzenetek -->
+        <!--hibauzenetek-->
         @if ($errors->any())
             <div class="mb-6 p-4 rounded-lg bg-red-900/40 border border-red-600 text-sm text-red-200">
                 <ul class="space-y-1">
@@ -90,7 +90,7 @@
             </div>
         @endif
 
-        <!-- Bejelentkezés form -->
+        <!--login form-->
         <form method="POST" action="{{ route('partner.login.post') }}">
             @csrf
 
@@ -112,6 +112,7 @@
             </button>
         </form>
 
+        <!--SZUKSEGES MODOSITANI MAJD VEGYE FEL A KAPCSOLATOT FORMRA-->
         <p class="text-sm text-gray-500 text-center mt-8">
             Nincs még hozzáférése?
             <a href="{{ route('partner.register') }}" class="font-medium text-[var(--color-primary)] hover:underline">

@@ -16,13 +16,13 @@ class PartnerUserController extends Controller
 
         $ceg_id = session('ceg_id');
 
-        // Régi PHP logika szerinti mezőnevek
+        //mezonevek phpbol atemelve
         $full_name  = trim($request->input('full_name'));
         $email      = trim($request->input('email'));
         $password   = $request->input('password');
         $password2  = $request->input('password_confirm');
 
-        // VALIDÁCIÓ (ugyanaz, mint régi rendszerben)
+        //hibaellenorzes (validacio)
         if ($full_name === '' || $email === '' || $password === '' || $password2 === '') {
             return back()->with('error', 'Hiba: minden mező kitöltése kötelező.');
         }
@@ -35,7 +35,7 @@ class PartnerUserController extends Controller
             return back()->with('error', 'Hiba: a két jelszó nem egyezik.');
         }
 
-        // Email ütközés ellenőrzése
+        //validacio (email)
         $exists = DB::table('felhasznalok')
             ->where('email', $email)
             ->first();
@@ -44,10 +44,10 @@ class PartnerUserController extends Controller
             return back()->with('error', 'Hiba: ezzel az email címmel már létezik felhasználó.');
         }
 
-        // Jelszó hash
+        //jelszo hashelese
         $hash = Hash::make($password);
 
-        // Adatbázis beszúrás
+        //db beszurasa
         DB::table('felhasznalok')->insert([
             'ceg_id'      => $ceg_id,
             'email'       => $email,
@@ -64,18 +64,19 @@ class PartnerUserController extends Controller
         
         
     }
+    //felhasznalo/sofor aktivalas avagy inaktivalas
     public function toggle($id)
 {
     if (!session()->has('ceg_id')) {
         return redirect()->route('partner.login');
     }
-
+    //csak sajat ceg adatai jelennek meg!!!!!
     $cegId = (int) session('ceg_id');
 
     $user = DB::table('felhasznalok')
         ->select('id', 'aktiv')
         ->where('id', $id)
-        ->where('ceg_id', $cegId) // 🔒 csak saját cég
+        ->where('ceg_id', $cegId)
         ->first();
 
     if (!$user) {

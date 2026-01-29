@@ -8,9 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class SoforController extends Controller
 {
-    /**
-     * Új sofőr mentése
-     */
+    //uj sofor mentese(db-be iras is, validalassal egyutt)
     public function store(Request $request)
     {
         if (!session()->has('ceg_id')) {
@@ -42,9 +40,7 @@ class SoforController extends Controller
                          ->with('success', 'Sofőr sikeresen hozzáadva!');
     }
 
-    /**
-     * Sofőr adatainak módosítása
-     */
+    //sofor adatainak modositasa
     public function update(Request $request, $id)
     {
         $cegId = (int) session('ceg_id');
@@ -69,9 +65,7 @@ class SoforController extends Controller
                          ->with('success', 'Sofőr adatai frissítve!');
     }
 
-    /**
-     * Aktív/Inaktív állapot váltása
-     */
+    //aktiv/inaktiv allapot valtas
     public function toggle($id)
     {
         $cegId = (int) session('ceg_id');
@@ -91,9 +85,7 @@ class SoforController extends Controller
         return back()->with('success', 'Státusz módosítva!');
     }
 
-    /**
-     * Sofőr törlése
-     */
+    //sofor torles
     public function destroy($id)
     {
         $cegId = (int) session('ceg_id');

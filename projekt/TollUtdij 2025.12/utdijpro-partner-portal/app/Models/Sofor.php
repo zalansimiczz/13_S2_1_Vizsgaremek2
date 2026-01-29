@@ -8,7 +8,7 @@ class Sofor extends Model
 {
     protected $table = 'soforok';
 
-    // ha csak created_at van és nincs updated_at:
+    //ha csak created_at van
     public $timestamps = false;
 
     protected $fillable = [

@@ -1,4 +1,3 @@
-{{-- resources/views/partner/layout.blade.php --}}
 <!DOCTYPE html>
 <html lang="hu">
 <head>
@@ -6,7 +5,7 @@
     <title>@yield('title', 'ÚtdíjPro Partner Portál')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    {{-- Tailwind CDN (mint a régi kódban) --}}
+    {{--Tailwind CDN--}}
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen">

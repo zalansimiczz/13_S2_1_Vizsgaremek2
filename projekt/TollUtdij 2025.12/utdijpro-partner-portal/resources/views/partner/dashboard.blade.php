@@ -103,12 +103,12 @@
     @endphp
 
 
-    <!-- MOBIL MENÜ GOMB -->
+    <!--mobilos nezet menu gomb(hamburger)-->
     <button id="mobileMenuBtn" class="lg:hidden fixed top-4 left-4 p-3 bg-gray-800/80 text-white rounded-md backdrop-blur-sm shadow-lg">
         <i class="fas fa-bars fa-lg"></i>
     </button>
 
-    <!-- OLDALSÁV -->
+    <!--sidebar-->
     <aside id="sidebar" class="sidebar glassmorphism-element p-5 space-y-6 flex-shrink-0 h-full overflow-y-auto transform -translate-x-full lg:translate-x-0 fixed lg:static z-40">
         <div class="logo-container text-center mb-6 pt-8 lg:pt-0">
             <a href="/" class="flex items-center justify-center space-x-2" title="Vissza a főoldalra">
@@ -146,7 +146,7 @@
         </div>
     </aside>
 
-    <!-- FŐ TARTALOM -->
+    <!--main content-->
     <main class="flex-1 p-6 md:p-10 overflow-y-auto" id="mainContentArea">
         <header class="mb-8 md:mb-10">
             <div class="flex justify-between items-center">
@@ -174,7 +174,7 @@
             </div>
         </header>
 
-        <!-- IRÁNYÍTÓPULT -->
+        <!--iranyitopult-->
         <div id="dashboard-main-content" class="content-section active">
             <h2 class="font-poppins text-xl font-semibold text-white mb-6">Áttekintés</h2>
             <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
@@ -221,7 +221,7 @@
             </div>
         </div>
 
-        <!-- KALKULÁTOR -->
+        <!--kalkulator-->
         <div id="calculatorSectionContent" class="content-section">
             <section class="glassmorphism-element p-6 md:p-8 rounded-2xl">
                 <div class="flex justify-between items-center mb-6">
@@ -274,7 +274,7 @@
             </section>
         </div>
 
-        <!-- ALKALMAZOTTAK KEZELÉSE -->
+        <!--alkalmazottak-->
         <div id="addUserContent" class="content-section">
             <h2 class="font-poppins text-xl font-semibold text-white mb-6">
                 Alkalmazottak kezelése
@@ -367,7 +367,7 @@
 </div>
             </div>
         </div>
-   <!-- SOFŐRÖK -->
+   <!--soforok-->
 <div id="driversContent" class="content-section">
     <h2 class="font-poppins text-xl font-semibold text-white mb-6">Sofőrök nyilvántartása</h2>
 
@@ -520,7 +520,7 @@
 </div>
 
 
-        <!-- FLOTTA -->
+        <!--flotta (MEG NINCS KESZ)-->
         <div id="fleetContent" class="content-section">
             <h2 class="font-poppins text-xl font-semibold text-white mb-6">Flotta Kezelés</h2>
             <div class="glassmorphism-element p-6 rounded-xl">
@@ -528,7 +528,7 @@
             </div>
         </div>
 
-        <!-- RIPORTOK -->
+        <!--riportok (MEG NINCS KESZ)-->
         <div id="reportsContent" class="content-section">
             <h2 class="font-poppins text-xl font-semibold text-white mb-6">Riportok</h2>
             <div class="glassmorphism-element p-6 rounded-xl">
@@ -536,7 +536,7 @@
             </div>
         </div>
 
-        <!-- BEÁLLÍTÁSOK -->
+        <!--beallitasok(meg nincsen keszen)-->
         <div id="settingsContent" class="content-section">
             <h2 class="font-poppins text-xl font-semibold text-white mb-6">Beállítások</h2>
             <div class="glassmorphism-element p-6 rounded-xl">
@@ -621,7 +621,7 @@
             });
         });
 
-        // Útdíj kalkulátor JS – az eredeti kódod
+        //utdij kalkulator js (eredeti php-bol)
         const portalCalculateBtn = document.getElementById('portalCalculateBtn');
         const portalResultsSection = document.getElementById('portalResultsSection');
         const portalErrorMessages = document.getElementById('portalErrorMessages');
@@ -763,7 +763,7 @@
             });
         }
 
-        // Alap nézet – tab paraméter figyelése
+//base nezet a kalkulalas utan
 const params = new URLSearchParams(window.location.search);
 const tab = params.get('tab');
 
@@ -772,7 +772,6 @@ if (tab) {
 } else if (sidebarLinks.length > 0) {
     switchContent(sidebarLinks[0].getAttribute('href'));
 }
-
 </script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -811,8 +810,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// MODAL MEGNYITÁSA SZERKESZTÉSHEZ (ezt tedd a DOMContentLoaded-en kívülre)
-function editDriver(driver) {
+    //modal megnyitasa az adatok szerkesztesehez(soforok menuponthoz)
+    function editDriver(driver) {
     const modal = document.getElementById('driverModal');
     const form = document.getElementById('driverForm');
     const title = document.getElementById('driverModalTitle');
@@ -820,9 +819,9 @@ function editDriver(driver) {
 
     title.innerText = "Sofőr adatainak módosítása";
     form.action = `/partner/soforok/${driver.id}/update`;
-    methodField.innerHTML = ''; // Mivel a backend POST-ot vár az update-re is
+    methodField.innerHTML = ''; 
 
-    // Adatok betöltése
+    //adatok betoltese
     document.getElementById('driverName').value = driver.nev;
     document.getElementById('driverPhone').value = driver.telefonszam;
     document.getElementById('driverPersonalId').value = driver.szemelyi_azonosito || '';
@@ -834,14 +833,14 @@ function editDriver(driver) {
     modal.classList.replace('hidden', 'flex');
 }
 
-// ESEMÉNYKEZELŐK (ezt a DOMContentLoaded-be tedd)
-document.addEventListener('DOMContentLoaded', () => {
+    //esemenykezelok
+    document.addEventListener('DOMContentLoaded', () => {
     const addBtn = document.getElementById('addDriverBtn');
     const modal = document.getElementById('driverModal');
     const form = document.getElementById('driverForm');
 
-    // Új sofőr gomb: form ürítése és action visszaállítása
-    addBtn?.addEventListener('click', () => {
+        //sofor hozzaadasa gomb, utana uritese a feluletnek
+        addBtn?.addEventListener('click', () => {
         form.reset();
         document.getElementById('driverModalTitle').innerText = "Új sofőr hozzáadása";
         form.action = "{{ route('partner.soforok.store') }}";
@@ -849,7 +848,7 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.classList.replace('hidden', 'flex');
     });
 
-    // Modal bezárás gombok
+    //modal close buttons
     [document.getElementById('closeDriverModal'), document.getElementById('cancelDriverModal'), document.getElementById('driverModalBackdrop')].forEach(el => {
         el?.addEventListener('click', () => {
             modal.classList.replace('flex', 'hidden');
@@ -857,8 +856,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 </script>
-
-
-
 </body>
 </html>

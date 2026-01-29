@@ -4,32 +4,30 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PartnerAuthController;
 use App\Http\Controllers\PartnerDashboardController;
 use App\Http\Controllers\PartnerUserController;
-use App\Http\Controllers\SoforController; // Új import
+use App\Http\Controllers\SoforController;
 
 Route::get('/', function () {
     return redirect()->route('partner.login');
 });
 
-// Auth
+//autentikacio route
 Route::get('/partner/login', [PartnerAuthController::class, 'showLogin'])->name('partner.login');
 Route::post('/partner/login', [PartnerAuthController::class, 'login'])->name('partner.login.post');
-
 Route::get('/partner/register', [PartnerAuthController::class, 'showRegister'])->name('partner.register');
 Route::post('/partner/register', [PartnerAuthController::class, 'register'])->name('partner.register.post');
-
 Route::get('/partner/logout', [PartnerAuthController::class, 'logout'])->name('partner.logout');
 
-// Protected partner routes
+//partner routeok
 Route::middleware('auth.partner')->prefix('partner')->group(function () {
-    Route::get('/dashboard', [PartnerDashboardController::class, 'index'])->name('partner.dashboard');
+Route::get('/dashboard', [PartnerDashboardController::class, 'index'])->name('partner.dashboard');
 
-    // Felhasználók kezelése
-    Route::post('/users', [PartnerUserController::class, 'store'])->name('partner.users.store');
-    Route::post('/users/{id}/toggle', [PartnerUserController::class, 'toggle'])->name('partner.users.toggle');
+//userek kezelese route
+Route::post('/users', [PartnerUserController::class, 'store'])->name('partner.users.store');
+Route::post('/users/{id}/toggle', [PartnerUserController::class, 'toggle'])->name('partner.users.toggle');
 
-    // Sofőrök kezelése - Nyilvántartás funkciók
-    Route::post('/soforok', [SoforController::class, 'store'])->name('partner.soforok.store');
-    Route::post('/soforok/{id}/update', [SoforController::class, 'update'])->name('partner.soforok.update');
-    Route::post('/soforok/{id}/toggle', [SoforController::class, 'toggle'])->name('partner.soforok.toggle');
-    Route::delete('/soforok/{id}', [SoforController::class, 'destroy'])->name('partner.soforok.destroy');
+//soforok kezelese routeok
+Route::post('/soforok', [SoforController::class, 'store'])->name('partner.soforok.store');
+Route::post('/soforok/{id}/update', [SoforController::class, 'update'])->name('partner.soforok.update');
+Route::post('/soforok/{id}/toggle', [SoforController::class, 'toggle'])->name('partner.soforok.toggle');
+Route::delete('/soforok/{id}', [SoforController::class, 'destroy'])->name('partner.soforok.destroy');
 });

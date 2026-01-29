@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 
 class PartnerAuthController extends Controller
 {
-    // LOGIN LAP
+    //login felulet
     public function showLogin()
     {
         if (session()->has('user_id')) {
@@ -19,7 +19,7 @@ class PartnerAuthController extends Controller
         return view('partner.login');
     }
 
-    // LOGIN POST
+    //login postolas
     public function login(Request $request)
     {
         $validated = $request->validate([
@@ -27,7 +27,7 @@ class PartnerAuthController extends Controller
             'password' => ['required', 'string'],
         ]);
 
-        // Normalizálás
+        //normalizalasa a loginnak (trim)
         $email = strtolower(trim($validated['email']));
         $password = (string)$validated['password'];
 
@@ -35,7 +35,7 @@ class PartnerAuthController extends Controller
             ->where('email', $email)
             ->first();
 
-        // Egységes, “nem árulkodó” hibaüzenet
+        //fail eseten hibauzenet
         $fail = fn () => back()
             ->withErrors(['login' => 'Hibás email cím vagy jelszó, vagy a felhasználó inaktív.'])
             ->withInput();
@@ -48,10 +48,10 @@ class PartnerAuthController extends Controller
             return $fail();
         }
 
-        // Hash mező biztonságos beolvasása
+        //hashelt mezo beolvasasa
         $hash = $user->jelszo_hash ?? null;
 
-        // Ha nincs hash / nem string → ne 500, hanem sima login fail + log a fejlesztőnek
+        //ha nincs hash hibauzenet + log keszites
         if (!is_string($hash) || $hash === '') {
             Log::warning('Login failed: missing/invalid hash', [
                 'email' => $email,
@@ -61,13 +61,13 @@ class PartnerAuthController extends Controller
             return $fail();
         }
 
-        // Ha NEM bcrypt formátum, Hash::check dobhat RuntimeException-t → ezt fogjuk meg
+        //ha nem bcryptelt a jelszo, akkor hash ellenorzes, majjd hibauzi
         try {
             if (!Hash::check($password, $hash)) {
                 return $fail();
             }
         } catch (\RuntimeException $e) {
-            // Itt volt a te 500-asod. Most nem fog elszállni.
+            //hibauzenet, idotullepes
             Log::warning('Login failed: hasher runtime exception', [
                 'email' => $email,
                 'user_id' => $user->id ?? null,
@@ -77,7 +77,7 @@ class PartnerAuthController extends Controller
             return $fail();
         }
 
-        // Sikeres login → session biztonság
+        //sikeres login
         $request->session()->regenerate();
 
         session([
@@ -89,7 +89,7 @@ class PartnerAuthController extends Controller
         return redirect()->route('partner.dashboard');
     }
 
-    // LOGOUT
+    //kijelentkezes
     public function logout(Request $request)
     {
         $request->session()->flush();
@@ -99,7 +99,7 @@ class PartnerAuthController extends Controller
         return redirect()->route('partner.login');
     }
 
-    // REGISZTRÁCIÓS LAP
+    //regisztracios form
     public function showRegister()
     {
         if (session()->has('user_id')) {
@@ -109,7 +109,7 @@ class PartnerAuthController extends Controller
         return view('partner.register');
     }
 
-    // REGISZTRÁCIÓ POST
+    //regisztracios post
     public function register(Request $request)
     {
         $data = $request->validate([
@@ -122,7 +122,7 @@ class PartnerAuthController extends Controller
             'password_confirm' => ['required', 'string', 'min:8'],
         ]);
 
-        // password_confirm kompatibilitás
+        //jelszo egyezes ellenorzes
         if ($data['password'] !== $data['password_confirm']) {
             return back()
                 ->withErrors(['password' => 'A jelszók nem egyeznek.'])
@@ -131,7 +131,7 @@ class PartnerAuthController extends Controller
 
         $email = strtolower(trim($data['email']));
 
-        // email ütközés
+        //email ellenorzo (van e mar ilyen)
         $exists = DB::table('felhasznalok')->where('email', $email)->exists();
         if ($exists) {
             return back()
@@ -142,7 +142,7 @@ class PartnerAuthController extends Controller
         try {
             $result = DB::transaction(function () use ($data, $email) {
 
-                // Cég: név alapján keres
+                //cegnev alapjan valo kereses
                 $existingCompany = DB::table('cegek')
                     ->where('nev', $data['ceg_nev'])
                     ->first();
@@ -174,7 +174,7 @@ class PartnerAuthController extends Controller
 
             [$userId, $cegId] = $result;
 
-            // auto-login + session regenerate
+            //auto login(session management) MEG NEM MUKODIK, FELKESZ
             $request->session()->regenerate();
 
             session([

@@ -12,7 +12,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
 
-        // Partner auth middleware alias
+        //alias
         $middleware->alias([
             'auth.partner' => \App\Http\Middleware\PartnerAuth::class,
         ]);
