@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: localhost
--- Létrehozás ideje: 2026. Jan 20. 08:09
+-- Létrehozás ideje: 2026. Jan 30. 08:32
 -- Kiszolgáló verziója: 8.0.42
 -- PHP verzió: 8.2.29
 
@@ -20,14 +20,14 @@ SET time_zone = "+00:00";
 --
 -- Adatbázis: `tollutdijadatbazis`
 --
+CREATE DATABASE IF NOT EXISTS `tollutdijadatbazis` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `tollutdijadatbazis`;
 
 -- --------------------------------------------------------
 
 --
 -- Tábla szerkezet ehhez a táblához `cegek`
 --
-CREATE DATABASE IF NOT EXISTS `tollutdijadatbazis` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `tollutdijadatbazis`;
 
 CREATE TABLE `cegek` (
   `id` int NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE `cegek` (
 --
 
 INSERT INTO `cegek` (`id`, `nev`, `adoszam`, `cim`, `statusz`, `created_at`) VALUES
-(1, 'Demo Cég', '12345678-1-12', '1234 Budapest, Demo utca 1.', 'aktiv', '2025-11-12 11:07:09'),
+(1, 'Demo Cég2', '12345678-1-13', '1234 Budapest, Demo utca 1.', 'aktiv', '2025-11-12 11:07:09'),
 (2, 'Demo Kft.', '12345678-1-25', '1234 Kakas, Liba utca 1.', 'aktiv', '2025-11-18 08:39:54'),
 (3, 'Demo Cég', '12345678-1-12', '1234 Budapest, Demo utca 1.', 'aktiv', '2025-11-18 08:41:55'),
 (4, 'Demo Huba Kft.', '12345678-1-26', '1234 Budapest, Kakas utca 1', 'aktiv', '2025-11-18 09:08:29');
@@ -117,16 +117,10 @@ CREATE TABLE `jarmuvek` (
 --
 
 INSERT INTO `jarmuvek` (`id`, `ceg_id`, `kategoria`, `marka`, `tipus`, `tengelyszam`, `rendszam`, `vin`, `euro_besorolas`, `ossztomeg_kg`, `potkocsi_kepes`, `device_id`, `aktiv`) VALUES
-(1, 1, 'teherauto', 'Mercedes-Benz', 'Actros', 5, 'TRK-101', 'WDB9634031L200001', 'EURO 6', 40000, 1, NULL, 1),
-(2, 2, 'teherauto', 'Volvo', 'FH16', 5, 'TRK-102', 'YV2RT40A9JB200002', 'EURO 6', 42000, 1, NULL, 1),
-(3, 3, 'teherauto', 'Scania', 'R500', 5, 'TRK-103', 'YS2R4X20002200003', 'EURO 6', 41000, 1, NULL, 1),
-(4, 4, 'teherauto', 'DAF', 'XF 530', 5, 'TRK-104', 'XLRTE47MS0E200004', 'EURO 6', 40500, 1, NULL, 1),
-(5, 1, 'kisteherauto', 'Ford', 'Transit', 2, 'VAN-201', 'WF0XXXTTGXK200005', 'EURO 5', 3500, 0, NULL, 1),
-(6, 2, 'kisteherauto', 'Mercedes-Benz', 'Sprinter', 2, 'VAN-202', 'WDB9066331S200006', 'EURO 6', 3500, 0, NULL, 1),
-(7, 3, 'kisteherauto', 'Iveco', 'Daily', 2, 'VAN-203', 'ZCFC735A50200007', 'EURO 5', 3500, 0, NULL, 1),
-(8, 2, 'busz', 'MAN', 'Lion’s Coach', 3, 'BUS-301', 'WMAA05ZZ1FP200008', 'EURO 6', 18000, 0, NULL, 1),
-(9, 3, 'busz', 'Setra', 'S 515 HD', 3, 'BUS-302', 'WKK62900001200009', 'EURO 6', 18500, 0, NULL, 1),
-(10, 4, 'busz', 'Volvo', '9700', 3, 'BUS-303', 'YV3R22A123200010', 'EURO 6', 19000, 0, NULL, 1);
+(6, 1, 'Teherautó', 'Volvo', 'FH', 2, 'ABC-123', 'VIN000000000001', 'EURO6', 18000, 1, 1, 1),
+(7, 1, 'Teherautó', 'Scania', 'R450', 2, 'DEF-456', 'VIN000000000002', 'EURO6', 19000, 1, 2, 1),
+(8, 1, 'Kisteher', 'Mercedes', 'Sprinter', 2, 'GHI-789', 'VIN000000000003', 'EURO6', 3500, 0, 3, 1),
+(9, 2, 'Teherautó', 'MAN', 'TGX', 3, 'JKL-012', 'VIN000000000004', 'EURO5', 26000, 1, 4, 0);
 
 -- --------------------------------------------------------
 
@@ -141,6 +135,23 @@ CREATE TABLE `jogositvanyok` (
   `erv_tol` date DEFAULT NULL,
   `erv_ig` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `jogositvanyok`
+--
+
+INSERT INTO `jogositvanyok` (`id`, `sofor_id`, `kategoria`, `erv_tol`, `erv_ig`) VALUES
+(11, 2, 'B', '2010-01-01', '2026-12-31'),
+(12, 2, 'C', '2012-06-15', '2024-06-14'),
+(13, 2, 'D', '2015-03-01', '2025-03-01'),
+(14, 3, 'B', '2018-05-10', '2028-05-09'),
+(15, 5, 'D', '2019-07-01', '2029-06-30'),
+(16, 2, 'C', '2026-01-27', '2031-01-27'),
+(17, 2, 'CE', '2026-01-27', '2031-01-27'),
+(18, 2, 'B', '2010-01-01', '2026-12-31'),
+(19, 2, 'C1', '2026-01-27', '2031-01-27'),
+(20, 2, 'B', '2010-01-01', '2027-01-02'),
+(21, 2, 'CE', '2026-01-27', '2031-01-27');
 
 -- --------------------------------------------------------
 
@@ -224,6 +235,15 @@ CREATE TABLE `soforok` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- A tábla adatainak kiíratása `soforok`
+--
+
+INSERT INTO `soforok` (`id`, `ceg_id`, `szemelyi_azonosito`, `nev`, `szuletesi_datum`, `telefonszam`, `cim`, `adoszam`, `aktiv`, `created_at`) VALUES
+(2, 1, '234567BB', 'Nagy Anna', '1990-07-25', '+36201234568', '4025 Debrecen, Kossuth tér 5.', '23456789-1-09', 1, '2026-01-22 14:19:11'),
+(3, 2, '345678CC', 'Szabó László', '1978-11-02', '+36701234569', '6720 Szeged, Tisza Lajos krt. 10.', '34567890-2-06', 0, '2026-01-22 14:19:11'),
+(5, 3, '567890EE', 'Varga Gábor', '1982-09-30', '+36209998877', '8000 Székesfehérvár, Bartók Béla út 7.', '56789012-1-07', 1, '2026-01-22 14:19:11');
+
 -- --------------------------------------------------------
 
 --
@@ -239,6 +259,16 @@ CREATE TABLE `trackereszkozok` (
   `aktiv` tinyint(1) DEFAULT '1',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `trackereszkozok`
+--
+
+INSERT INTO `trackereszkozok` (`id`, `imei`, `sim_iccid`, `modell`, `firmware_verzio`, `aktiv`, `created_at`) VALUES
+(1, '359881234567890', '2160123456789012345', 'Tracker X100', '1.0.3', 1, '2025-01-10 08:15:00'),
+(2, '359881234567891', '2160123456789012346', 'Tracker X100', '1.0.3', 1, '2025-01-12 13:32:10'),
+(3, '359881234567892', '2160123456789012347', 'Tracker Pro', '1.1.0', 0, '2025-01-15 07:05:44'),
+(4, '359881234567893', '2160123456789012348', 'Tracker Mini', '0.9.8', 1, '2025-01-20 17:47:29');
 
 -- --------------------------------------------------------
 
@@ -421,7 +451,7 @@ ALTER TABLE `felhasznalok`
 -- AUTO_INCREMENT a táblához `felhasznalo_sessionok`
 --
 ALTER TABLE `felhasznalo_sessionok`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT a táblához `jarmuvek`
@@ -433,7 +463,7 @@ ALTER TABLE `jarmuvek`
 -- AUTO_INCREMENT a táblához `jogositvanyok`
 --
 ALTER TABLE `jogositvanyok`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT a táblához `menetlevelek`
@@ -463,13 +493,13 @@ ALTER TABLE `rfid_kartya_hozzarendeles`
 -- AUTO_INCREMENT a táblához `soforok`
 --
 ALTER TABLE `soforok`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT a táblához `trackereszkozok`
 --
 ALTER TABLE `trackereszkozok`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT a táblához `tracker_poziciok`
