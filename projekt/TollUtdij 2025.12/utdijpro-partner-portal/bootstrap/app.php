@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
         //alias
         $middleware->alias([
             'auth.partner' => \App\Http\Middleware\PartnerAuth::class,
+            'verified.partner' => \App\Http\Middleware\PartnerVerified::class,
         ]);
 
     })
@@ -22,3 +23,4 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->create();
+    

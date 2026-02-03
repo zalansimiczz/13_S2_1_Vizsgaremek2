@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Auth\Events\Registered;
+use App\Models\User;
 
 class PartnerAuthController extends Controller
 {
@@ -53,7 +55,7 @@ class PartnerAuthController extends Controller
 
         //ha nincs hash hibauzenet + log keszites
         if (!is_string($hash) || $hash === '') {
-            Log::warning('Login failed: missing/invalid hash', [
+            Log::warning('Sikertelen bejelentkezés: invalid hash', [
                 'email' => $email,
                 'user_id' => $user->id ?? null,
                 'hash_type' => gettype($hash),
@@ -68,7 +70,7 @@ class PartnerAuthController extends Controller
             }
         } catch (\RuntimeException $e) {
             //hibauzenet, idotullepes
-            Log::warning('Login failed: hasher runtime exception', [
+            Log::warning('Sikertelen bejelentkezés: időtúllépés', [
                 'email' => $email,
                 'user_id' => $user->id ?? null,
                 'hash_prefix' => substr($hash, 0, 10),
@@ -125,7 +127,7 @@ class PartnerAuthController extends Controller
         //jelszo egyezes ellenorzes
         if ($data['password'] !== $data['password_confirm']) {
             return back()
-                ->withErrors(['password' => 'A jelszók nem egyeznek.'])
+                ->withErrors(['password' => 'A jelszavak nem egyeznek.'])
                 ->withInput();
         }
 
@@ -174,6 +176,10 @@ class PartnerAuthController extends Controller
 
             [$userId, $cegId] = $result;
 
+            $user = User::findOrFail($userId);
+
+            event(new Registered($user)); 
+
             //auto login(session management) MEG NEM MUKODIK, FELKESZ
             $request->session()->regenerate();
 
@@ -183,10 +189,10 @@ class PartnerAuthController extends Controller
                 'user_name' => $data['teljes_nev'] ?: $email,
             ]);
 
-            return redirect()->route('partner.dashboard');
+            return redirect()->route('verification.notice');
 
         } catch (\Throwable $e) {
-            Log::error('Registration failed', [
+            Log::error('Sikertelen regisztráció', [
                 'email' => $email ?? null,
                 'message' => $e->getMessage(),
             ]);
