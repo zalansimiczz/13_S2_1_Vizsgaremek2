@@ -34,6 +34,13 @@ class PartnerDashboardController extends Controller
             ->orderByDesc('created_at')
             ->get();
 
+        //jarmuvek lekerese (jarmuvek tabla a db-ben)
+        $trucks = DB::table('soforok')
+            ->where('ceg_id', $cegId)
+            ->orderByDesc('created_at')
+            ->get();
+
+
         //adatok atadasa a ui-nak (ez kell a listazashoz)
         return view('partner.dashboard', [
             'userName'  => $userName,
