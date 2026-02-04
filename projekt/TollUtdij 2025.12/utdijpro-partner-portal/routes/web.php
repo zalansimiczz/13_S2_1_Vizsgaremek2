@@ -8,6 +8,7 @@ use App\Http\Controllers\PartnerAuthController;
 use App\Http\Controllers\PartnerDashboardController;
 use App\Http\Controllers\PartnerUserController;
 use App\Http\Controllers\SoforController;
+use App\Http\Controllers\JarmuController;
 use App\Models\User;
 
 //alap route
@@ -59,6 +60,19 @@ Route::get('/partner/logout', [PartnerAuthController::class, 'logout'])
     Route::delete('/soforok/{id}', [SoforController::class, 'destroy'])
         ->name('partner.soforok.destroy');
 });
+
+//sofor kezeles
+    Route::post('/jarmuvek', [JarmuController::class, 'store'])
+        ->name('partner.jarmuvek.store');
+
+    Route::post('/jarmuvek/{id}/update', [JarmuController::class, 'update'])
+        ->name('partner.jarmuvek.update');
+
+    Route::post('/jarmuvek/{id}/toggle', [JarmuController::class, 'toggle'])
+        ->name('partner.jarmuvek.toggle');
+
+    Route::delete('/jarmuvek/{id}', [JarmuController::class, 'destroy'])
+        ->name('partner.jarmuvek.destroy');
 
 //email verifikacio
 Route::get('/email/verify', function () {

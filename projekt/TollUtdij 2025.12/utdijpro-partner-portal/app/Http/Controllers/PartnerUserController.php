@@ -89,6 +89,31 @@ class PartnerUserController extends Controller
         ->update(['aktiv' => $user->aktiv ? 0 : 1]);
 
     return redirect()->route('partner.dashboard', ['tab' => 'addUserContent']);
+
+    if (!session()->has('ceg_id')) {
+        return redirect()->route('partner.login');
+    }
+    //csak sajat ceg adatai jelennek meg (jarmuvek)!!!!!
+    $cegId = (int) session('ceg_id');
+
+    $trucks = DB::table('jarmuvek')
+        ->select('id', 'aktiv')
+        ->where('id', $id)
+        ->where('ceg_id', $cegId)
+        ->first();
+
+    if (!$trucks) {
+        abort(404);
+    }
+
+    DB::table('jarmuvek')
+        ->where('id', $id)
+        ->where('ceg_id', $cegId)
+        ->update(['aktiv' => $user->aktiv ? 0 : 1]);
+
+    return redirect()->route('partner.dashboard', ['tab' => 'addUserContent']);
 }
+
+
 
 }

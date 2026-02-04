@@ -129,7 +129,7 @@
             <a href="#driversContent" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
                 <i class="fas fa-id-card fa-fw w-5 text-center"></i><span class="font-medium">Sofőrök</span>
             </a>
-            <a href="#fleetContent" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
+            <a href="#trucksContent" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
                 <i class="fas fa-truck fa-fw w-5 text-center"></i><span class="font-medium">Flotta</span>
             </a>
             <a href="#reportsContent" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
@@ -520,13 +520,195 @@
 </div>
 
 
-        <!--flotta (MEG NINCS KESZ)-->
-        <div id="fleetContent" class="content-section">
-            <h2 class="font-poppins text-xl font-semibold text-white mb-6">Flotta Kezelés</h2>
-            <div class="glassmorphism-element p-6 rounded-xl">
-                <p class="text-muted">Járművek hozzáadása, szerkesztése, csoportosítása és a flottához kapcsolódó beállítások. (Fejlesztés alatt)</p>
+        <!--soforok-->
+<div id="trucksContent" class="content-section">
+    <h2 class="font-poppins text-xl font-semibold text-white mb-6">Járművek nyilvántartása</h2>
+
+    <div class="glassmorphism-element p-6 rounded-xl">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-5">
+            <div class="flex-1">
+                <input id="truckSearch" type="text"
+                       class="w-full bg-transparent border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20"
+                       placeholder="Keresés rendszám, márka alapján...">
             </div>
+
+            <button type="button" id="addTruckBtn"
+                    class="px-4 py-2 rounded-lg bg-blue-600/80 hover:bg-blue-600 text-white font-medium transition">
+                + Új jármű
+            </button>
         </div>
+
+        <div class="overflow-x-auto">
+            <table class="w-full text-left">
+                <thead>
+                    <tr class="text-gray-300 border-b border-white/10">
+                        <th class="py-3 pr-4">Rendszám</th>
+                        <th class="py-3 pr-4">Márka</th>
+                        <th class="py-3 pr-4">Kategória</th>
+                        <th class="py-3 pr-4">Státusz</th>
+                        <th class="py-3 text-right">Műveletek</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-200" id="truckTableBody">
+                @forelse($trucks as $t)
+                    <tr class="border-b border-white/10 hover:bg-white/5 transition">
+                        <td class="py-3 pr-4">{{ $t->rendszam }}</td>
+                        <td class="py-3 pr-4">{{ $t->marka }}</td>
+                        <td class="py-3 pr-4">{{ $t->kategoria }}</td>
+                        <td class="py-3 pr-4">
+                            @if($t->aktiv)
+                                <span class="px-2 py-1 rounded-md text-sm bg-green-600/25 text-green-200">Aktív</span>
+                            @else
+                                <span class="px-2 py-1 rounded-md text-sm bg-gray-600/25 text-gray-200">Inaktív</span>
+                            @endif
+                        </td>
+                        <td class="py-3 text-right space-x-2">
+                            <form action="{{ route('partner.jarmuvek.toggle', $t->id) }}" method="POST" class="inline">
+                                @csrf
+                                <button type="submit" title="Státusz váltása" class="text-sky-400 hover:text-sky-300">
+                                    <i class="fas fa-power-off"></i>
+                                </button>
+                            </form>
+
+                            <button onclick='editTruck(@json($t))' title="Szerkesztés" class="text-amber-400 hover:text-amber-300">
+                                <i class="fas fa-edit"></i>
+                            </button>
+
+                            <form action="{{ route('partner.jarmuvek.destroy', $t->id) }}" method="POST" class="inline" onsubmit="return confirm('Biztosan törölni szeretné ezt a járművet?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" title="Törlés" class="text-red-400 hover:text-red-300">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="5" class="py-10 text-center text-gray-500 italic">Nincs még rögzített jármű.</td>
+                    </tr>
+                @endforelse
+                </tbody>
+            </table>
+        </div>
+
+        <div id="trucksEmptyState" class="mt-6 text-gray-400 {{ (count($trucks) > 0) ? 'hidden' : '' }}">
+            Nincs még rögzített jármű. Kattints az <b>Új jármű</b> gombra a felvitelhez.
+        </div>
+    </div>
+
+    <div id="truckModal" class="fixed inset-0 z-50 hidden items-center justify-center">
+        <div id="truckModalBackdrop" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+
+        <div class="relative w-[95%] max-w-2xl glassmorphism-element p-6 rounded-xl shadow-2xl">
+            <div class="flex items-center justify-between mb-4">
+                <h3 id="truckModalTitle" class="text-white text-lg font-semibold">Új jármű</h3>
+                <button type="button" id="closeTruckModal"
+                        class="text-gray-300 hover:text-white text-xl leading-none">×</button>
+            </div>
+
+            <form id="truckForm" method="POST" action="{{ route('partner.jarmuvek.store') }}"
+                  class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                @csrf
+                <div id="methodField"></div>
+
+                <div>
+                    <label class="block text-gray-300 mb-1">Aktív</label>
+                    <select id="truckAktiv" name="aktiv" required
+                            class="w-full bg-slate-800 border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20">
+                        <option value="1">Igen</option>
+                        <option value="0">Nem</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-gray-300 mb-1">Rendszám</label>
+                    <input id="truckRendszam" name="rendszam" type="text" required
+                           class="w-full bg-slate-800 border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20">
+                </div>
+
+                <div>
+                    <label class="block text-gray-300 mb-1">Márka</label>
+                    <input id="truckMarka" name="marka" type="text"
+                           class="w-full bg-slate-800 border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20">
+                </div>
+
+                <div>
+                    <label class="block text-gray-300 mb-1">Kategória</label>
+                    <select id="truckKategoria" name="kategoria" required
+                            class="w-full bg-slate-800 border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20">
+                        <option value="Tehergépkocsi">Tehergépkocsi</option>
+                        <option value="Személygépkocsi">Személygépkocsi</option>
+                        <option value="Kisteherautó">Kisteherautó</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-gray-300 mb-1">Típus</label>
+                    <input id="truckTipus" name="tipus" type="text" required
+                           class="w-full bg-slate-800 border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20">
+                </div>
+
+                <div>
+                    <label class="block text-gray-300 mb-1">Tengelyszám</label>
+                    <select id="truckTengelyszam" name="tengelyszam" required
+                            class="w-full bg-slate-800 border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20">
+                        <option value="0">-</option>
+                        <option value="1">1 tengelyes</option>
+                        <option value="2">2 tengelyes</option>
+                        <option value="3">3 tengelyes</option>
+                        <option value="4">4 tengelyes</option>
+                        <option value="5">5 tengelyes</option>
+                        <option value="6">6 tengelyes</option>
+                        <option value="7">7 tengelyes</option>
+                    </select>
+                </div>
+
+                <div class="md:col-span-2">
+                    <label class="block text-gray-300 mb-1">Alvázszám</label>
+                    <input id="truckAlvazszam" name="vin" type="text"
+                           class="w-full bg-slate-800 border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20">
+                </div>
+
+                <div>
+                    <label class="block text-gray-300 mb-1">Euro besorolás</label>
+                    <select id="truckEurobesorolas" name="euro_besorolas" required
+                            class="w-full bg-slate-800 border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20">
+                        <option value="3">Euro 3</option>
+                        <option value="4">Euro 4</option>
+                        <option value="5">Euro 5</option>
+                        <option value="6">Euro 6</option>
+                    </select>
+                </div>
+
+                <div class="md:col-span-2">
+                    <label class="block text-gray-300 mb-1">Össztömeg</label>
+                    <input id="truckÖssztömeg" name="ossztomeg_kg" type="text"
+                           class="w-full bg-slate-800 border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20">
+                </div>
+
+                <label class="block text-gray-300 mb-1">Pótkocsi képes?</label>
+                    <select id="truckPotkocsikepes" name="potkocsi_kepes" required
+                            class="w-full bg-slate-800 border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20">
+                        <option value="1">Igen</option>
+                        <option value="0">Nem</option>
+                    </select>
+
+                <div class="md:col-span-2 flex justify-end gap-2 pt-2">
+                    <button type="button" id="cancelTruckModal"
+                            class="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-gray-200 transition">
+                        Mégse
+                    </button>
+                    <button type="submit"
+                            class="px-4 py-2 rounded-lg bg-blue-600/80 hover:bg-blue-600 text-white font-medium transition">
+                        Mentés
+                    </button>
+                     </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
         <!--riportok (MEG NINCS KESZ)-->
         <div id="reportsContent" class="content-section">
@@ -850,6 +1032,92 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //modal close buttons
     [document.getElementById('closeDriverModal'), document.getElementById('cancelDriverModal'), document.getElementById('driverModalBackdrop')].forEach(el => {
+        el?.addEventListener('click', () => {
+            modal.classList.replace('flex', 'hidden');
+        });
+    });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('truckModal');
+  const openBtn = document.getElementById('addTruckBtn');
+  const closeBtn = document.getElementById('closeTruckModal');
+  const cancelBtn = document.getElementById('cancelTruckModal');
+  const backdrop = document.getElementById('truckModalBackdrop');
+
+  if (!modal || !openBtn) {
+    console.error("Driver modal elemek hiányoznak!", { modal, openBtn });
+    return;
+  }
+
+  function openModal() {
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  }
+
+  function closeModal() {
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  }
+
+  openBtn.addEventListener('click', () => {
+    console.log("Új jármű gomb kattintva");
+    openModal();
+  });
+
+  closeBtn?.addEventListener('click', closeModal);
+  cancelBtn?.addEventListener('click', closeModal);
+  backdrop?.addEventListener('click', closeModal);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+});
+
+    //modal megnyitasa az adatok szerkesztesehez(jarmuvek menuponthoz)
+    function editTruck(truck) {
+    const modal = document.getElementById('truckModal');
+    const form = document.getElementById('truckForm');
+    const title = document.getElementById('truckModalTitle');
+    const methodField = document.getElementById('methodField');
+
+    title.innerText = "Jármű adatainak módosítása";
+    form.action = `/partner/jarmuvek/${truck.id}/update`;
+    methodField.innerHTML = ''; 
+
+    // adatok betöltése
+document.getElementById('truckAktiv').value = truck.aktiv ? 1 : 0;
+document.getElementById('truckRendszam').value = truck.rendszam || '';
+document.getElementById('truckMarka').value = truck.marka || '';
+document.getElementById('truckKategoria').value = truck.kategoria || '';
+document.getElementById('truckTipus').value = truck.tipus || '';
+document.getElementById('truckTengelyszam').value = truck.tengelyszam || '';
+document.getElementById('truckAlvazszam').value = truck.vin || '';
+document.getElementById('truckEurobesorolas').value = truck.euro_besorolas || '';
+document.getElementById('truckÖssztömeg').value = truck.ossztomeg_kg || '';
+document.getElementById('truckPotkocsikepes').value = truck.potkocsi_kepes ? 1 : 0;
+
+modal.classList.replace('hidden', 'flex');
+}
+
+    //esemenykezelok
+    document.addEventListener('DOMContentLoaded', () => {
+    const addBtn = document.getElementById('addTruckBtn');
+    const modal = document.getElementById('truckModal');
+    const form = document.getElementById('truckForm');
+
+        //jarmu hozzaadasa gomb, utana uritese a feluletnek
+        addBtn?.addEventListener('click', () => {
+        form.reset();
+        document.getElementById('truckModalTitle').innerText = "Új jármű hozzáadása";
+        form.action = "{{ route('partner.jarmuvek.store') }}";
+        document.getElementById('methodField').innerHTML = "";
+        modal.classList.replace('hidden', 'flex');
+    });
+
+    //modal close buttons
+    [document.getElementById('closeTruckModal'), document.getElementById('cancelTruckModal'), document.getElementById('truckModalBackdrop')].forEach(el => {
         el?.addEventListener('click', () => {
             modal.classList.replace('flex', 'hidden');
         });

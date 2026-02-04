@@ -35,7 +35,7 @@ class PartnerDashboardController extends Controller
             ->get();
 
         //jarmuvek lekerese (jarmuvek tabla a db-ben)
-        $trucks = DB::table('soforok')
+        $trucks = DB::table('jarmuvek')
             ->where('ceg_id', $cegId)
             ->orderByDesc('created_at')
             ->get();
@@ -46,6 +46,7 @@ class PartnerDashboardController extends Controller
             'userName'  => $userName,
             'employees' => $employees,
             'drivers'   => $drivers,
+            'trucks'   => $trucks,
         ]);
     }
 }
