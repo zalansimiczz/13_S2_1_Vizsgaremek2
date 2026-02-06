@@ -131,11 +131,11 @@ Route::post('/reports', [\App\Http\Controllers\PartnerReportController::class, '
     ->name('partner.reports.generate');
 
 //settings
-        Route::put('/settings/profile', [PartnerSettingsController::class, 'updateProfile'])->name('settings.profile.update');
-        Route::put('/settings/company', [PartnerSettingsController::class, 'updateCompany'])->name('settings.company.update');
+Route::put('/settings/profile', [PartnerSettingsController::class, 'updateProfile'])->name('settings.profile.update');
+Route::put('/settings/company', [PartnerSettingsController::class, 'updateCompany'])->name('settings.company.update');
 
-        Route::post('/settings/apikeys', [PartnerSettingsController::class, 'storeApiKey'])->name('settings.apikeys.store');
-        Route::post('/settings/apikeys/{id}/regen', [PartnerSettingsController::class, 'regenApiKey'])->name('settings.apikeys.regen');
-        Route::delete('/settings/apikeys/{id}', [PartnerSettingsController::class, 'destroyApiKey'])->name('settings.apikeys.destroy');
+Route::post('/settings/apikeys', [PartnerSettingsController::class, 'storeApiKey'])->name('settings.apikeys.store');
+Route::post('/settings/apikeys/{id}/regen', [PartnerSettingsController::class, 'regenApiKey'])->name('settings.apikeys.regen');
+Route::delete('/settings/apikeys/{id}', [PartnerSettingsController::class, 'destroyApiKey'])->name('settings.apikeys.destroy');
     
 
