@@ -520,7 +520,7 @@
 </div>
 
 
-        <!--soforok-->
+        <!--jarmuvek-->
 <div id="trucksContent" class="content-section">
     <h2 class="font-poppins text-xl font-semibold text-white mb-6">Járművek nyilvántartása</h2>
 
