@@ -63,7 +63,7 @@ namespace TollÚtdíj
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "mysql",
+                Password = "",
                 Database = "tollutdijadatbazis"
             };
 
@@ -75,8 +75,7 @@ namespace TollÚtdíj
                 }
                 catch
                 {
-                    lblhibas.Text = "Adatlekérdezési hiba.";
-                    lblhibas.Visible = true;
+                    MessageBox.Show("Adatlekérdezési hiba.", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -114,7 +113,7 @@ namespace TollÚtdíj
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "mysql",
+                Password = "",
                 Database = "tollutdijadatbazis"
             };
             using (MySqlConnection kapcsolat = new MySqlConnection(build.ConnectionString))
@@ -125,8 +124,7 @@ namespace TollÚtdíj
                 }
                 catch (Exception)
                 {
-                    lblhibas.Text = "Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot, majd próbálja újra.";
-                    lblhibas.Visible = true;
+                    MessageBox.Show("Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot, majd próbálja újra.", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 

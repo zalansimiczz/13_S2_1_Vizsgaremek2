@@ -51,7 +51,7 @@ namespace TollÚtdíj
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "mysql",
+                Password = "",
                 Database = "tollutdijadatbazis"
             };
 
@@ -63,8 +63,7 @@ namespace TollÚtdíj
                 }
                 catch
                 {
-                    lblhiba.Text = "Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot.";
-                    lblhiba.Visible = true;
+                    MessageBox.Show("Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot.", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -120,7 +119,7 @@ namespace TollÚtdíj
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "mysql",
+                Password = "",
                 Database = "tollutdijadatbazis"
             };
 
@@ -132,8 +131,7 @@ namespace TollÚtdíj
                 }
                 catch (Exception)
                 {
-                    lblhiba.Text = "Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot, majd próbálja újra.";
-                    lblhiba.Visible = true;
+                    MessageBox.Show("Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot, majd próbálja újra.", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -220,7 +218,19 @@ namespace TollÚtdíj
 
                 if (cbbsoforlista.SelectedItem != null)
                 {
-                    string r = cbbsoforlista.Text;
+                    string r = cbbsoforlista.Text.Split('|')[0].Trim();
+                    // Restore enabled/read-only state for the name textbox based on role
+                    if (role == "rendszer_admin")
+                    {
+                        txbnev.Enabled = true;
+                        txbnev.ReadOnly = false;
+                    }
+                    else
+                    {
+                        txbnev.Enabled = false;
+                        txbnev.ReadOnly = true;
+                    }
+
                     BetoltSoforAdatok(r);
                 }
             }
@@ -287,8 +297,7 @@ namespace TollÚtdíj
                     }
                     catch (Exception ex)
                     {
-                        lblhiba.Text = "Hiba mentés közben:\n" + ex.Message;
-                        lblhiba.Visible = true;
+                        MessageBox.Show("Hiba mentés közben:\n" + ex.Message, "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                 }
@@ -346,8 +355,7 @@ namespace TollÚtdíj
                     }
                     catch (Exception ex)
                     {
-                        lblhiba.Text = "Hiba mentés közben:\n" + ex.Message;
-                        lblhiba.Visible = true;
+                        MessageBox.Show("Hiba mentés közben:\n" + ex.Message, "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                 }
@@ -387,8 +395,7 @@ namespace TollÚtdíj
                 }
                 catch
                 {
-                    lblhiba.Text = "Adatbázis kapcsolat hiba.";
-                    lblhiba.Visible = true;
+                    MessageBox.Show("Adatbázis kapcsolat hiba.", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -407,8 +414,7 @@ namespace TollÚtdíj
                 }
                 catch (Exception ex)
                 {
-                    lblhiba.Text = "Hiba törlés közben:\n" + ex.Message;
-                    lblhiba.Visible = true;
+                    MessageBox.Show("Hiba törlés közben:\n" + ex.Message, "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
             }

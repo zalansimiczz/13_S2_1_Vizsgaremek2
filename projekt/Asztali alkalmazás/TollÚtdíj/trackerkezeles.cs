@@ -62,7 +62,7 @@ namespace TollÚtdíj
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "mysql",
+                Password = "",
                 Database = "tollutdijadatbazis"
             };
 
@@ -117,7 +117,7 @@ ORDER BY j.rendszam;
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "mysql",
+                Password = "",
                 Database = "tollutdijadatbazis"
             };
 

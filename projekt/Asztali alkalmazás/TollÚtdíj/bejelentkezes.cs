@@ -29,7 +29,8 @@ namespace TollÚtdíj
                 txbusername,
                 lbl1,
                 btnlogin,
-                chkrememberme
+                chkrememberme,
+                pictureBox1
                 );
         }
 
@@ -45,6 +46,7 @@ namespace TollÚtdíj
             private Label lbl1;
             private Button btnLogin;
             private CheckBox chkrememberme;
+            private PictureBox logoPicture;
 
             public Bejelentkezessegito(
                 Label lblHibas,
@@ -54,7 +56,8 @@ namespace TollÚtdíj
                 TextBox txbUsername,
                 Label lbl1,
                 Button btnLogin,
-                CheckBox chkrememberme)
+                CheckBox chkrememberme,
+                PictureBox logoPicture)
             {
                 this.lblHibas = lblHibas;
                 this.lblUser = lblUser;
@@ -64,6 +67,7 @@ namespace TollÚtdíj
                 this.lbl1 = lbl1;
                 this.btnLogin = btnLogin;
                 this.chkrememberme = chkrememberme;
+                this.logoPicture = logoPicture;
             }
 
             public void ShowErrorState()
@@ -76,9 +80,34 @@ namespace TollÚtdíj
                 lbl1.Visible = true;
                 btnLogin.Visible = true;
                 chkrememberme.Visible = true;
+                if (logoPicture != null)
+                {
+                    logoPicture.Visible = true;
+                }
 
                 txbPass.Text = "";
                 txbPass.Focus();
+            }
+
+            public void RestoreLoginState()
+            {
+                // Hide the error label and restore the normal login controls
+                lblHibas.Visible = false;
+                lblUser.Visible = true;
+                lblPass.Visible = true;
+                txbPass.Visible = true;
+                txbUsername.Visible = true;
+                lbl1.Visible = true;
+                btnLogin.Visible = true;
+                chkrememberme.Visible = true;
+                if (logoPicture != null)
+                {
+                    logoPicture.Visible = true;
+                }
+
+                // Clear the password and set focus to the username field
+                txbPass.Text = string.Empty;
+                txbUsername.Focus();
             }
         }
 
@@ -116,7 +145,7 @@ namespace TollÚtdíj
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "mysql",
+                Password = "",
                 Database = "tollutdijadatbazis"
             };
 
@@ -130,7 +159,7 @@ namespace TollÚtdíj
                 }
                 catch (Exception)
                 {
-                    lblhibas.Text = "Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot, majd próbálja újra.";
+                    MessageBox.Show("Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot, majd próbálja újra.", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     UIkisegito.ShowErrorState();
                     return;
                 }
@@ -146,7 +175,7 @@ namespace TollÚtdíj
 
                 if (!read.HasRows)
                 {
-                    lblhibas.Text = "Kérjük, ellenőrizze a jelszavát\r\nés az E-mail címét, majd próbálja újra.";
+                    MessageBox.Show("Kérjük, ellenőrizze a jelszavát\r\nés az E-mail címét, majd próbálja újra.", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     UIkisegito.ShowErrorState();
                     return;
                 }
@@ -162,7 +191,7 @@ namespace TollÚtdíj
                 {
                     if (aktiv == 0)
                     {
-                        lblhibas.Text = "A fiók nincs aktiválva.\r\nForduljon az adminisztrátorhoz.";
+                        MessageBox.Show("A fiók nincs aktiválva.\r\nForduljon az adminisztrátorhoz.", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         UIkisegito.ShowErrorState();
                         return;
                     }
@@ -207,15 +236,28 @@ namespace TollÚtdíj
 
 
 
-                    this.Hide();
                     var ui = new userinterface(szerep, cegId);
-                    ui.FormClosed += (s, args) => { this.Show(); this.Activate(); };
+                    ui.FormClosed += (s, args) =>
+                    {
+                        // If "remember me" was selected we stored a session token -> exit the app when main UI closes
+                        if (!string.IsNullOrEmpty(Properties.Settings.Default.SessionToken))
+                        {
+                            this.Close();
+                            return;
+                        }
+
+                        // Otherwise restore the login form controls and picture when the UI is closed
+                        UIkisegito.RestoreLoginState();
+                        pictureBox1.Visible = true;
+                        this.Show();
+                        this.Activate();
+                    };
                     this.Hide();
                     ui.Show();
                 }
                 else
                 {
-                    lblhibas.Text = "Kérjük, ellenőrizze a jelszavát\r\nés az E-mail címét, majd próbálja újra.";
+                    MessageBox.Show("Kérjük, ellenőrizze a jelszavát\r\nés az E-mail címét, majd próbálja újra.", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     UIkisegito.ShowErrorState();
                     return;
                 }
@@ -229,10 +271,10 @@ namespace TollÚtdíj
         }
 
         /* Jelenlegi hibák:
-         * - ha bejelentkezési adat rossz eltűnik a logó
-         * - új sofőr hozzáadásánál mégse gombra nyomva nem hozza vissza az eddigi sofőr adatait
-         * - új jármű hozzáadásánál mégse gombra nyomva nem hozza vissza a jármű euro besorolását
-         * - első bezárásnál a bejelentkezési form üresen megnyitva marad
+         * - ha bejelentkezési adat rossz eltűnik a logó //javítva
+         * - új sofőr hozzáadásánál mégse gombra nyomva nem hozza vissza az eddigi sofőr adatait //javítva
+         * - új jármű hozzáadásánál mégse gombra nyomva nem hozza vissza a jármű euro besorolását //javítva
+         * - első bezárásnál a bejelentkezési form üresen megnyitva marad //javítva
           */
     }
 }

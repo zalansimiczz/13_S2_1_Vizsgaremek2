@@ -77,7 +77,7 @@ namespace TollÚtdíj
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "mysql",
+                Password = "",
                 Database = "tollutdijadatbazis"
             };
             using (MySqlConnection kapcsolat = new MySqlConnection(build.ConnectionString))
@@ -88,8 +88,7 @@ namespace TollÚtdíj
                 }
                 catch (Exception)
                 {
-                    lblhiba.Text = "Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot, majd próbálja újra.";
-                    lblhiba.Visible = true;
+                    MessageBox.Show("Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot, majd próbálja újra.", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 var parancs = kapcsolat.CreateCommand();
@@ -146,7 +145,7 @@ namespace TollÚtdíj
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "mysql",
+                Password = "",
                 Database = "tollutdijadatbazis"
             };
 
@@ -182,8 +181,60 @@ namespace TollÚtdíj
                         txbtomeg.Text = reader.GetInt32("ossztomeg_kg") + "kg";
                         txbcegid.Text = reader.GetInt32("ceg_id").ToString();
                         txbmarka.Text = reader.GetString("marka").ToString();
-                        string euro = reader.GetString("euro_besorolas");
-                        cbbeuro.SelectedItem = euro;
+                        string euro = null;
+                        if (!reader.IsDBNull(reader.GetOrdinal("euro_besorolas")))
+                        {
+                            euro = reader.GetString("euro_besorolas");
+                        }
+
+                        // Normalize and try to match the combo box items.
+                        if (string.IsNullOrWhiteSpace(euro))
+                        {
+                            cbbeuro.SelectedIndex = -1;
+                        }
+                        else
+                        {
+                            string euroNorm = euro.Trim().ToUpperInvariant();
+
+                            // Build a normalized list of items from the combobox
+                            int matchIndex = -1;
+                            for (int i = 0; i < cbbeuro.Items.Count; i++)
+                            {
+                                string item = cbbeuro.Items[i].ToString().Trim().ToUpperInvariant();
+                                if (item == euroNorm)
+                                {
+                                    matchIndex = i;
+                                    break;
+                                }
+                                // also tolerate strings like "EURO4" vs "EURO 4"
+                                if (item.Replace(" ", "") == euroNorm.Replace(" ", ""))
+                                {
+                                    matchIndex = i;
+                                    break;
+                                }
+                            }
+
+                            // If still not found, try to extract a number and map to "EURO {n}"
+                            if (matchIndex == -1)
+                            {
+                                // find first digit sequence
+                                var digits = System.Text.RegularExpressions.Regex.Match(euroNorm, "\\d+");
+                                if (digits.Success)
+                                {
+                                    string mapped = "EURO " + digits.Value;
+                                    for (int i = 0; i < cbbeuro.Items.Count; i++)
+                                    {
+                                        if (cbbeuro.Items[i].ToString().Trim().ToUpperInvariant() == mapped)
+                                        {
+                                            matchIndex = i;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+
+                            cbbeuro.SelectedIndex = matchIndex;
+                        }
                         txbtengely.SelectedText = reader.GetInt32("tengelyszam").ToString();
                         txbvin.Text = reader["vin"].ToString();
                         cbbpotkocsi.SelectedIndex = Convert.ToInt32(reader["potkocsi_kepes"]);
@@ -229,7 +280,7 @@ namespace TollÚtdíj
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "mysql",
+                Password = "",
                 Database = "tollutdijadatbazis"
             };
 
@@ -301,7 +352,7 @@ namespace TollÚtdíj
                     {
                         Server = "localhost",
                         UserID = "root",
-                        Password = "mysql",
+                        Password = "",
                         Database = "tollutdijadatbazis"
                     };
 
@@ -384,6 +435,7 @@ namespace TollÚtdíj
                 {
                     string r = cbbjarmulista.Text.Split('|')[0].Trim();
                     BetoltJarmuAdatok(r);
+                    // Ensure euro selection is restored as well (BetoltJarmuAdatok handles selection robustly)
                 }
             }
         }
@@ -417,7 +469,7 @@ namespace TollÚtdíj
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "mysql",
+                Password = "",
                 Database = "tollutdijadatbazis"
             };
 
@@ -429,8 +481,7 @@ namespace TollÚtdíj
                 }
                 catch
                 {
-                    lblhiba.Text = "Adatbázis kapcsolat hiba.";
-                    lblhiba.Visible = true;
+                    MessageBox.Show("Adatbázis kapcsolat hiba.", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -453,8 +504,7 @@ namespace TollÚtdíj
                 }
                 catch (Exception ex)
                 {
-                    lblhiba.Text = "Hiba törlés közben:\n" + ex.Message;
-                    lblhiba.Visible = true;
+                    MessageBox.Show("Hiba törlés közben:\n" + ex.Message, "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
             }
