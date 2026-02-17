@@ -3,7 +3,7 @@
   "WorkspaceRootPath": "C:\\Users\\boban\\Documents\\GitHub\\13_S2_1_Vizsgaremek2\\projekt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|C:\\Users\\boban\\Documents\\GitHub\\13_S2_1_Vizsgaremek2\\projekt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\bejelentkezes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|c:\\users\\boban\\documents\\github\\13_s2_1_vizsgaremek2\\projekt\\asztali alkalmaz\u00E1s\\toll\u00FAtd\u00EDj\\bejelentkezes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|solutionrelative:bejelentkezes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -23,7 +23,7 @@
       "RelativeMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|solutionrelative:bejelentkezes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|c:\\users\\boban\\documents\\github\\13_s2_1_vizsgaremek2\\projekt\\asztali alkalmaz\u00E1s\\toll\u00FAtd\u00EDj\\jogsikezeles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|C:\\Users\\boban\\Documents\\GitHub\\13_S2_1_Vizsgaremek2\\projekt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\jogsikezeles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|solutionrelative:jogsikezeles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -55,7 +55,7 @@
       "RelativeMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|solutionrelative:fomenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|c:\\users\\boban\\documents\\github\\13_s2_1_vizsgaremek2\\projekt\\asztali alkalmaz\u00E1s\\toll\u00FAtd\u00EDj\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|C:\\Users\\boban\\Documents\\GitHub\\13_S2_1_Vizsgaremek2\\projekt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -86,8 +86,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAACwAAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T22:49:28.245Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-17T22:49:28.245Z"
             },
             {
               "$type": "Document",
@@ -99,8 +98,7 @@
               "RelativeToolTip": "jarmukezeles.cs",
               "ViewState": "AgIAAMABAAAAAAAAAAAIwNcBAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T22:10:31.031Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-17T22:10:31.031Z"
             },
             {
               "$type": "Document",
@@ -112,8 +110,7 @@
               "RelativeToolTip": "trackerkezeles.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAALMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T22:10:31.107Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-17T22:10:31.107Z"
             },
             {
               "$type": "Document",
@@ -125,8 +122,7 @@
               "RelativeToolTip": "jogsikezeles.cs",
               "ViewState": "AgIAAL8AAAAAAAAAAAAewNQAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T22:10:31.19Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-17T22:10:31.19Z"
             },
             {
               "$type": "Document",
@@ -137,8 +133,7 @@
               "ToolTip": "C:\\Users\\boban\\Documents\\GitHub\\13_S2_1_Vizsgaremek2\\projekt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\jogsikezeles.cs [Design]",
               "RelativeToolTip": "jogsikezeles.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T22:10:31.346Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2026-02-17T22:10:31.346Z"
             },
             {
               "$type": "Document",
@@ -148,7 +143,7 @@
               "RelativeDocumentMoniker": "bejelentkezes.cs",
               "ToolTip": "C:\\Users\\boban\\Documents\\GitHub\\13_S2_1_Vizsgaremek2\\projekt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\bejelentkezes.cs",
               "RelativeToolTip": "bejelentkezes.cs",
-              "ViewState": "AgIAAPEAAAAAAAAAAAAnwBgBAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAPEAAAAAAAAAAAAnwBQBAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-17T22:10:31.348Z",
               "EditorCaption": ""
@@ -162,8 +157,7 @@
               "ToolTip": "C:\\Users\\boban\\Documents\\GitHub\\13_S2_1_Vizsgaremek2\\projekt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\bejelentkezes.cs [Design]",
               "RelativeToolTip": "bejelentkezes.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T22:10:31.349Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2026-02-17T22:10:31.349Z"
             },
             {
               "$type": "Document",
@@ -174,8 +168,7 @@
               "ToolTip": "C:\\Users\\boban\\Documents\\GitHub\\13_S2_1_Vizsgaremek2\\projekt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\fomenu.cs [Design]",
               "RelativeToolTip": "fomenu.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T22:10:31.35Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2026-02-17T22:10:31.35Z"
             },
             {
               "$type": "Document",
@@ -187,8 +180,7 @@
               "RelativeToolTip": "soforkezeles.cs",
               "ViewState": "AgIAAMkAAAAAAAAAAAAvwBAAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T22:10:31.351Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-17T22:10:31.351Z"
             },
             {
               "$type": "Document",
@@ -199,8 +191,7 @@
               "ToolTip": "C:\\Users\\boban\\Documents\\GitHub\\13_S2_1_Vizsgaremek2\\projekt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\soforkezeles.cs [Design]",
               "RelativeToolTip": "soforkezeles.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T22:10:31.351Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2026-02-17T22:10:31.351Z"
             },
             {
               "$type": "Document",
@@ -212,8 +203,7 @@
               "RelativeToolTip": "fomenu.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAD0AAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T22:10:31.351Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-17T22:10:31.351Z"
             },
             {
               "$type": "Document",
@@ -225,8 +215,7 @@
               "RelativeToolTip": "cegkezeles.cs",
               "ViewState": "AgIAAFkAAAAAAAAAAAAewGwAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T22:10:31.353Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-17T22:10:31.353Z"
             },
             {
               "$type": "Document",
@@ -237,8 +226,7 @@
               "ToolTip": "C:\\Users\\boban\\Documents\\GitHub\\13_S2_1_Vizsgaremek2\\projekt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\cegkezeles.cs [Design]",
               "RelativeToolTip": "cegkezeles.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T22:10:31.353Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2026-02-17T22:10:31.353Z"
             },
             {
               "$type": "Document",
@@ -249,8 +237,7 @@
               "ToolTip": "C:\\Users\\boban\\Documents\\GitHub\\13_S2_1_Vizsgaremek2\\projekt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\jarmukezeles.cs [Design]",
               "RelativeToolTip": "jarmukezeles.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-17T22:10:31.354Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2026-02-17T22:10:31.354Z"
             }
           ]
         }

@@ -271,10 +271,8 @@ namespace TollÚtdíj
         }
 
         /* Jelenlegi hibák:
-         * - ha bejelentkezési adat rossz eltűnik a logó //javítva
-         * - új sofőr hozzáadásánál mégse gombra nyomva nem hozza vissza az eddigi sofőr adatait //javítva
-         * - új jármű hozzáadásánál mégse gombra nyomva nem hozza vissza a jármű euro besorolását //javítva
-         * - első bezárásnál a bejelentkezési form üresen megnyitva marad //javítva
+         messageboxok átírása labelszövegre
+         mysql password átírása üresre
           */
     }
 }
