@@ -3,6 +3,7 @@
 <html lang="hu">
 <head>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ÚtdíjPro - Partner Irányítópult</title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -889,11 +890,19 @@
                 portalCalculateBtn.disabled = true;
 
                 try {
-                    const response = await fetch('http://localhost:5000/api/calculate', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ from, to, vehicleType: truckType, waypoints })
-                    });
+                    const csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+const response = await fetch('/calculate', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': csrf,
+        'Accept': 'application/json'
+    },
+    body: JSON.stringify({ from, to, vehicleType: truckType, waypoints })
+});
+
+
                     const result = await response.json();
 
                     if (!response.ok) {
@@ -937,7 +946,7 @@
                 } catch (err) {
                     console.error("Kalkulációs hiba a portálon:", err);
                     portalErrorMessages.textContent = err.message || "Ismeretlen hiba történt a kalkuláció során.";
-                    portalErrorMessages.classList.remove('hidden');
+                    portalErrorMessages.sclassList.remove('hidden');
                 } finally {
                     portalCalculateBtn.innerHTML = '<i class="fas fa-cogs mr-2"></i>Kalkuláció';
                     portalCalculateBtn.disabled = false;
@@ -948,7 +957,6 @@
 //base nezet a kalkulalas utan
 const params = new URLSearchParams(window.location.search);
 const tab = params.get('tab');
-
 if (tab) {
     switchContent('#' + tab);
 } else if (sidebarLinks.length > 0) {
