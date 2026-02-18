@@ -54,7 +54,7 @@ namespace TollÚtdíj
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "",
+                Password = "mysql",
                 Database = "tollutdijadatbazis"
             };
 
@@ -66,8 +66,8 @@ namespace TollÚtdíj
                 }
                 catch
                 {
-                    lblhiba.Text = "Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot.";
-                    lblhiba.Visible = true;
+                    lblhibas.Text = "Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot.";
+                    lblhibas.Visible = true;
                     return;
                 }
 
@@ -125,7 +125,7 @@ namespace TollÚtdíj
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "",
+                Password = "mysql",
                 Database = "tollutdijadatbazis"
             };
 
@@ -159,7 +159,7 @@ namespace TollÚtdíj
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "",
+                Password = "mysql",
                 Database = "tollutdijadatbazis"
             };
 
@@ -210,7 +210,7 @@ namespace TollÚtdíj
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "",
+                Password = "mysql",
                 Database = "tollutdijadatbazis"
             };
 

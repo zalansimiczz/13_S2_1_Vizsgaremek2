@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.btnvissza = new System.Windows.Forms.Button();
-            this.lblhiba = new System.Windows.Forms.Label();
             this.cbbsoforlista = new System.Windows.Forms.ComboBox();
             this.lblcegid = new System.Windows.Forms.Label();
             this.txbcegid = new System.Windows.Forms.TextBox();
@@ -50,6 +49,7 @@
             this.txbnev = new System.Windows.Forms.TextBox();
             this.cbbaktiv = new System.Windows.Forms.ComboBox();
             this.btntorles = new System.Windows.Forms.Button();
+            this.lblhibas = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnvissza
@@ -61,16 +61,6 @@
             this.btnvissza.Text = "Vissza";
             this.btnvissza.UseVisualStyleBackColor = true;
             this.btnvissza.Click += new System.EventHandler(this.btnvissza_Click);
-            // 
-            // lblhiba
-            // 
-            this.lblhiba.AutoSize = true;
-            this.lblhiba.ForeColor = System.Drawing.Color.Red;
-            this.lblhiba.Location = new System.Drawing.Point(12, 425);
-            this.lblhiba.Name = "lblhiba";
-            this.lblhiba.Size = new System.Drawing.Size(35, 13);
-            this.lblhiba.TabIndex = 1;
-            this.lblhiba.Text = "label1";
             // 
             // cbbsoforlista
             // 
@@ -242,11 +232,24 @@
             this.btntorles.UseVisualStyleBackColor = true;
             this.btntorles.Click += new System.EventHandler(this.btntorles_Click);
             // 
+            // lblhibas
+            // 
+            this.lblhibas.AutoSize = true;
+            this.lblhibas.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblhibas.ForeColor = System.Drawing.Color.Red;
+            this.lblhibas.Location = new System.Drawing.Point(12, 401);
+            this.lblhibas.Name = "lblhibas";
+            this.lblhibas.Size = new System.Drawing.Size(68, 16);
+            this.lblhibas.TabIndex = 52;
+            this.lblhibas.Text = "HIBA LABEL";
+            this.lblhibas.Visible = false;
+            // 
             // soforkezeles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(431, 450);
+            this.Controls.Add(this.lblhibas);
             this.Controls.Add(this.btntorles);
             this.Controls.Add(this.cbbaktiv);
             this.Controls.Add(this.lblnev);
@@ -267,7 +270,6 @@
             this.Controls.Add(this.txbszemazon);
             this.Controls.Add(this.txbszul);
             this.Controls.Add(this.cbbsoforlista);
-            this.Controls.Add(this.lblhiba);
             this.Controls.Add(this.btnvissza);
             this.MaximumSize = new System.Drawing.Size(447, 489);
             this.MinimumSize = new System.Drawing.Size(447, 489);
@@ -283,7 +285,6 @@
         #endregion
 
         private System.Windows.Forms.Button btnvissza;
-        private System.Windows.Forms.Label lblhiba;
         private System.Windows.Forms.ComboBox cbbsoforlista;
         private System.Windows.Forms.Label lblcegid;
         private System.Windows.Forms.TextBox txbcegid;
@@ -304,5 +305,6 @@
         private System.Windows.Forms.TextBox txbnev;
         private System.Windows.Forms.ComboBox cbbaktiv;
         private System.Windows.Forms.Button btntorles;
+        private System.Windows.Forms.Label lblhibas;
     }
 }

@@ -22,7 +22,7 @@ namespace TollÚtdíj
 
 
 
-            lblhibas.Visible = false;
+            lblhibass.Visible = false;
             this.role = role;
             this.cegId = cegId;
             cbbceglista.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -63,7 +63,7 @@ namespace TollÚtdíj
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "",
+                Password = "mysql",
                 Database = "tollutdijadatbazis"
             };
 
@@ -113,7 +113,7 @@ namespace TollÚtdíj
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "",
+                Password = "mysql",
                 Database = "tollutdijadatbazis"
             };
             using (MySqlConnection kapcsolat = new MySqlConnection(build.ConnectionString))

@@ -43,7 +43,7 @@ namespace TollÚtdíj
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "",
+                Password = "mysql",
                 Database = "tollutdijadatbazis"
             };
 

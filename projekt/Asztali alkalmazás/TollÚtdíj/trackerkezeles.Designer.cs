@@ -45,6 +45,7 @@
             this.lbleszkoz = new System.Windows.Forms.Label();
             this.lbljarmuadat = new System.Windows.Forms.Label();
             this.txbjarmu = new System.Windows.Forms.TextBox();
+            this.lblhibas = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cbbaktiv
@@ -188,11 +189,24 @@
             this.txbjarmu.Size = new System.Drawing.Size(202, 20);
             this.txbjarmu.TabIndex = 78;
             // 
+            // lblhibas
+            // 
+            this.lblhibas.AutoSize = true;
+            this.lblhibas.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblhibas.ForeColor = System.Drawing.Color.Red;
+            this.lblhibas.Location = new System.Drawing.Point(12, 325);
+            this.lblhibas.Name = "lblhibas";
+            this.lblhibas.Size = new System.Drawing.Size(68, 16);
+            this.lblhibas.TabIndex = 79;
+            this.lblhibas.Text = "HIBA LABEL";
+            this.lblhibas.Visible = false;
+            // 
             // trackerkezeles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(396, 360);
+            this.Controls.Add(this.lblhibas);
             this.Controls.Add(this.txbjarmu);
             this.Controls.Add(this.lbljarmuadat);
             this.Controls.Add(this.lbleszkoz);
@@ -241,5 +255,6 @@
         private System.Windows.Forms.Label lbleszkoz;
         private System.Windows.Forms.Label lbljarmuadat;
         private System.Windows.Forms.TextBox txbjarmu;
+        private System.Windows.Forms.Label lblhibas;
     }
 }

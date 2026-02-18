@@ -77,7 +77,7 @@ namespace TollÚtdíj
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "",
+                Password = "mysql",
                 Database = "tollutdijadatbazis"
             };
             using (MySqlConnection kapcsolat = new MySqlConnection(build.ConnectionString))
@@ -145,7 +145,7 @@ namespace TollÚtdíj
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "",
+                Password = "mysql",
                 Database = "tollutdijadatbazis"
             };
 
@@ -280,7 +280,7 @@ namespace TollÚtdíj
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "",
+                Password = "mysql",
                 Database = "tollutdijadatbazis"
             };
 
@@ -352,7 +352,7 @@ namespace TollÚtdíj
                     {
                         Server = "localhost",
                         UserID = "root",
-                        Password = "",
+                        Password = "mysql",
                         Database = "tollutdijadatbazis"
                     };
 
@@ -469,7 +469,7 @@ namespace TollÚtdíj
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "",
+                Password = "mysql",
                 Database = "tollutdijadatbazis"
             };
 

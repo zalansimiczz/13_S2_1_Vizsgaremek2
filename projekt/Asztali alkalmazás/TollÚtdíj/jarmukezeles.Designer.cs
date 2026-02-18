@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.btnvissza = new System.Windows.Forms.Button();
-            this.lblhiba = new System.Windows.Forms.Label();
             this.lbladatok = new System.Windows.Forms.Label();
             this.txbkategoria = new System.Windows.Forms.TextBox();
             this.txbtipus = new System.Windows.Forms.TextBox();
@@ -56,6 +55,7 @@
             this.lblvin = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btntorles = new System.Windows.Forms.Button();
+            this.lblhibas = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnvissza
@@ -67,18 +67,6 @@
             this.btnvissza.Text = "Vissza";
             this.btnvissza.UseVisualStyleBackColor = true;
             this.btnvissza.Click += new System.EventHandler(this.btnvissza_Click);
-            // 
-            // lblhiba
-            // 
-            this.lblhiba.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblhiba.AutoSize = true;
-            this.lblhiba.ForeColor = System.Drawing.Color.Red;
-            this.lblhiba.Location = new System.Drawing.Point(215, 204);
-            this.lblhiba.Name = "lblhiba";
-            this.lblhiba.Size = new System.Drawing.Size(35, 13);
-            this.lblhiba.TabIndex = 3;
-            this.lblhiba.Text = "label1";
-            this.lblhiba.Visible = false;
             // 
             // lbladatok
             // 
@@ -112,9 +100,9 @@
             // 
             // btnmentes
             // 
-            this.btnmentes.Location = new System.Drawing.Point(231, 118);
+            this.btnmentes.Location = new System.Drawing.Point(256, 78);
             this.btnmentes.Name = "btnmentes";
-            this.btnmentes.Size = new System.Drawing.Size(101, 38);
+            this.btnmentes.Size = new System.Drawing.Size(85, 38);
             this.btnmentes.TabIndex = 8;
             this.btnmentes.Text = "Változtatások mentése";
             this.btnmentes.UseVisualStyleBackColor = true;
@@ -191,7 +179,7 @@
             // btnhozzaadas
             // 
             this.btnhozzaadas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnhozzaadas.Location = new System.Drawing.Point(208, 398);
+            this.btnhozzaadas.Location = new System.Drawing.Point(335, 398);
             this.btnhozzaadas.Name = "btnhozzaadas";
             this.btnhozzaadas.Size = new System.Drawing.Size(133, 33);
             this.btnhozzaadas.TabIndex = 21;
@@ -293,19 +281,32 @@
             // btntorles
             // 
             this.btntorles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btntorles.Location = new System.Drawing.Point(256, 18);
+            this.btntorles.Location = new System.Drawing.Point(256, 25);
             this.btntorles.Name = "btntorles";
-            this.btntorles.Size = new System.Drawing.Size(85, 28);
+            this.btntorles.Size = new System.Drawing.Size(85, 21);
             this.btntorles.TabIndex = 52;
             this.btntorles.Text = "Törlés";
             this.btntorles.UseVisualStyleBackColor = true;
             this.btntorles.Click += new System.EventHandler(this.btntorles_Click);
             // 
+            // lblhibas
+            // 
+            this.lblhibas.AutoSize = true;
+            this.lblhibas.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblhibas.ForeColor = System.Drawing.Color.Red;
+            this.lblhibas.Location = new System.Drawing.Point(253, 120);
+            this.lblhibas.Name = "lblhibas";
+            this.lblhibas.Size = new System.Drawing.Size(68, 16);
+            this.lblhibas.TabIndex = 53;
+            this.lblhibas.Text = "HIBA LABEL";
+            this.lblhibas.Visible = false;
+            // 
             // jarmukezeles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(353, 438);
+            this.ClientSize = new System.Drawing.Size(480, 438);
+            this.Controls.Add(this.lblhibas);
             this.Controls.Add(this.btntorles);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblvin);
@@ -332,7 +333,6 @@
             this.Controls.Add(this.txbtipus);
             this.Controls.Add(this.txbrendszam);
             this.Controls.Add(this.btnmentes);
-            this.Controls.Add(this.lblhiba);
             this.Controls.Add(this.btnvissza);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -348,7 +348,6 @@
         #endregion
 
         private System.Windows.Forms.Button btnvissza;
-        private System.Windows.Forms.Label lblhiba;
         private System.Windows.Forms.Label lbladatok;
         private System.Windows.Forms.TextBox txbkategoria;
         private System.Windows.Forms.TextBox txbtipus;
@@ -375,5 +374,6 @@
         private System.Windows.Forms.Label lblvin;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btntorles;
+        private System.Windows.Forms.Label lblhibas;
     }
 }

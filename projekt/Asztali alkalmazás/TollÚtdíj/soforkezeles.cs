@@ -26,7 +26,7 @@ namespace TollÚtdíj
             cbbaktiv.DropDownStyle = ComboBoxStyle.DropDownList;
             this.role = role;
             this.cegId = cegId;
-            lblhiba.Visible = false;
+            lblhibas.Visible = false;
             txbnev.Enabled = false;
             cbbsoforlista.DropDownStyle = ComboBoxStyle.DropDownList;
             if (role == "operator")
@@ -51,7 +51,7 @@ namespace TollÚtdíj
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "",
+                Password = "mysql",
                 Database = "tollutdijadatbazis"
             };
 
@@ -119,7 +119,7 @@ namespace TollÚtdíj
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "",
+                Password = "mysql",
                 Database = "tollutdijadatbazis"
             };
 
@@ -256,8 +256,8 @@ namespace TollÚtdíj
                     }
                     catch
                     {
-                        lblhiba.Text = "Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot, majd próbálja újra.";
-                        lblhiba.Visible = true;
+                        lblhibas.Text = "Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot, majd próbálja újra.";
+                        lblhibas.Visible = true;
                         return;
                     }
 
@@ -320,8 +320,8 @@ namespace TollÚtdíj
                     }
                     catch
                     {
-                        lblhiba.Text = "Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot, majd próbálja újra.";
-                        lblhiba.Visible = true;
+                        lblhibas.Text = "Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot, majd próbálja újra.";
+                        lblhibas.Visible = true;
                         return;
                     }
                     var parancs = kapcsolat.CreateCommand();

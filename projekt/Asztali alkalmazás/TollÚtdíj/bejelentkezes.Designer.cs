@@ -105,10 +105,11 @@ namespace TollÚtdíj
             this.lblhibas.AutoSize = true;
             this.lblhibas.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblhibas.ForeColor = System.Drawing.Color.Red;
-            this.lblhibas.Location = new System.Drawing.Point(31, 216);
+            this.lblhibas.Location = new System.Drawing.Point(31, 219);
             this.lblhibas.Name = "lblhibas";
-            this.lblhibas.Size = new System.Drawing.Size(0, 16);
+            this.lblhibas.Size = new System.Drawing.Size(68, 16);
             this.lblhibas.TabIndex = 14;
+            this.lblhibas.Text = "HIBA LABEL";
             this.lblhibas.Visible = false;
             // 
             // pictureBox1

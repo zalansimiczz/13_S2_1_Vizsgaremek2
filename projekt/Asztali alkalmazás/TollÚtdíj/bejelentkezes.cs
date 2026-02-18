@@ -38,7 +38,7 @@ namespace TollÚtdíj
 
         public class Bejelentkezessegito
         {
-            private Label lblHibas;
+            private Label lblhibass;
             private Label lblUser;
             private Label lblPass;
             private TextBox txbPass;
@@ -49,7 +49,7 @@ namespace TollÚtdíj
             private PictureBox logoPicture;
 
             public Bejelentkezessegito(
-                Label lblHibas,
+                Label lblhibass,
                 Label lblUser,
                 Label lblPass,
                 TextBox txbPass,
@@ -59,7 +59,7 @@ namespace TollÚtdíj
                 CheckBox chkrememberme,
                 PictureBox logoPicture)
             {
-                this.lblHibas = lblHibas;
+                this.lblhibass = lblhibass;
                 this.lblUser = lblUser;
                 this.lblPass = lblPass;
                 this.txbPass = txbPass;
@@ -72,7 +72,7 @@ namespace TollÚtdíj
 
             public void ShowErrorState()
             {
-                lblHibas.Visible = true;
+                lblhibass.Visible = true;
                 lblUser.Visible = true;
                 lblPass.Visible = true;
                 txbPass.Visible = true;
@@ -92,7 +92,7 @@ namespace TollÚtdíj
             public void RestoreLoginState()
             {
                 // Hide the error label and restore the normal login controls
-                lblHibas.Visible = false;
+                lblhibass.Visible = false;
                 lblUser.Visible = true;
                 lblPass.Visible = true;
                 txbPass.Visible = true;
@@ -145,7 +145,7 @@ namespace TollÚtdíj
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "",
+                Password = "mysql",
                 Database = "tollutdijadatbazis"
             };
 
@@ -159,7 +159,7 @@ namespace TollÚtdíj
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot, majd próbálja újra.", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    lblhibas("Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot, majd próbálja újra.", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     UIkisegito.ShowErrorState();
                     return;
                 }
