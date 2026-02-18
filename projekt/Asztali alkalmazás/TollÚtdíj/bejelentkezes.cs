@@ -38,7 +38,7 @@ namespace TollÚtdíj
 
         public class Bejelentkezessegito
         {
-            private Label lblhibass;
+            private Label lblhibas;
             private Label lblUser;
             private Label lblPass;
             private TextBox txbPass;
@@ -49,7 +49,7 @@ namespace TollÚtdíj
             private PictureBox logoPicture;
 
             public Bejelentkezessegito(
-                Label lblhibass,
+                Label lblhibas,
                 Label lblUser,
                 Label lblPass,
                 TextBox txbPass,
@@ -59,7 +59,7 @@ namespace TollÚtdíj
                 CheckBox chkrememberme,
                 PictureBox logoPicture)
             {
-                this.lblhibass = lblhibass;
+                this.lblhibas = lblhibas;
                 this.lblUser = lblUser;
                 this.lblPass = lblPass;
                 this.txbPass = txbPass;
@@ -72,7 +72,7 @@ namespace TollÚtdíj
 
             public void ShowErrorState()
             {
-                lblhibass.Visible = true;
+                lblhibas.Visible = true;
                 lblUser.Visible = true;
                 lblPass.Visible = true;
                 txbPass.Visible = true;
@@ -92,7 +92,7 @@ namespace TollÚtdíj
             public void RestoreLoginState()
             {
                 // Hide the error label and restore the normal login controls
-                lblhibass.Visible = false;
+                lblhibas.Visible = false;
                 lblUser.Visible = true;
                 lblPass.Visible = true;
                 txbPass.Visible = true;
@@ -159,7 +159,7 @@ namespace TollÚtdíj
                 }
                 catch (Exception)
                 {
-                    lblhibas("Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot, majd próbálja újra.", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    lblhibas.Text = "Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot, majd próbálja újra.";
                     UIkisegito.ShowErrorState();
                     return;
                 }
@@ -175,7 +175,7 @@ namespace TollÚtdíj
 
                 if (!read.HasRows)
                 {
-                    MessageBox.Show("Kérjük, ellenőrizze a jelszavát\r\nés az E-mail címét, majd próbálja újra.", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    lblhibas.Text = "Kérjük, ellenőrizze a jelszavát\r\nés az E-mail címét, majd próbálja újra.";
                     UIkisegito.ShowErrorState();
                     return;
                 }
@@ -191,7 +191,7 @@ namespace TollÚtdíj
                 {
                     if (aktiv == 0)
                     {
-                        MessageBox.Show("A fiók nincs aktiválva.\r\nForduljon az adminisztrátorhoz.", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        lblhibas.Text = "A fiók nincs aktiválva.\r\nForduljon az adminisztrátorhoz.";
                         UIkisegito.ShowErrorState();
                         return;
                     }
@@ -257,7 +257,7 @@ namespace TollÚtdíj
                 }
                 else
                 {
-                    MessageBox.Show("Kérjük, ellenőrizze a jelszavát\r\nés az E-mail címét, majd próbálja újra.", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    lblhibas.Text = "Kérjük, ellenőrizze a jelszavát\r\nés az E-mail címét, majd próbálja újra.";
                     UIkisegito.ShowErrorState();
                     return;
                 }
@@ -271,8 +271,8 @@ namespace TollÚtdíj
         }
 
         /* Jelenlegi hibák:
-         messageboxok átírása labelszövegre
-         mysql password átírása üresre
+         messageboxok átírása labelszövegre (jarmukezeles hianyos)
+        uj sofor hozzáadásnál szüldatum megfelelő kezelése
           */
     }
 }

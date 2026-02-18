@@ -29,6 +29,7 @@ namespace TollÚtdíj
             this.cegId = cegId;
             lblcegid.Visible = false;
             txbcegid.Visible = false;
+            lblhibas.Visible = false;
             cbbjarmulista.DropDownStyle = ComboBoxStyle.DropDownList;
             cbbeuro.DropDownStyle = ComboBoxStyle.DropDownList;
             cbbpotkocsi.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -271,9 +272,10 @@ namespace TollÚtdíj
             if (!int.TryParse(txbtomeg.Text.Replace("kg", "").Trim(), out int tomeg))
             {
                
-                MessageBox.Show("Hibás össztömeg érték!");
-                
-                return;
+                lblhibas.Text = "Hibás össztömeg érték!";
+                    lblhibas.ForeColor = Color.Red;
+                    lblhibas.Visible = true;
+                    return;
             }
 
             MySqlConnectionStringBuilder build = new MySqlConnectionStringBuilder
@@ -293,8 +295,10 @@ namespace TollÚtdíj
                 }
                 catch
                 {
-                    MessageBox.Show("Nem sikerült csatlakozni az adatbázishoz.");
-                    return;
+                    lblhibas.Text = "Nem sikerült csatlakozni az adatbázishoz.";
+                        lblhibas.ForeColor = Color.Red;
+                        lblhibas.Visible = true;
+                        return;
                 }
 
                 var parancs = kapcsolat.CreateCommand();
@@ -329,12 +333,15 @@ namespace TollÚtdíj
                     try
                 {
                     parancs.ExecuteNonQuery();
-                    MessageBox.Show("Sikeres mentés!");
-                }
+                    lblhibas.Text = "Sikeres mentés!";
+                    lblhibas.ForeColor = Color.Green;
+                    }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Hiba mentés közben:\n" + ex.Message);
-                }
+                    lblhibas.Text = "Hiba mentés közben:\n" + ex.Message;
+                        lblhibas.ForeColor = Color.Red;
+                        lblhibas.Visible = true;
+                    }
             }
 
             }
@@ -344,7 +351,9 @@ namespace TollÚtdíj
                     if (!int.TryParse(txbtomeg.Text, out int tomeg) ||
                         !int.TryParse(txbtengely.Text, out int tengely))
                     {
-                        MessageBox.Show("Hibás számérték!");
+                        lblhibas.Text = "Hibás számérték!";
+                        lblhibas.ForeColor = Color.Red;
+                        lblhibas.Visible = true;
                         return;
                     }
 
@@ -383,8 +392,8 @@ namespace TollÚtdíj
                         parancs.Parameters.AddWithValue("@ceg", insertCegId);
                         parancs.ExecuteNonQuery();
 
-                        MessageBox.Show("Új jármű sikeresen hozzáadva!");
-
+                        lblhibas.Text = "Új jármű sikeresen hozzáadva!";
+                        lblhibas.ForeColor = Color.Green;
                         hozzaadas = false;
                         btnhozzaadas.Text = "Új jármű";
                         btnmentes.Text = "Mentés";
@@ -455,15 +464,6 @@ namespace TollÚtdíj
         }
         private void btntorles_Click(object sender, EventArgs e)
         {
-            DialogResult valasz = MessageBox.Show(
-    "Biztosan törölni szeretné a kijelölt járművet?\nEz a művelet nem visszavonható!",
-    "Megerősítés",
-    MessageBoxButtons.YesNo,
-    MessageBoxIcon.Warning
-);
-
-            if (valasz != DialogResult.Yes)
-                return;
 
             MySqlConnectionStringBuilder build = new MySqlConnectionStringBuilder
             {
@@ -481,7 +481,9 @@ namespace TollÚtdíj
                 }
                 catch
                 {
-                    MessageBox.Show("Adatbázis kapcsolat hiba.", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    lblhibas.Text = "Adatbázis kapcsolat hiba.";
+                    lblhibas.ForeColor = Color.Red;
+                    lblhibas.Visible = true;
                     return;
                 }
 
@@ -500,11 +502,14 @@ namespace TollÚtdíj
                 try
                 {
                     parancs.ExecuteNonQuery();
-                    MessageBox.Show("Jármű sikeresen törölve.");
+                    lblhibas.Text = "Jármű sikeresen törölve.";
+                    lblhibas.ForeColor = Color.Green;
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Hiba törlés közben:\n" + ex.Message, "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    lblhibas.Text = "Hiba törlés közben:\n" + ex.Message;
+                    lblhibas.ForeColor = Color.Red;
+                    lblhibas.Visible = true;
                     return;
                 }
             }

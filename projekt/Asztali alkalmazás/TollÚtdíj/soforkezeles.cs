@@ -131,7 +131,9 @@ namespace TollÚtdíj
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot, majd próbálja újra.", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    lblhibas.Text = "Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot, majd próbálja újra.";
+                    lblhibas.ForeColor = Color.Red;
+                    lblhibas.Visible = true;
                     return;
                 }
 
@@ -258,6 +260,8 @@ namespace TollÚtdíj
                     {
                         lblhibas.Text = "Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot, majd próbálja újra.";
                         lblhibas.Visible = true;
+                        lblhibas.ForeColor = Color.Red;
+                        
                         return;
                     }
 
@@ -293,11 +297,15 @@ namespace TollÚtdíj
                     try
                     {
                         parancs.ExecuteNonQuery();
-                        MessageBox.Show("Sikeres mentés!");
+                        lblhibas.Text = "Sikeres mentés!";
+                        lblhibas.ForeColor = Color.Green;
+                        lblhibas.Visible = true;
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Hiba mentés közben:\n" + ex.Message, "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        lblhibas.Text = "Hiba mentés közben:\n" + ex.Message;
+                        lblhibas.ForeColor = Color.Red;
+                        lblhibas.Visible = true;
                         return;
                     }
                 }
@@ -322,6 +330,8 @@ namespace TollÚtdíj
                     {
                         lblhibas.Text = "Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot, majd próbálja újra.";
                         lblhibas.Visible = true;
+                        lblhibas.ForeColor = Color.Red;
+                        
                         return;
                     }
                     var parancs = kapcsolat.CreateCommand();
@@ -351,11 +361,15 @@ namespace TollÚtdíj
                     try
                     {
                         parancs.ExecuteNonQuery();
-                        MessageBox.Show("Sikeres mentés!");
+                        lblhibas.Text = "Sikeres mentés!";
+                        lblhibas.ForeColor = Color.Green;
+                        lblhibas.Visible = true;
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Hiba mentés közben:\n" + ex.Message, "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        lblhibas.Text = "Hiba mentés közben:\n" + ex.Message;
+                        lblhibas.ForeColor = Color.Red;
+                        lblhibas.Visible = true;
                         return;
                     }
                 }
@@ -395,7 +409,9 @@ namespace TollÚtdíj
                 }
                 catch
                 {
-                    MessageBox.Show("Adatbázis kapcsolat hiba.", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    lblhibas.Text = "Adatbázis kapcsolat hiba.";
+                    lblhibas.ForeColor = Color.Red;
+                    lblhibas.Visible = true;
                     return;
                 }
 
@@ -410,11 +426,15 @@ namespace TollÚtdíj
                 try
                 {
                     parancs.ExecuteNonQuery();
-                    MessageBox.Show("Sofőr sikeresen törölve.");
+                    lblhibas.Text = "Sofőr sikeresen törölve.";
+                    lblhibas.ForeColor = Color.Green;
+                    lblhibas.Visible = true;
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Hiba törlés közben:\n" + ex.Message, "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    lblhibas.Text = "Hiba törlés közben:\n" + ex.Message;
+                    lblhibas.ForeColor = Color.Red;
+                    lblhibas.Visible = true;
                     return;
                 }
             }
