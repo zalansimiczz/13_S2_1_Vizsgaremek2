@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.2
+-- version 5.2.3
 -- https://www.phpmyadmin.net/
 --
 -- Gép: localhost
--- Létrehozás ideje: 2026. Jan 30. 08:32
--- Kiszolgáló verziója: 8.0.42
--- PHP verzió: 8.2.29
+-- Létrehozás ideje: 2026. Feb 23. 14:41
+-- Kiszolgáló verziója: 8.0.45
+-- PHP verzió: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -281,8 +281,8 @@ CREATE TABLE `tracker_poziciok` (
   `device_id` int DEFAULT NULL,
   `menetlevel_id` int DEFAULT NULL,
   `idobelyeg` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `lat` float DEFAULT NULL,
-  `lon` float DEFAULT NULL,
+  `lat` decimal(9,6) DEFAULT NULL,
+  `lon` decimal(9,6) DEFAULT NULL,
   `sebesseg_kmh` float DEFAULT NULL,
   `nyers_payload` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
