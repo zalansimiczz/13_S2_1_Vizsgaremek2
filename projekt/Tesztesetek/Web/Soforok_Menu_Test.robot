@@ -36,3 +36,15 @@ Sofor inaktivalasa
     Click Element    xpath=//tr[td[contains(.,'Jani Király')]]//button[@title='Státusz váltása']
     Wait Until Page Contains    Inaktív    timeout=5s
     Close Browser
+
+Sofor aktivalasa
+    Open Browser    http://127.0.0.1:8000/partner/login    Chrome
+    Maximize Browser Window
+    Input Text    xpath=//input[@name="email"]    zalansimicz@gmail.com
+    Input Text    xpath=//input[@name="password"]    12345678
+    Click Button    xpath=//button[contains(., "Bejelentkezés")]
+    Wait Until Element Is Visible    id=soforok    timeout=10s
+    Click Element    id=soforok
+    Click Element    xpath=//tr[td[contains(.,'Jani Király')]]//button[@title='Státusz váltása']
+    Wait Until Page Contains    Aktív    timeout=5s
+    Close Browser
