@@ -25,13 +25,13 @@ except:
     raise SystemExit
 
 # CÉGKEZELÉS
-fomenu.child_window(auto_id="btnjarmukez", control_type="Button").click()
+fomenu.child_window(auto_id="btnsofor", control_type="Button").click()
 
 try:
-    jarmukezeles = app.window(auto_id="jarmukezeles")
-    jarmukezeles.wait("visible", timeout=5)
+    soforkezeles = app.window(auto_id="soforkezeles")
+    soforkezeles.wait("visible", timeout=5)
 
-    textbox = jarmukezeles.child_window(auto_id="txbtipus", control_type="Edit")
+    textbox = soforkezeles.child_window(auto_id="txbadoszam", control_type="Edit")
     textbox.wait("visible", timeout=5)
 
     original_text = textbox.get_value()
@@ -39,16 +39,16 @@ try:
 
 
     textbox.set_text("teszt")
-    jarmukezeles.child_window(auto_id="btnmentes", control_type="Button").click()
+    soforkezeles.child_window(auto_id="btnmentes", control_type="Button").click()
 
     time.sleep(1)
 
 
-    jarmukezeles.child_window(auto_id="btnvissza", control_type="Button").click()
-    fomenu.child_window(auto_id="btnjarmukez", control_type="Button").click()
+    soforkezeles.child_window(auto_id="btnvissza", control_type="Button").click()
+    fomenu.child_window(auto_id="btnsofor", control_type="Button").click()
 
-    jarmukezeles.wait("visible", timeout=5)
-    textbox = jarmukezeles.child_window(auto_id="txbtipus", control_type="Edit")
+    soforkezeles.wait("visible", timeout=5)
+    textbox = soforkezeles.child_window(auto_id="txbadoszam", control_type="Edit")
 
     new_text = textbox.get_value()
 
@@ -62,7 +62,7 @@ except Exception as e:
 
 finally:
     textbox.set_text(original_text)
-    jarmukezeles.child_window(auto_id="btnmentes", control_type="Button").click()
+    soforkezeles.child_window(auto_id="btnmentes", control_type="Button").click()
     time.sleep(1)
     print("Eredeti érték visszaállítva.")
     app.kill()

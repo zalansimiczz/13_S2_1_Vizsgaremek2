@@ -25,13 +25,13 @@ except:
     raise SystemExit
 
 # CÉGKEZELÉS
-fomenu.child_window(auto_id="btnjarmukez", control_type="Button").click()
+fomenu.child_window(auto_id="btnsofor", control_type="Button").click()
 
 try:
-    jarmukezeles = app.window(auto_id="jarmukezeles")
-    jarmukezeles.wait("visible", timeout=5)
+    soforkezeles = app.window(auto_id="soforkezeles")
+    soforkezeles.wait("visible", timeout=5)
 
-    textbox = jarmukezeles.child_window(auto_id="txbtipus", control_type="Edit")
+    textbox = soforkezeles.child_window(auto_id="txbszul", control_type="Edit")
     textbox.wait("visible", timeout=5)
 
     original_text = textbox.get_value()
@@ -39,30 +39,29 @@ try:
 
 
     textbox.set_text("teszt")
-    jarmukezeles.child_window(auto_id="btnmentes", control_type="Button").click()
+    soforkezeles.child_window(auto_id="btnmentes", control_type="Button").click()
 
     time.sleep(1)
 
 
-    jarmukezeles.child_window(auto_id="btnvissza", control_type="Button").click()
-    fomenu.child_window(auto_id="btnjarmukez", control_type="Button").click()
-
-    jarmukezeles.wait("visible", timeout=5)
-    textbox = jarmukezeles.child_window(auto_id="txbtipus", control_type="Edit")
-
-    new_text = textbox.get_value()
-
-    if new_text == "teszt":
-        print("Sikeresen módosítva. Sikeres teszt.")
+    error_label = soforkezeles.child_window(auto_id="lblhibas", control_type="Text")
+    error_label.wait("visible", timeout=5)
+    error_text = error_label.window_text()
+    if error_text == "Hibás születési dátum formátum.\r\nHasználja a következő formátumot: ÉÉÉÉ MM DD":
+        print("Az elem nem került módosításra. Sikeres teszt")
     else:
-        print("Nem módosult. Hiba mentés során.")
+        print(f"Nem várt hibaüzenet: {error_text}")
+
+
+
+
 
 except Exception as e:
     print("Hiba a teszt futtatása során:", e)
 
 finally:
     textbox.set_text(original_text)
-    jarmukezeles.child_window(auto_id="btnmentes", control_type="Button").click()
+    soforkezeles.child_window(auto_id="btnmentes", control_type="Button").click()
     time.sleep(1)
     print("Eredeti érték visszaállítva.")
     app.kill()
