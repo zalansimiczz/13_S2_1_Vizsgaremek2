@@ -33,3 +33,6 @@ Sofor inaktivalasa
     Click Button    xpath=//button[contains(., "Bejelentkezés")]
     Wait Until Element Is Visible    id=soforok    timeout=10s
     Click Element    id=soforok
+    Click Element    xpath=//tr[td[contains(.,'Jani Király')]]//button[@title='Státusz váltása']
+    Wait Until Page Contains    Inaktív    timeout=5s
+    Close Browser
