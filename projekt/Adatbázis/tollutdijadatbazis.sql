@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: localhost
--- Létrehozás ideje: 2026. Feb 23. 14:41
+-- Létrehozás ideje: 2026. Feb 24. 16:25
 -- Kiszolgáló verziója: 8.0.45
 -- PHP verzió: 8.2.12
 
@@ -29,6 +29,7 @@ USE `tollutdijadatbazis`;
 -- Tábla szerkezet ehhez a táblához `cegek`
 --
 
+DROP TABLE IF EXISTS `cegek`;
 CREATE TABLE `cegek` (
   `id` int NOT NULL,
   `nev` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
@@ -54,6 +55,7 @@ INSERT INTO `cegek` (`id`, `nev`, `adoszam`, `cim`, `statusz`, `created_at`) VAL
 -- Tábla szerkezet ehhez a táblához `felhasznalok`
 --
 
+DROP TABLE IF EXISTS `felhasznalok`;
 CREATE TABLE `felhasznalok` (
   `id` int NOT NULL,
   `ceg_id` int DEFAULT NULL,
@@ -82,6 +84,7 @@ INSERT INTO `felhasznalok` (`id`, `ceg_id`, `email`, `jelszo_hash`, `teljes_nev`
 -- Tábla szerkezet ehhez a táblához `felhasznalo_sessionok`
 --
 
+DROP TABLE IF EXISTS `felhasznalo_sessionok`;
 CREATE TABLE `felhasznalo_sessionok` (
   `id` int NOT NULL,
   `felhasznalo_id` int NOT NULL,
@@ -90,12 +93,24 @@ CREATE TABLE `felhasznalo_sessionok` (
   `lejart_at` timestamp NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- A tábla adatainak kiíratása `felhasznalo_sessionok`
+--
+
+INSERT INTO `felhasznalo_sessionok` (`id`, `felhasznalo_id`, `token`, `created_at`, `lejart_at`) VALUES
+(20, 2, '6363bc50f1edeeaff4ca9b24b32d1a2faf7e4082cb029327fe8df05b7d869046', '2026-02-24 14:02:20', '2026-03-03 13:02:20'),
+(21, 2, '67fd7b086614e1d5780bef260575cdc41355fe544f34cb4989781fb4e77ec30b', '2026-02-24 14:14:48', '2026-03-03 13:14:48'),
+(22, 2, '9d8254b0307c0889448960be1d818c2cb172dff71922949f0a62af394e7bd44f', '2026-02-24 14:57:46', '2026-03-03 13:57:46'),
+(23, 2, '6bb86a6b2dda8a94a22f3323623e9fb8121e7cec09153c910670e437d565c448', '2026-02-24 15:07:43', '2026-03-03 14:07:43'),
+(24, 2, '0e0f78874b81f502cb9f10f82ddb1e2c644206c97e6381acc2228981f26530af', '2026-02-24 15:43:40', '2026-03-03 14:43:40');
+
 -- --------------------------------------------------------
 
 --
 -- Tábla szerkezet ehhez a táblához `jarmuvek`
 --
 
+DROP TABLE IF EXISTS `jarmuvek`;
 CREATE TABLE `jarmuvek` (
   `id` int NOT NULL,
   `ceg_id` int DEFAULT NULL,
@@ -128,6 +143,7 @@ INSERT INTO `jarmuvek` (`id`, `ceg_id`, `kategoria`, `marka`, `tipus`, `tengelys
 -- Tábla szerkezet ehhez a táblához `jogositvanyok`
 --
 
+DROP TABLE IF EXISTS `jogositvanyok`;
 CREATE TABLE `jogositvanyok` (
   `id` int NOT NULL,
   `sofor_id` int DEFAULT NULL,
@@ -159,6 +175,7 @@ INSERT INTO `jogositvanyok` (`id`, `sofor_id`, `kategoria`, `erv_tol`, `erv_ig`)
 -- Tábla szerkezet ehhez a táblához `menetlevelek`
 --
 
+DROP TABLE IF EXISTS `menetlevelek`;
 CREATE TABLE `menetlevelek` (
   `id` int NOT NULL,
   `sofor_id` int DEFAULT NULL,
@@ -178,6 +195,7 @@ CREATE TABLE `menetlevelek` (
 -- Tábla szerkezet ehhez a táblához `rfid_azonositasok`
 --
 
+DROP TABLE IF EXISTS `rfid_azonositasok`;
 CREATE TABLE `rfid_azonositasok` (
   `id` int NOT NULL,
   `device_id` int DEFAULT NULL,
@@ -195,6 +213,7 @@ CREATE TABLE `rfid_azonositasok` (
 -- Tábla szerkezet ehhez a táblához `rfid_kartyak`
 --
 
+DROP TABLE IF EXISTS `rfid_kartyak`;
 CREATE TABLE `rfid_kartyak` (
   `id` int NOT NULL,
   `uid_hex` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
@@ -207,6 +226,7 @@ CREATE TABLE `rfid_kartyak` (
 -- Tábla szerkezet ehhez a táblához `rfid_kartya_hozzarendeles`
 --
 
+DROP TABLE IF EXISTS `rfid_kartya_hozzarendeles`;
 CREATE TABLE `rfid_kartya_hozzarendeles` (
   `id` int NOT NULL,
   `kartya_id` int DEFAULT NULL,
@@ -222,6 +242,7 @@ CREATE TABLE `rfid_kartya_hozzarendeles` (
 -- Tábla szerkezet ehhez a táblához `soforok`
 --
 
+DROP TABLE IF EXISTS `soforok`;
 CREATE TABLE `soforok` (
   `id` int NOT NULL,
   `ceg_id` int DEFAULT NULL,
@@ -250,6 +271,7 @@ INSERT INTO `soforok` (`id`, `ceg_id`, `szemelyi_azonosito`, `nev`, `szuletesi_d
 -- Tábla szerkezet ehhez a táblához `trackereszkozok`
 --
 
+DROP TABLE IF EXISTS `trackereszkozok`;
 CREATE TABLE `trackereszkozok` (
   `id` int NOT NULL,
   `imei` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
@@ -276,8 +298,10 @@ INSERT INTO `trackereszkozok` (`id`, `imei`, `sim_iccid`, `modell`, `firmware_ve
 -- Tábla szerkezet ehhez a táblához `tracker_poziciok`
 --
 
+DROP TABLE IF EXISTS `tracker_poziciok`;
 CREATE TABLE `tracker_poziciok` (
   `id` int NOT NULL,
+  `user_id` int NOT NULL,
   `device_id` int DEFAULT NULL,
   `menetlevel_id` int DEFAULT NULL,
   `idobelyeg` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
@@ -287,12 +311,47 @@ CREATE TABLE `tracker_poziciok` (
   `nyers_payload` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- A tábla adatainak kiíratása `tracker_poziciok`
+--
+
+INSERT INTO `tracker_poziciok` (`id`, `user_id`, `device_id`, `menetlevel_id`, `idobelyeg`, `lat`, `lon`, `sebesseg_kmh`, `nyers_payload`) VALUES
+(1, 2, 2, NULL, '2026-02-24 15:34:14', 47.497900, 19.040200, NULL, NULL),
+(2, 2, 2, NULL, '2026-02-24 15:34:16', 47.497900, 19.040200, NULL, NULL),
+(3, 2, 2, NULL, '2026-02-24 15:34:44', 47.497900, 19.040200, NULL, NULL),
+(4, 2, 2, NULL, '2026-02-24 15:34:45', 47.497900, 19.040200, NULL, NULL),
+(5, 2, 2, NULL, '2026-02-24 15:34:45', 47.497900, 19.040200, NULL, NULL),
+(6, 2, 2, NULL, '2026-02-24 15:34:46', 47.497900, 19.040200, NULL, NULL),
+(7, 2, 2, NULL, '2026-02-24 15:34:46', 47.497900, 19.040200, NULL, NULL),
+(8, 2, 2, NULL, '2026-02-24 15:34:57', 47.497900, 19.040200, NULL, NULL),
+(9, 2, 2, NULL, '2026-02-24 15:39:22', 47.497900, 19.040200, NULL, NULL),
+(10, 2, 2, NULL, '2026-02-24 15:43:43', 47.497900, 19.040200, NULL, NULL),
+(11, 2, 2, NULL, '2026-02-24 15:51:25', 46.666362, 19.974795, NULL, NULL),
+(12, 2, 2, NULL, '2026-02-24 15:51:25', 46.666362, 19.974795, NULL, NULL),
+(13, 2, 2, NULL, '2026-02-24 15:51:32', 46.604113, 20.009765, NULL, NULL),
+(14, 2, 2, NULL, '2026-02-24 15:51:32', 46.604113, 20.009765, NULL, NULL),
+(15, 2, 2, NULL, '2026-02-24 15:52:03', 46.604113, 20.009765, NULL, NULL),
+(16, 2, 2, NULL, '2026-02-24 15:52:10', 46.604113, 20.009765, NULL, NULL),
+(17, 2, 2, NULL, '2026-02-24 15:58:37', 46.602393, 20.009157, NULL, NULL),
+(18, 2, 2, NULL, '2026-02-24 15:58:38', 46.602393, 20.009157, NULL, NULL),
+(19, 2, 2, NULL, '2026-02-24 15:58:38', 46.602393, 20.009157, NULL, NULL),
+(20, 2, 2, NULL, '2026-02-24 15:58:41', 46.602393, 20.009157, NULL, NULL),
+(21, 2, 2, NULL, '2026-02-24 15:58:46', 46.602390, 20.009156, NULL, NULL),
+(22, 2, 2, NULL, '2026-02-24 15:58:51', 46.602390, 20.009156, NULL, NULL),
+(23, 2, 2, NULL, '2026-02-24 15:58:56', 46.602392, 20.009157, NULL, NULL),
+(24, 2, 2, NULL, '2026-02-24 15:59:01', 46.602392, 20.009157, NULL, NULL),
+(25, 2, 2, NULL, '2026-02-24 15:59:06', 46.602392, 20.009157, NULL, NULL),
+(26, 2, 2, NULL, '2026-02-24 15:59:18', 46.602392, 20.009157, NULL, NULL),
+(27, 2, 2, NULL, '2026-02-24 15:59:18', 46.602392, 20.009157, NULL, NULL),
+(28, 2, 2, NULL, '2026-02-24 15:59:21', 46.602392, 20.009157, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
 -- Tábla szerkezet ehhez a táblához `utdij_kalkulaciok`
 --
 
+DROP TABLE IF EXISTS `utdij_kalkulaciok`;
 CREATE TABLE `utdij_kalkulaciok` (
   `id` int NOT NULL,
   `menetlevel_id` int DEFAULT NULL,
@@ -310,6 +369,7 @@ CREATE TABLE `utdij_kalkulaciok` (
 -- Tábla szerkezet ehhez a táblához `utvonalak`
 --
 
+DROP TABLE IF EXISTS `utvonalak`;
 CREATE TABLE `utvonalak` (
   `id` int NOT NULL,
   `indulasi_pont` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
@@ -414,7 +474,8 @@ ALTER TABLE `trackereszkozok`
 ALTER TABLE `tracker_poziciok`
   ADD PRIMARY KEY (`id`),
   ADD KEY `device_id` (`device_id`),
-  ADD KEY `menetlevel_id` (`menetlevel_id`);
+  ADD KEY `menetlevel_id` (`menetlevel_id`),
+  ADD KEY `fk_user` (`user_id`);
 
 --
 -- A tábla indexei `utdij_kalkulaciok`
@@ -451,7 +512,7 @@ ALTER TABLE `felhasznalok`
 -- AUTO_INCREMENT a táblához `felhasznalo_sessionok`
 --
 ALTER TABLE `felhasznalo_sessionok`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT a táblához `jarmuvek`
@@ -505,7 +566,7 @@ ALTER TABLE `trackereszkozok`
 -- AUTO_INCREMENT a táblához `tracker_poziciok`
 --
 ALTER TABLE `tracker_poziciok`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT a táblához `utdij_kalkulaciok`
@@ -583,6 +644,7 @@ ALTER TABLE `soforok`
 -- Megkötések a táblához `tracker_poziciok`
 --
 ALTER TABLE `tracker_poziciok`
+  ADD CONSTRAINT `fk_user` FOREIGN KEY (`user_id`) REFERENCES `felhasznalok` (`id`),
   ADD CONSTRAINT `tracker_poziciok_ibfk_1` FOREIGN KEY (`device_id`) REFERENCES `trackereszkozok` (`id`),
   ADD CONSTRAINT `tracker_poziciok_ibfk_2` FOREIGN KEY (`menetlevel_id`) REFERENCES `menetlevelek` (`id`);
 
