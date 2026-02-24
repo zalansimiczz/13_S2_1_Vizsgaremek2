@@ -88,7 +88,7 @@ namespace TollÚtdíj
             this.lbl1.Size = new System.Drawing.Size(117, 13);
             this.lbl1.TabIndex = 8;
             this.lbl1.Text = "Kérjük jelentkezzen be!";
-            this.lbl1.Click += new System.EventHandler(this.lbl1_Click);
+
             // 
             // btnlogin
             // 

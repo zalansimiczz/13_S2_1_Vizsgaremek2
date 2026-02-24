@@ -265,14 +265,12 @@ namespace TollÚtdíj
             #endregion
         }
 
-        private void lbl1_Click(object sender, EventArgs e)
-        {
 
-        }
 
         /* Jelenlegi hibák:
          messageboxok átírása labelszövegre (jarmukezeles hianyos)
         uj sofor hozzáadásnál szüldatum megfelelő kezelése
+        uj sofor hozzáadásnál engedélyez duplikált nevű sofőrt
           */
     }
 }
