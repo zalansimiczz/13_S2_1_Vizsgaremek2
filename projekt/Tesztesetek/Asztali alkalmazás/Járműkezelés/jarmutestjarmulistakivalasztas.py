@@ -41,7 +41,7 @@ try:
         time.sleep(0.5)
         for _ in range(i):
             combo.type_keys("{DOWN}")
-        combo.type_keys("{ENTER}")
+            combo.type_keys("{ENTER}")
         print(f"Kiválasztott elem index: {i}, szöveg: {combo.selected_text()}")
 
         selected_value = combo.selected_text()

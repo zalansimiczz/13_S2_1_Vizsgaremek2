@@ -56,31 +56,50 @@ try:
 
     soforkezeles.wait("visible", timeout=5)
 
+    soforkezeles = app.window(auto_id="soforkezeles")
+    combo = soforkezeles.child_window(auto_id="cbbsoforlista", control_type="ComboBox")
+    combo.wait("visible enabled", timeout=5)
 
-    if  soforkezeles.child_window(auto_id="txbnev", control_type="Edit") == "teszt":
-        print("Sikeresen Hozzáadva. Sikeres teszt.")
-    else:
-        print("Nem lett hozzáadva. Hiba mentés során.")
-    if  soforkezeles.child_window(auto_id="txbszul", control_type="Edit") == "1111 11 1":
-        print("Sikeresen Hozzáadva. Sikeres teszt.")
-    else:
-        print("Nem lett hozzáadva. Hiba mentés során.")
-    if  soforkezeles.child_window(auto_id="txbszemazon", control_type="Edit") == "teszt":
-        print("Sikeresen Hozzáadva. Sikeres teszt.")
-    else:
-        print("Nem lett hozzáadva. Hiba mentés során.")
-    if  soforkezeles.child_window(auto_id="txbtelszam", control_type="Edit") == "teszt":
-        print("Sikeresen Hozzáadva. Sikeres teszt.")
-    else:
-        print("Nem lett hozzáadva. Hiba mentés során.")
-    if  soforkezeles.child_window(auto_id="txbcim", control_type="Edit") == "teszt":
-        print("Sikeresen Hozzáadva. Sikeres teszt.")
-    else:
-        print("Nem lett hozzáadva. Hiba mentés során.")
-    if  soforkezeles.child_window(auto_id="txbadoszam", control_type="Edit") == "teszt":
-        print("Sikeresen Hozzáadva. Sikeres teszt.")
-    else:
-        print("Nem lett hozzáadva. Hiba mentés során.")
+    count = combo.item_count()
+    print("Jelenlegi tartalom számban:", count)
+    combo.collapse()
+    for i in range(0, count, 1):
+        combo.expand()
+        time.sleep(0.5)
+        for _ in range(i):
+            combo.type_keys("{DOWN}")
+            combo.type_keys("{ENTER}")
+        print(f"Kiválasztott elem index: {i}, szöveg: {combo.selected_text()}")
+
+        combo.collapse()
+        time.sleep(0.5)
+        if combo.selected_text() == "teszt":
+            if soforkezeles.child_window(auto_id="txbnev", control_type="Edit").get_value() == "teszt":
+                print("Sikeresen Hozzáadva. Sikeres teszt.")
+            else:
+                print("Nem lett hozzáadva. Hiba mentés során.")
+            if soforkezeles.child_window(auto_id="txbszul", control_type="Edit").get_value() == "1111 11 01":
+                print("Sikeresen Hozzáadva. Sikeres teszt.")
+            else:
+                print("Nem lett hozzáadva. Hiba mentés során.")
+            if soforkezeles.child_window(auto_id="txbszemazon", control_type="Edit").get_value() == "teszt":
+                print("Sikeresen Hozzáadva. Sikeres teszt.")
+            else:
+                print("Nem lett hozzáadva. Hiba mentés során.")
+            if soforkezeles.child_window(auto_id="txbtelszam", control_type="Edit").get_value() == "teszt":
+                print("Sikeresen Hozzáadva. Sikeres teszt.")
+            else:
+                print("Nem lett hozzáadva. Hiba mentés során.")
+            if soforkezeles.child_window(auto_id="txbcim", control_type="Edit").get_value() == "teszt":
+                print("Sikeresen Hozzáadva. Sikeres teszt.")
+            else:
+                print("Nem lett hozzáadva. Hiba mentés során.")
+            if soforkezeles.child_window(auto_id="txbadoszam", control_type="Edit").get_value() == "teszt":
+                print("Sikeresen Hozzáadva. Sikeres teszt.")
+            else:
+                print("Nem lett hozzáadva. Hiba mentés során.")
+
+
 
 except Exception as e:
     print("Hiba a teszt futtatása során:", e)
@@ -100,11 +119,11 @@ finally:
         time.sleep(0.5)
         for _ in range(i):
             combo.type_keys("{DOWN}")
-        combo.type_keys("{ENTER}")
+            combo.type_keys("{ENTER}")
         print(f"Kiválasztott elem index: {i}, szöveg: {combo.selected_text()}")
 
 
-        other_value = soforkezeles.child_window(auto_id="txbnev", control_type="Edit").get_value()
+
         combo.collapse()
         time.sleep(0.5)
         if combo.selected_text() == "teszt":

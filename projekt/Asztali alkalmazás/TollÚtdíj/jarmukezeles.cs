@@ -179,6 +179,7 @@ namespace TollÚtdíj
                         txbrendszam.Text = reader.GetString("rendszam");
                         txbtipus.Text = reader.GetString("tipus");
                         txbkategoria.Text = reader.GetString("kategoria");
+                        txbtengely.Text = reader.GetInt32("tengelyszam").ToString();                  
                         txbtomeg.Text = reader.GetInt32("ossztomeg_kg") + "kg";
                         txbcegid.Text = reader.GetInt32("ceg_id").ToString();
                         txbmarka.Text = reader.GetString("marka").ToString();
@@ -236,7 +237,6 @@ namespace TollÚtdíj
 
                             cbbeuro.SelectedIndex = matchIndex;
                         }
-                        txbtengely.SelectedText = reader.GetInt32("tengelyszam").ToString();
                         txbvin.Text = reader["vin"].ToString();
                         cbbpotkocsi.SelectedIndex = Convert.ToInt32(reader["potkocsi_kepes"]);
                     }
