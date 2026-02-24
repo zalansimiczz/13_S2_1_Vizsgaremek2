@@ -15,11 +15,15 @@ if (!isset($data['lat']) || !isset($data['lon'])) {
 $lat = $data['lat'];
 $lon = $data['lon'];
 
+$userId = $userId;
+
+$deviceId = $userId;
+
 $stmt = $conn->prepare("
-    INSERT INTO tracker_poziciok (felhasznalo_id, lat, lon)
-    VALUES (?, ?, ?)
+    INSERT INTO tracker_poziciok (user_id, device_id, lat, lon)
+    VALUES (?, ?, ?, ?)
 ");
 
-$stmt->execute([$userId, $lat, $lon]);
+$stmt->execute([$userId, $deviceId, $lat, $lon]);
 
 echo json_encode(["success" => true]);
