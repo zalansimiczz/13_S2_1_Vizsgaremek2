@@ -242,6 +242,19 @@ namespace TollÚtdíj
         {
             if (hozzaadas == false)
             {
+                try
+                {
+                    txbszul.Text = DateTime.Parse(txbszul.Text).ToString("yyyy MM dd");
+                }
+                catch 
+                {
+                    lblhibas.Text = "Hibás születési dátum formátum.\r\nHasználja a következő formátumot: ÉÉÉÉ MM DD";
+                    lblhibas.ForeColor = Color.Red;
+                    lblhibas.Visible = true;
+                    return;
+                }
+   
+
                 MySqlConnectionStringBuilder build = new MySqlConnectionStringBuilder
                 {
                     Server = "localhost",
@@ -312,6 +325,19 @@ namespace TollÚtdíj
             }
             else
             {
+                try
+                {
+                    txbszul.Text = DateTime.Parse(txbszul.Text).ToString("yyyy MM dd");
+                }
+                catch
+                {
+                    lblhibas.Text = "Hibás születési dátum formátum.\r\nHasználja a következő formátumot: ÉÉÉÉ MM DD";
+                    lblhibas.ForeColor = Color.Red;
+                    lblhibas.Visible = true;
+                    return;
+                }
+
+
                 MySqlConnectionStringBuilder build = new MySqlConnectionStringBuilder
                 {
                     Server = "localhost",
@@ -383,15 +409,7 @@ namespace TollÚtdíj
 
         private void btntorles_Click(object sender, EventArgs e)
         {
-            DialogResult valasz = MessageBox.Show(
-    "Biztosan törölni szeretné a kijelölt sofőrt?\nEz a művelet nem visszavonható!",
-    "Megerősítés",
-    MessageBoxButtons.YesNo,
-    MessageBoxIcon.Warning
-);
 
-            if (valasz != DialogResult.Yes)
-                return;
 
             MySqlConnectionStringBuilder build = new MySqlConnectionStringBuilder
             {
