@@ -63,3 +63,16 @@ Sofor nev modositasa
     Click Button    xpath=//button[contains(., "Mentés")]
     Wait Until Page Contains    Jani Nem Kiraly    timeout=5s
     Close Browser
+
+Sofor torlese
+    Open Browser    http://127.0.0.1:8000/partner/login    Chrome
+    Maximize Browser Window
+    Input Text    xpath=//input[@name="email"]    zalansimicz@gmail.com
+    Input Text    xpath=//input[@name="password"]    12345678
+    Click Button    xpath=//button[contains(., "Bejelentkezés")]
+    Wait Until Element Is Visible    id=soforok    timeout=10s
+    Click Element    id=soforok
+    Click Element    xpath=//tr[td[contains(.,'Jani a Boss Apja')]]//button[@title='Törlés']
+    Handle Alert    ACCEPT
+    Wait Until Page Does Not Contain    Jani a Boss Apja    timeout=5s
+    Close Browser
