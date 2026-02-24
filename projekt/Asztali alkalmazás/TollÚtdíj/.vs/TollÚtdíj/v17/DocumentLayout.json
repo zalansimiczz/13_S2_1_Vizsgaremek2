@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\bobanpetrik\\Documents\\GitHub\\13_S2_1_Vizsgaremek2\\projekt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|c:\\users\\bobanpetrik\\documents\\github\\13_s2_1_vizsgaremek2\\projekt\\asztali alkalmaz\u00E1s\\toll\u00FAtd\u00EDj\\soforkezeles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|solutionrelative:soforkezeles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|C:\\Users\\bobanpetrik\\Documents\\GitHub\\13_S2_1_Vizsgaremek2\\projekt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\soforkezeles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|solutionrelative:soforkezeles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|c:\\users\\bobanpetrik\\documents\\github\\13_s2_1_vizsgaremek2\\projekt\\asztali alkalmaz\u00E1s\\toll\u00FAtd\u00EDj\\soforkezeles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|solutionrelative:soforkezeles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AE8A4366-5B2A-4CC9-BDD2-270E94D646CF}|Toll\u00DAtd\u00EDj.csproj|C:\\Users\\bobanpetrik\\Documents\\GitHub\\13_S2_1_Vizsgaremek2\\projekt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\fomenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
@@ -66,7 +66,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 11,
+          "SelectedChildIndex": 12,
           "Children": [
             {
               "$type": "Bookmark",
@@ -182,20 +182,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "soforkezeles.cs",
               "DocumentMoniker": "C:\\Users\\bobanpetrik\\Documents\\GitHub\\13_S2_1_Vizsgaremek2\\projekt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\soforkezeles.cs",
               "RelativeDocumentMoniker": "soforkezeles.cs",
               "ToolTip": "C:\\Users\\bobanpetrik\\Documents\\GitHub\\13_S2_1_Vizsgaremek2\\projekt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\soforkezeles.cs",
               "RelativeToolTip": "soforkezeles.cs",
-              "ViewState": "AgIAAGMBAAAAAAAAAAD4v88BAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAALoBAAAAAAAAAAD4v88BAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-22T14:13:55.115Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "soforkezeles.cs [Design]",
               "DocumentMoniker": "C:\\Users\\bobanpetrik\\Documents\\GitHub\\13_S2_1_Vizsgaremek2\\projekt\\Asztali alkalmaz\u00E1s\\Toll\u00DAtd\u00EDj\\soforkezeles.cs",
               "RelativeDocumentMoniker": "soforkezeles.cs",
