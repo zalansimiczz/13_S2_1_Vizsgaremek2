@@ -3,7 +3,6 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 
-
 use App\Http\Controllers\PartnerAuthController;
 use App\Http\Controllers\PartnerDashboardController;
 use App\Http\Controllers\PartnerUserController;
@@ -11,9 +10,7 @@ use App\Http\Controllers\SoforController;
 use App\Http\Controllers\JarmuController;
 use App\Models\User;
 
-Route::get('/health', function () {
-    return response()->json(['ok' => true]);
-});
+
 //alap route
 Route::get('/', function () {
     return redirect()->route('partner.login');

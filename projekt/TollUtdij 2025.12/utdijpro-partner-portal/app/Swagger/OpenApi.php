@@ -1,14 +1,17 @@
 <?php
 
 /**
- * @OA\Info(
- *     title="ÚtdíjPro Partner API",
- *     version="1.0.0"
+ * @OpenApi\Annotations\Info(title="UtdijPro Partner Portal API", version="1.0.0")
+ *
+ * @OpenApi\Annotations\Server(
+ *   url="http://127.0.0.1:8000",
+ *   description="Local"
  * )
  *
- * @OA\Server(
- *     url="http://127.0.0.1:8000",
- *     description="Local dev server"
+ * @OpenApi\Annotations\Get(
+ *   path="/health",
+ *   summary="Health check",
+ *   @OpenApi\Annotations\Response(response=200, description="OK")
  * )
  */
-class OpenApiSpec {}
+class ApiDoc {}
