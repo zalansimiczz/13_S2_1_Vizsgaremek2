@@ -48,3 +48,18 @@ Sofor aktivalasa
     Click Element    xpath=//tr[td[contains(.,'Jani Király')]]//button[@title='Státusz váltása']
     Wait Until Page Contains    Aktív    timeout=5s
     Close Browser
+
+Sofor nev modositasa
+    Open Browser    http://127.0.0.1:8000/partner/login    Chrome
+    Maximize Browser Window
+    Input Text    xpath=//input[@name="email"]    zalansimicz@gmail.com
+    Input Text    xpath=//input[@name="password"]    12345678
+    Click Button    xpath=//button[contains(., "Bejelentkezés")]
+    Wait Until Element Is Visible    id=soforok    timeout=10s
+    Click Element    id=soforok
+    Click Element    xpath=//tr[td[contains(.,'Jani Király')]]//button[@title='Szerkesztés']
+    ${fields}=    Get WebElements    xpath=//form[@id="driverForm"]//input[@type="text"]
+    Input Text    ${fields}[0]    Jani Nem Kiraly
+    Click Button    xpath=//button[contains(., "Mentés")]
+    Wait Until Page Contains    Jani Nem Kiraly    timeout=5s
+    Close Browser
