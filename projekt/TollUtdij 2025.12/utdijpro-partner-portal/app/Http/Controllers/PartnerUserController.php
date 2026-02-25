@@ -19,8 +19,8 @@ class PartnerUserController extends Controller
         //mezonevek phpbol atemelve
         $full_name  = trim($request->input('full_name'));
         $email      = trim($request->input('email'));
-        $password   = $request->input('password');
-        $password2  = $request->input('password_confirm');
+        $password   = $request->input('password', 'min:8');
+        $password2  = $request->input('password_confirm', 'min:8');
 
         //hibaellenorzes (validacio)
         if ($full_name === '' || $email === '' || $password === '' || $password2 === '') {

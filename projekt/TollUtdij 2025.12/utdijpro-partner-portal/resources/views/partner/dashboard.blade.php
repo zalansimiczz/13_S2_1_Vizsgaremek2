@@ -117,25 +117,25 @@
             </a>
         </div>
         <nav class="space-y-1.5">
-            <a href="#dashboard-main-content" class="sidebar-link active flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
+            <a href="#dashboard-main-content" id="dashboard" class="sidebar-link active flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
                 <i class="fas fa-tachometer-alt fa-fw w-5 text-center"></i><span class="font-medium">Irányítópult</span>
             </a>
             <a href="#calculatorSectionContent" id="openCalculator" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
                 <i class="fas fa-calculator fa-fw w-5 text-center"></i><span class="font-medium">Útdíj Kalkulátor</span>
             </a>
-            <a href="#addUserContent" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
+            <a href="#addUserContent" id="alkalmazottak" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
                 <i class="fas fa-users-cog fa-fw w-5 text-center"></i><span class="font-medium">Alkalmazottak</span>
             </a>
-            <a href="#driversContent" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
+            <a href="#driversContent" id="soforok" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
                 <i class="fas fa-id-card fa-fw w-5 text-center"></i><span class="font-medium">Sofőrök</span>
             </a>
-            <a href="#trucksContent" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
+            <a href="#trucksContent" id="flotta" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
                 <i class="fas fa-truck fa-fw w-5 text-center"></i><span class="font-medium">Flotta</span>
             </a>
-            <a href="#reportsContent" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
+            <a href="#reportsContent" id="riportok" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
                 <i class="fas fa-chart-bar fa-fw w-5 text-center"></i><span class="font-medium">Riportok</span>
             </a>
-            <a href="#settingsContent" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
+            <a href="#settingsContent" id="beallitasok" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
                 <i class="fas fa-cog fa-fw w-5 text-center"></i><span class="font-medium">Beállítások</span>
             </a>
         </nav>

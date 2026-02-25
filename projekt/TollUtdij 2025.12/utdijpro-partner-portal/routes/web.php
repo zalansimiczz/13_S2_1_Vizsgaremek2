@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
@@ -10,6 +9,7 @@ use App\Http\Controllers\PartnerUserController;
 use App\Http\Controllers\SoforController;
 use App\Http\Controllers\JarmuController;
 use App\Models\User;
+
 
 //alap route
 Route::get('/', function () {
