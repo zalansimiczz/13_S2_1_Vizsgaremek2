@@ -2,7 +2,10 @@ from pywinauto import Application
 import time
 
 
-app_path = r"C:\Users\boban\Documents\GitHub\13_S2_1_Vizsgaremek2\projekt\Asztali alkalmazás\TollÚtdíj\bin\Debug\TollÚtdíj.exe"
+app_path = r"C:\Users\bobanpetrik\Documents\GitHub\13_S2_1_Vizsgaremek2\projekt\Tesztesetek\mappa\TollÚtdíj.exe"
+
+
+#app_path = r"..\..\..\..\..\..\GitHub\13_S2_1_Vizsgaremek2\projekt\Asztali alkalmazás\TollÚtdíj\bin\Debug\TollÚtdíj.exe"
 app = Application(backend="uia").start(app_path)
 
 
@@ -23,11 +26,11 @@ try:
     fomenu.child_window(auto_id="btnlogout", control_type="Button").click()
     print("Sikeres bejelentkezés!")
     time.sleep(1)
-    #deapp.kill()
+    app.kill()
 
 except:
     print("A főmenü nem jelent meg. Hiba a login során.")
-    #app.kill()
+    app.kill()
 
 
 
