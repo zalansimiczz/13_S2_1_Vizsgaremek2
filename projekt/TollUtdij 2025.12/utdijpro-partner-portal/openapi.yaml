@@ -1,0 +1,133 @@
+openapi: 3.0.0
+info:
+  title: UtdijPro Partner Portal API
+  version: 1.0.0
+
+servers:
+  - url: http://127.0.0.1:8000
+
+paths:
+
+  /partner/login:
+    get:
+      summary: Login oldal megjelenítése
+      responses:
+        '200':
+          description: Login oldal betölt
+
+    post:
+      summary: Partner bejelentkezés
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '302':
+          description: Sikeres login redirect
+
+  /partner/register:
+    get:
+      summary: Regisztráció oldal
+      responses:
+        '200':
+          description: Register oldal
+
+    post:
+      summary: Partner regisztráció
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '302':
+          description: Sikeres regisztráció
+
+  /partner/dashboard:
+    get:
+      summary: Dashboard
+      responses:
+        '200':
+          description: Dashboard betölt
+
+  /partner/users:
+    post:
+      summary: Felhasználó létrehozás
+      responses:
+        '302':
+          description: Sikeres mentés
+
+  /partner/soforok:
+    post:
+      summary: Sofőr létrehozás
+      responses:
+        '302':
+          description: Sikeres mentés
+
+  /partner/soforok/{id}/update:
+    post:
+      summary: Sofőr frissítés
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '302':
+          description: Sikeres frissítés
+
+  /partner/soforok/{id}:
+    delete:
+      summary: Sofőr törlés
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '302':
+          description: Sikeres törlés
+
+  /reports:
+    get:
+      summary: Riport lista
+      responses:
+        '200':
+          description: Riport oldal
+
+    post:
+      summary: Riport generálás
+      responses:
+        '200':
+          description: Riport elkészült
+
+  /settings/profile:
+    put:
+      summary: Profil frissítés
+      responses:
+        '200':
+          description: Profil frissítve
+
+  /settings/company:
+    put:
+      summary: Cég frissítés
+      responses:
+        '200':
+          description: Cég frissítve

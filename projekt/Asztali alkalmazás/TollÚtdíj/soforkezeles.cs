@@ -26,7 +26,7 @@ namespace TollÚtdíj
             cbbaktiv.DropDownStyle = ComboBoxStyle.DropDownList;
             this.role = role;
             this.cegId = cegId;
-            lblhiba.Visible = false;
+            lblhibas.Visible = false;
             txbnev.Enabled = false;
             cbbsoforlista.DropDownStyle = ComboBoxStyle.DropDownList;
             if (role == "operator")
@@ -51,7 +51,7 @@ namespace TollÚtdíj
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "",
+                Password = "mysql",
                 Database = "tollutdijadatbazis"
             };
 
@@ -119,7 +119,7 @@ namespace TollÚtdíj
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "",
+                Password = "mysql",
                 Database = "tollutdijadatbazis"
             };
 
@@ -131,7 +131,9 @@ namespace TollÚtdíj
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot, majd próbálja újra.", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    lblhibas.Text = "Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot, majd próbálja újra.";
+                    lblhibas.ForeColor = Color.Red;
+                    lblhibas.Visible = true;
                     return;
                 }
 
@@ -240,6 +242,19 @@ namespace TollÚtdíj
         {
             if (hozzaadas == false)
             {
+                try
+                {
+                    txbszul.Text = DateTime.Parse(txbszul.Text).ToString("yyyy MM dd");
+                }
+                catch 
+                {
+                    lblhibas.Text = "Hibás születési dátum formátum.\r\nHasználja a következő formátumot: ÉÉÉÉ MM DD";
+                    lblhibas.ForeColor = Color.Red;
+                    lblhibas.Visible = true;
+                    return;
+                }
+   
+
                 MySqlConnectionStringBuilder build = new MySqlConnectionStringBuilder
                 {
                     Server = "localhost",
@@ -256,8 +271,10 @@ namespace TollÚtdíj
                     }
                     catch
                     {
-                        lblhiba.Text = "Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot, majd próbálja újra.";
-                        lblhiba.Visible = true;
+                        lblhibas.Text = "Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot, majd próbálja újra.";
+                        lblhibas.Visible = true;
+                        lblhibas.ForeColor = Color.Red;
+                        
                         return;
                     }
 
@@ -293,17 +310,34 @@ namespace TollÚtdíj
                     try
                     {
                         parancs.ExecuteNonQuery();
-                        MessageBox.Show("Sikeres mentés!");
+                        lblhibas.Text = "Sikeres mentés!";
+                        lblhibas.ForeColor = Color.Green;
+                        lblhibas.Visible = true;
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Hiba mentés közben:\n" + ex.Message, "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        lblhibas.Text = "Hiba mentés közben:\n" + ex.Message;
+                        lblhibas.ForeColor = Color.Red;
+                        lblhibas.Visible = true;
                         return;
                     }
                 }
             }
             else
             {
+                try
+                {
+                    txbszul.Text = DateTime.Parse(txbszul.Text).ToString("yyyy MM dd");
+                }
+                catch
+                {
+                    lblhibas.Text = "Hibás születési dátum formátum.\r\nHasználja a következő formátumot: ÉÉÉÉ MM DD";
+                    lblhibas.ForeColor = Color.Red;
+                    lblhibas.Visible = true;
+                    return;
+                }
+
+
                 MySqlConnectionStringBuilder build = new MySqlConnectionStringBuilder
                 {
                     Server = "localhost",
@@ -320,8 +354,10 @@ namespace TollÚtdíj
                     }
                     catch
                     {
-                        lblhiba.Text = "Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot, majd próbálja újra.";
-                        lblhiba.Visible = true;
+                        lblhibas.Text = "Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot, majd próbálja újra.";
+                        lblhibas.Visible = true;
+                        lblhibas.ForeColor = Color.Red;
+                        
                         return;
                     }
                     var parancs = kapcsolat.CreateCommand();
@@ -351,11 +387,15 @@ namespace TollÚtdíj
                     try
                     {
                         parancs.ExecuteNonQuery();
-                        MessageBox.Show("Sikeres mentés!");
+                        lblhibas.Text = "Sikeres mentés!";
+                        lblhibas.ForeColor = Color.Green;
+                        lblhibas.Visible = true;
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Hiba mentés közben:\n" + ex.Message, "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        lblhibas.Text = "Hiba mentés közben:\n" + ex.Message;
+                        lblhibas.ForeColor = Color.Red;
+                        lblhibas.Visible = true;
                         return;
                     }
                 }
@@ -369,15 +409,7 @@ namespace TollÚtdíj
 
         private void btntorles_Click(object sender, EventArgs e)
         {
-            DialogResult valasz = MessageBox.Show(
-    "Biztosan törölni szeretné a kijelölt sofőrt?\nEz a művelet nem visszavonható!",
-    "Megerősítés",
-    MessageBoxButtons.YesNo,
-    MessageBoxIcon.Warning
-);
 
-            if (valasz != DialogResult.Yes)
-                return;
 
             MySqlConnectionStringBuilder build = new MySqlConnectionStringBuilder
             {
@@ -395,7 +427,9 @@ namespace TollÚtdíj
                 }
                 catch
                 {
-                    MessageBox.Show("Adatbázis kapcsolat hiba.", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    lblhibas.Text = "Adatbázis kapcsolat hiba.";
+                    lblhibas.ForeColor = Color.Red;
+                    lblhibas.Visible = true;
                     return;
                 }
 
@@ -410,11 +444,15 @@ namespace TollÚtdíj
                 try
                 {
                     parancs.ExecuteNonQuery();
-                    MessageBox.Show("Sofőr sikeresen törölve.");
+                    lblhibas.Text = "Sofőr sikeresen törölve.";
+                    lblhibas.ForeColor = Color.Green;
+                    lblhibas.Visible = true;
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Hiba törlés közben:\n" + ex.Message, "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    lblhibas.Text = "Hiba törlés közben:\n" + ex.Message;
+                    lblhibas.ForeColor = Color.Red;
+                    lblhibas.Visible = true;
                     return;
                 }
             }

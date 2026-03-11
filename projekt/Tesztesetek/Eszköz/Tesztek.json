@@ -1,0 +1,120 @@
+{
+  "info": {
+    "name": "Login API Tests",
+    "_postman_id": "b7f9c3a2-1234-4abc-9def-123456789000",
+    "description": "Teszt esetek a login.php endpointhoz",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Sikeres login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"teszt@pelda.hu\",\n  \"password\": \"helyesjelszo\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost/login.php",
+          "protocol": "http",
+          "host": ["localhost"],
+          "path": ["login.php"]
+        }
+      }
+    },
+    {
+      "name": "Hibás jelszó",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"teszt@pelda.hu\",\n  \"password\": \"rosszjelszo\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost/login.php",
+          "protocol": "http",
+          "host": ["localhost"],
+          "path": ["login.php"]
+        }
+      }
+    },
+    {
+      "name": "Nem létező user",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"nincs@pelda.hu\",\n  \"password\": \"valami123\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost/login.php",
+          "protocol": "http",
+          "host": ["localhost"],
+          "path": ["login.php"]
+        }
+      }
+    },
+    {
+      "name": "Üres body",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{}"
+        },
+        "url": {
+          "raw": "http://localhost/login.php",
+          "protocol": "http",
+          "host": ["localhost"],
+          "path": ["login.php"]
+        }
+      }
+    },
+    {
+      "name": "SQL Injection próbálkozás",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"teszt@pelda.hu' OR 1=1 --\",\n  \"password\": \"barmi\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost/login.php",
+          "protocol": "http",
+          "host": ["localhost"],
+          "path": ["login.php"]
+        }
+      }
+    }
+  ]
+}

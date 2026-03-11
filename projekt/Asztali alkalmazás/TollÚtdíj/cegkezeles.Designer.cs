@@ -30,7 +30,7 @@
         {
             this.btnvissza = new System.Windows.Forms.Button();
             this.lblinfo = new System.Windows.Forms.Label();
-            this.lblhibas = new System.Windows.Forms.Label();
+            this.lblhibass = new System.Windows.Forms.Label();
             this.btnmentes = new System.Windows.Forms.Button();
             this.txbcegnev = new System.Windows.Forms.TextBox();
             this.txbcegszam = new System.Windows.Forms.TextBox();
@@ -40,6 +40,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.cbbceglista = new System.Windows.Forms.ComboBox();
+            this.lblhibas = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnvissza
@@ -64,13 +65,13 @@
             this.lblinfo.Text = "ⓘ Amennyiben új céget szeretne létrehozni,\r\n a webes felületen van lehetősége ezt" +
     " megteheti!";
             // 
-            // lblhibas
+            // lblhibass
             // 
-            this.lblhibas.AutoSize = true;
-            this.lblhibas.Location = new System.Drawing.Point(12, 9);
-            this.lblhibas.Name = "lblhibas";
-            this.lblhibas.Size = new System.Drawing.Size(0, 13);
-            this.lblhibas.TabIndex = 0;
+            this.lblhibass.AutoSize = true;
+            this.lblhibass.Location = new System.Drawing.Point(12, 9);
+            this.lblhibass.Name = "lblhibass";
+            this.lblhibass.Size = new System.Drawing.Size(0, 13);
+            this.lblhibass.TabIndex = 0;
             // 
             // btnmentes
             // 
@@ -148,11 +149,24 @@
             this.cbbceglista.TabIndex = 12;
             this.cbbceglista.SelectedIndexChanged += new System.EventHandler(this.cbbceglista_SelectedIndexChanged);
             // 
+            // lblhibas
+            // 
+            this.lblhibas.AutoSize = true;
+            this.lblhibas.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblhibas.ForeColor = System.Drawing.Color.Red;
+            this.lblhibas.Location = new System.Drawing.Point(229, 17);
+            this.lblhibas.Name = "lblhibas";
+            this.lblhibas.Size = new System.Drawing.Size(68, 16);
+            this.lblhibas.TabIndex = 15;
+            this.lblhibas.Text = "HIBA LABEL";
+            this.lblhibas.Visible = false;
+            // 
             // cegkezeles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(547, 296);
+            this.Controls.Add(this.lblhibas);
             this.Controls.Add(this.cbbceglista);
             this.Controls.Add(this.lblinfo);
             this.Controls.Add(this.label2);
@@ -164,7 +178,7 @@
             this.Controls.Add(this.txbcegnev);
             this.Controls.Add(this.btnvissza);
             this.Controls.Add(this.btnmentes);
-            this.Controls.Add(this.lblhibas);
+            this.Controls.Add(this.lblhibass);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "cegkezeles";
@@ -179,7 +193,7 @@
         #endregion
         private System.Windows.Forms.Button btnvissza;
         private System.Windows.Forms.Label lblinfo;
-        private System.Windows.Forms.Label lblhibas;
+        private System.Windows.Forms.Label lblhibass;
         private System.Windows.Forms.Button btnmentes;
         private System.Windows.Forms.TextBox txbcegnev;
         private System.Windows.Forms.TextBox txbcegszam;
@@ -189,5 +203,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cbbceglista;
+        private System.Windows.Forms.Label lblhibas;
     }
 }

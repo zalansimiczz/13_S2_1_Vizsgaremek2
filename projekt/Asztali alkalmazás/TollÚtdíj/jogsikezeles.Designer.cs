@@ -37,10 +37,11 @@
             this.btnmentes = new System.Windows.Forms.Button();
             this.btnhozzaadas = new System.Windows.Forms.Button();
             this.btntorles = new System.Windows.Forms.Button();
-            this.lblhiba = new System.Windows.Forms.Label();
+            this.lblhibas = new System.Windows.Forms.Label();
             this.dtpErvTol = new System.Windows.Forms.DateTimePicker();
             this.dtpErvIg = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
+            this.lblhibass = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cbbsoforlista
@@ -132,15 +133,15 @@
             this.btntorles.UseVisualStyleBackColor = false;
             this.btntorles.Click += new System.EventHandler(this.btntorles_Click);
             // 
-            // lblhiba
+            // lblhibas
             // 
-            this.lblhiba.AutoSize = true;
-            this.lblhiba.Location = new System.Drawing.Point(16, 478);
-            this.lblhiba.Name = "lblhiba";
-            this.lblhiba.Size = new System.Drawing.Size(35, 13);
-            this.lblhiba.TabIndex = 51;
-            this.lblhiba.Text = "label1";
-            this.lblhiba.Visible = false;
+            this.lblhibas.AutoSize = true;
+            this.lblhibas.Location = new System.Drawing.Point(16, 478);
+            this.lblhibas.Name = "lblhibas";
+            this.lblhibas.Size = new System.Drawing.Size(35, 13);
+            this.lblhibas.TabIndex = 51;
+            this.lblhibas.Text = "label1";
+            this.lblhibas.Visible = false;
             // 
             // dtpErvTol
             // 
@@ -165,15 +166,28 @@
             this.label1.TabIndex = 54;
             this.label1.Text = "Söfőrök:";
             // 
+            // lblhibass
+            // 
+            this.lblhibass.AutoSize = true;
+            this.lblhibass.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblhibass.ForeColor = System.Drawing.Color.Red;
+            this.lblhibass.Location = new System.Drawing.Point(7, 246);
+            this.lblhibass.Name = "lblhibass";
+            this.lblhibass.Size = new System.Drawing.Size(68, 16);
+            this.lblhibass.TabIndex = 55;
+            this.lblhibass.Text = "HIBA LABEL";
+            this.lblhibass.Visible = false;
+            // 
             // jogsikezeles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(423, 294);
+            this.Controls.Add(this.lblhibass);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dtpErvIg);
             this.Controls.Add(this.dtpErvTol);
-            this.Controls.Add(this.lblhiba);
+            this.Controls.Add(this.lblhibas);
             this.Controls.Add(this.btntorles);
             this.Controls.Add(this.btnmentes);
             this.Controls.Add(this.btnhozzaadas);
@@ -207,9 +221,10 @@
         private System.Windows.Forms.Button btnmentes;
         private System.Windows.Forms.Button btnhozzaadas;
         private System.Windows.Forms.Button btntorles;
-        private System.Windows.Forms.Label lblhiba;
+        private System.Windows.Forms.Label lblhibas;
         private System.Windows.Forms.DateTimePicker dtpErvTol;
         private System.Windows.Forms.DateTimePicker dtpErvIg;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblhibass;
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
@@ -7,9 +6,11 @@ use App\Http\Controllers\Api\TollController;
 use App\Http\Controllers\PartnerAuthController;
 use App\Http\Controllers\PartnerDashboardController;
 use App\Http\Controllers\PartnerUserController;
+use App\Http\Controllers\PartnerSettingsController;
 use App\Http\Controllers\SoforController;
 use App\Http\Controllers\JarmuController;
 use App\Models\User;
+
 
 //alap route
 Route::get('/', function () {
@@ -131,14 +132,46 @@ Route::post('/reports', [\App\Http\Controllers\PartnerReportController::class, '
     ->name('partner.reports.generate');
 
 //settings
-Route::put('/settings/profile', [PartnerSettingsController::class, 'updateProfile'])->name('settings.profile.update');
-Route::put('/settings/company', [PartnerSettingsController::class, 'updateCompany'])->name('settings.company.update');
+// vedett routeok
+Route::middleware(['auth.partner', 'verified.partner'])
+    ->prefix('partner')
+    ->group(function () {
 
+<<<<<<< Updated upstream
 Route::post('/settings/apikeys', [PartnerSettingsController::class, 'storeApiKey'])->name('settings.apikeys.store');
 Route::post('/settings/apikeys/{id}/regen', [PartnerSettingsController::class, 'regenApiKey'])->name('settings.apikeys.regen');
 Route::delete('/settings/apikeys/{id}', [PartnerSettingsController::class, 'destroyApiKey'])->name('settings.apikeys.destroy');
 
 //kalkulator
 Route::post('/calculate', [TollController::class, 'calculate']);
+=======
+        Route::get('/dashboard', [PartnerDashboardController::class, 'index'])
+            ->name('partner.dashboard');
+
+        // user kezeles
+        Route::post('/users', [PartnerUserController::class, 'store'])
+            ->name('partner.users.store');
+
+        Route::post('/users/{id}/toggle', [PartnerUserController::class, 'toggle'])
+            ->name('partner.users.toggle');
+
+        // sofor kezeles
+        Route::post('/soforok', [SoforController::class, 'store'])
+            ->name('partner.soforok.store');
+
+        Route::post('/soforok/{id}/update', [SoforController::class, 'update'])
+            ->name('partner.soforok.update');
+
+        Route::post('/soforok/{id}/toggle', [SoforController::class, 'toggle'])
+            ->name('partner.soforok.toggle');
+
+        Route::delete('/soforok/{id}', [SoforController::class, 'destroy'])
+            ->name('partner.soforok.destroy');
+
+        // settings
+        Route::put('/settings/company', [PartnerSettingsController::class, 'updateCompany'])
+            ->name('partner.settings.company.update');
+    });
+>>>>>>> Stashed changes
     
 

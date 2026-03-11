@@ -1,0 +1,112 @@
+{
+  "info": {
+    "_postman_id": "282ac56f-c974-42ba-8a1b-200fdc4956d3",
+    "name": "Toll Tracker API Tests (LAN)",
+    "description": "Login + Send Position tests (LAN)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51958331",
+    "_collection_link": "https://go.postman.co/collection/51958331-282ac56f-c974-42ba-8a1b-200fdc4956d3?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "1 - Login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "let jsonData = pm.response.json();",
+              "if(jsonData.token){",
+              "    pm.environment.set('token', jsonData.token);",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"placeholder@demo.hu\",\n  \"password\": \"demo_hash\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost/toll_api/login.php",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "toll_api",
+            "login.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "2 - Send Position (Valid Token)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"token\": \"266eddde64f56e6c80ec3ad9dd008501e1dcf605c291563b8e5569ab152612f9\",\n  \"lat\": 47.4979,\n  \"lon\": 19.0402\n}"
+        },
+        "url": {
+          "raw": "http://localhost/toll_api/send_position.php",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "toll_api",
+            "send_position.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "3 - Send Position (Invalid Token)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"token\": \"invalidtoken123\",\n  \"lat\": 47.4979,\n  \"lon\": 19.0402\n}"
+        },
+        "url": {
+          "raw": "http://localhost/toll_api/send_position.php",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "toll_api",
+            "send_position.php"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

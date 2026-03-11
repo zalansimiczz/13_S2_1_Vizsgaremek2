@@ -38,6 +38,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btntrackkez = new System.Windows.Forms.Button();
             this.btnsofor = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblhibas = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -130,11 +132,33 @@
             this.btnsofor.UseVisualStyleBackColor = true;
             this.btnsofor.Click += new System.EventHandler(this.btnsofor_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(243, 226);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(0, 13);
+            this.label1.TabIndex = 17;
+            // 
+            // lblhibas
+            // 
+            this.lblhibas.AutoSize = true;
+            this.lblhibas.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblhibas.ForeColor = System.Drawing.Color.Red;
+            this.lblhibas.Location = new System.Drawing.Point(175, 223);
+            this.lblhibas.Name = "lblhibas";
+            this.lblhibas.Size = new System.Drawing.Size(68, 16);
+            this.lblhibas.TabIndex = 18;
+            this.lblhibas.Text = "HIBA LABEL";
+            this.lblhibas.Visible = false;
+            // 
             // userinterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(544, 261);
+            this.Controls.Add(this.lblhibas);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnsofor);
             this.Controls.Add(this.btntrackkez);
             this.Controls.Add(this.pictureBox1);
@@ -155,6 +179,7 @@
             this.Load += new System.EventHandler(this.userinterface_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -169,5 +194,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btntrackkez;
         private System.Windows.Forms.Button btnsofor;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblhibas;
     }
 }

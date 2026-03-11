@@ -1,0 +1,135 @@
+{
+  "info": {
+    "_postman_id": "3eff82cf-3a79-4da3-a899-df47f57c4a6b",
+    "name": "Toll API AMMPS Tests",
+    "description": "AMMPS környezethez - login + role check teszt",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51958331",
+    "_collection_link": "https://go.postman.co/collection/51958331-3eff82cf-3a79-4da3-a899-df47f57c4a6b?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Login - placeholder demo",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "var json = pm.response.json();",
+              "",
+              "pm.test('Login success true', function () {",
+              "    pm.expect(json.success).to.eql(true);",
+              "});",
+              "",
+              "pm.environment.set('token', json.token);",
+              "pm.environment.set('role', json.user.role);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"placeholder@demo.hu\",\n  \"password\": \"demo_hash\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost/tollapi/login.php",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "tollapi",
+            "login.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Admin endpoint with token",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Not 401', function () {",
+              "    pm.expect(pm.response.code).to.not.eql(401);",
+              "});",
+              "",
+              "pm.test('Not 403', function () {",
+              "    pm.expect(pm.response.code).to.not.eql(403);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost/tollapi/admin_lista.php",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "tollapi",
+            "admin_lista.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Admin endpoint without token",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Expected 401', function () {",
+              "    pm.response.to.have.status(401);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost/tollapi/admin_lista.php",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "tollapi",
+            "admin_lista.php"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

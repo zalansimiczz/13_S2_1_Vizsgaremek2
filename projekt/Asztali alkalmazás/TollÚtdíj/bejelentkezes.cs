@@ -38,7 +38,7 @@ namespace TollÚtdíj
 
         public class Bejelentkezessegito
         {
-            private Label lblHibas;
+            private Label lblhibas;
             private Label lblUser;
             private Label lblPass;
             private TextBox txbPass;
@@ -49,7 +49,7 @@ namespace TollÚtdíj
             private PictureBox logoPicture;
 
             public Bejelentkezessegito(
-                Label lblHibas,
+                Label lblhibas,
                 Label lblUser,
                 Label lblPass,
                 TextBox txbPass,
@@ -59,7 +59,7 @@ namespace TollÚtdíj
                 CheckBox chkrememberme,
                 PictureBox logoPicture)
             {
-                this.lblHibas = lblHibas;
+                this.lblhibas = lblhibas;
                 this.lblUser = lblUser;
                 this.lblPass = lblPass;
                 this.txbPass = txbPass;
@@ -72,7 +72,7 @@ namespace TollÚtdíj
 
             public void ShowErrorState()
             {
-                lblHibas.Visible = true;
+                lblhibas.Visible = true;
                 lblUser.Visible = true;
                 lblPass.Visible = true;
                 txbPass.Visible = true;
@@ -92,7 +92,7 @@ namespace TollÚtdíj
             public void RestoreLoginState()
             {
                 // Hide the error label and restore the normal login controls
-                lblHibas.Visible = false;
+                lblhibas.Visible = false;
                 lblUser.Visible = true;
                 lblPass.Visible = true;
                 txbPass.Visible = true;
@@ -145,7 +145,7 @@ namespace TollÚtdíj
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "",
+                Password = "mysql",
                 Database = "tollutdijadatbazis"
             };
 
@@ -159,7 +159,7 @@ namespace TollÚtdíj
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot, majd próbálja újra.", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    lblhibas.Text = "Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot, majd próbálja újra.";
                     UIkisegito.ShowErrorState();
                     return;
                 }
@@ -175,7 +175,7 @@ namespace TollÚtdíj
 
                 if (!read.HasRows)
                 {
-                    MessageBox.Show("Kérjük, ellenőrizze a jelszavát\r\nés az E-mail címét, majd próbálja újra.", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    lblhibas.Text = "Kérjük, ellenőrizze a jelszavát\r\nés az E-mail címét, majd próbálja újra.";
                     UIkisegito.ShowErrorState();
                     return;
                 }
@@ -191,7 +191,7 @@ namespace TollÚtdíj
                 {
                     if (aktiv == 0)
                     {
-                        MessageBox.Show("A fiók nincs aktiválva.\r\nForduljon az adminisztrátorhoz.", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        lblhibas.Text = "A fiók nincs aktiválva.\r\nForduljon az adminisztrátorhoz.";
                         UIkisegito.ShowErrorState();
                         return;
                     }
@@ -257,7 +257,7 @@ namespace TollÚtdíj
                 }
                 else
                 {
-                    MessageBox.Show("Kérjük, ellenőrizze a jelszavát\r\nés az E-mail címét, majd próbálja újra.", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    lblhibas.Text = "Kérjük, ellenőrizze a jelszavát\r\nés az E-mail címét, majd próbálja újra.";
                     UIkisegito.ShowErrorState();
                     return;
                 }
@@ -265,16 +265,12 @@ namespace TollÚtdíj
             #endregion
         }
 
-        private void lbl1_Click(object sender, EventArgs e)
-        {
 
-        }
 
         /* Jelenlegi hibák:
-         * - ha bejelentkezési adat rossz eltűnik a logó //javítva
-         * - új sofőr hozzáadásánál mégse gombra nyomva nem hozza vissza az eddigi sofőr adatait //javítva
-         * - új jármű hozzáadásánál mégse gombra nyomva nem hozza vissza a jármű euro besorolását //javítva
-         * - első bezárásnál a bejelentkezési form üresen megnyitva marad //javítva
+         messageboxok átírása labelszövegre (jarmukezeles hianyos)
+        uj sofor hozzáadásnál szüldatum megfelelő kezelése
+        uj sofor hozzáadásnál engedélyez duplikált nevű sofőrt
           */
     }
 }

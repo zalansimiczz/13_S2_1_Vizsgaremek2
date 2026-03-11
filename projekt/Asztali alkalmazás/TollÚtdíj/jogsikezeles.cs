@@ -27,6 +27,7 @@ namespace TollÚtdíj
             InitializeComponent();
             this.role = role;
             this.cegId = cegId;
+            lblhibas.Visible = false;
             cbbsoforlista.DropDownStyle = ComboBoxStyle.DropDownList;
             cbbkateg.DropDownStyle = ComboBoxStyle.DropDownList;
 
@@ -54,7 +55,7 @@ namespace TollÚtdíj
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "",
+                Password = "mysql",
                 Database = "tollutdijadatbazis"
             };
 
@@ -66,8 +67,10 @@ namespace TollÚtdíj
                 }
                 catch
                 {
-                    lblhiba.Text = "Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot.";
-                    lblhiba.Visible = true;
+                    lblhibas.Text = "Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot.";
+                    lblhibas.Visible = true;
+                    lblhibas.ForeColor = Color.Red;
+                    
                     return;
                 }
 
@@ -125,7 +128,7 @@ namespace TollÚtdíj
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "",
+                Password = "mysql",
                 Database = "tollutdijadatbazis"
             };
 
@@ -159,7 +162,7 @@ namespace TollÚtdíj
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "",
+                Password = "mysql",
                 Database = "tollutdijadatbazis"
             };
 
@@ -210,7 +213,7 @@ namespace TollÚtdíj
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "",
+                Password = "mysql",
                 Database = "tollutdijadatbazis"
             };
 
@@ -293,12 +296,9 @@ namespace TollÚtdíj
 
             if (hozzaadas && VanMarIlyenKategoria(soforId, kategoria))
             {
-                MessageBox.Show(
-                    "Ez a kategória már létezik ennél a sofőrnél!",
-                    "Duplikált kategória",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                );
+                lblhibas.Text = "Ez a kategória már létezik ennél a sofőrnél!";
+                lblhibas.ForeColor = Color.Red;
+                lblhibas.Visible = true;
                 return;
             }
 
@@ -339,8 +339,11 @@ namespace TollÚtdíj
 
                
                     parancs.ExecuteNonQuery();
-                MessageBox.Show("Sikeres mentés!");
-                
+                lblhibas.Text = "Sikeres mentés!";
+                lblhibas.ForeColor = Color.Green;
+    
+                lblhibas.Visible = true;
+
             }
 
             hozzaadas = false;
@@ -379,9 +382,6 @@ namespace TollÚtdíj
             if (cbbkateg.SelectedItem == null)
                 return;
 
-            if (MessageBox.Show("Biztosan törlöd ezt a kategóriát?",
-                "Megerősítés", MessageBoxButtons.YesNo) != DialogResult.Yes)
-                return;
 
             string soforNev = cbbsoforlista.Text.Split('|')[0].Trim();
             int soforId = GetSoforId(soforNev);
@@ -408,7 +408,9 @@ namespace TollÚtdíj
                 parancs.Parameters.AddWithValue("@kat", kategoria);
 
                 parancs.ExecuteNonQuery();
-                MessageBox.Show("Sikeres törlés!");
+                lblhibas.Text = "Sikeres törlés!";
+                lblhibas.ForeColor = Color.Green;
+                lblhibas.Visible = true;
             }
 
             BetoltJogositvanyok(soforId);

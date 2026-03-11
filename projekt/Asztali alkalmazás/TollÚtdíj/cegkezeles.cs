@@ -63,7 +63,7 @@ namespace TollÚtdíj
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "",
+                Password = "mysql",
                 Database = "tollutdijadatbazis"
             };
 
@@ -113,7 +113,7 @@ namespace TollÚtdíj
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "",
+                Password = "mysql",
                 Database = "tollutdijadatbazis"
             };
             using (MySqlConnection kapcsolat = new MySqlConnection(build.ConnectionString))
@@ -124,7 +124,9 @@ namespace TollÚtdíj
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot, majd próbálja újra.", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    lblhibas.Text = "Adatbetöltési hiba.\r\nEllenőrizze az internetkapcsolatot, majd próbálja újra.";
+                    lblhibas.ForeColor = Color.Red;
+                    lblhibas.Visible = true;
                     return;
                 }
 
@@ -200,7 +202,9 @@ namespace TollÚtdíj
                 }
                 catch
                 {
-                    MessageBox.Show("Nem sikerült csatlakozni az adatbázishoz.");
+                    lblhibas.Text = "Nem sikerült csatlakozni az adatbázishoz.";
+                    lblhibas.ForeColor = Color.Red;
+                    lblhibas.Visible = true;
                     return;
                 }
 
@@ -219,11 +223,16 @@ namespace TollÚtdíj
                 try
                 {
                     parancs.ExecuteNonQuery();
-                    MessageBox.Show("Sikeres mentés!");
+                    lblhibas.Text = "Sikeres mentés!";
+                    lblhibas.ForeColor = Color.Green;
+                    
+                    lblhibas.Visible = true;
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Hiba mentés közben:\n" + ex.Message);
+                    lblhibas.Text = "Hiba mentés közben:\n" + ex.Message;
+                    lblhibas.ForeColor = Color.Red;
+                    lblhibas.Visible = true;
                 }
             }
         }

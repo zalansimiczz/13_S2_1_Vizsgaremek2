@@ -19,7 +19,7 @@ namespace TollÚtdíj
             InitializeComponent();
             this.role = role;
             this.cegId = cegId;
-            
+            lblhibas.Visible = false;
 
 
             if (role == "operator")

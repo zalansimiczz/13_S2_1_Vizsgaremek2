@@ -34,6 +34,7 @@ namespace TollÚtdíj
             cbbaktiv.Enabled = false;
             dtpletkezes.Enabled = false;
             txbjarmu.Enabled = false;
+            lblhibas.Visible = false;
         }
 
         private void trackerkezeles_Load(object sender, EventArgs e)
@@ -62,7 +63,7 @@ namespace TollÚtdíj
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "",
+                Password = "mysql",
                 Database = "tollutdijadatbazis"
             };
 
@@ -74,7 +75,9 @@ namespace TollÚtdíj
                 }
                 catch
                 {
-                    MessageBox.Show("Nem sikerült csatlakozni az adatbázishoz.");
+                    lblhibas.Text = "Nem sikerült csatlakozni az adatbázishoz.";
+                    lblhibas.ForeColor = Color.Red;
+                    lblhibas.Visible = true;
                     return;
                 }
 
@@ -117,7 +120,7 @@ ORDER BY j.rendszam;
             {
                 Server = "localhost",
                 UserID = "root",
-                Password = "",
+                Password = "mysql",
                 Database = "tollutdijadatbazis"
             };
 
