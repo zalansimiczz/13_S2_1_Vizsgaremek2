@@ -1,21 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-use OpenApi\Annotations as OA;
 use App\Http\Controllers\Controller; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-/**
- * @OA\Info(title="UtdijPro Partner Portal API", version="1.0.0")
- * @OA\Server(url="http://127.0.0.1:8000", description="Local")
- *
- * @OA\Get(
- *   path="/health",
- *   summary="Health check",
- *   tags={"System"},
- *   @OA\Response(response=200, description="OK")
- * )
- */
 
 class TollController extends Controller
 {

@@ -2,7 +2,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
-
+use App\Http\Controllers\Api\TollController;
 use App\Http\Controllers\PartnerAuthController;
 use App\Http\Controllers\PartnerDashboardController;
 use App\Http\Controllers\PartnerUserController;
@@ -137,5 +137,8 @@ Route::put('/settings/company', [PartnerSettingsController::class, 'updateCompan
 Route::post('/settings/apikeys', [PartnerSettingsController::class, 'storeApiKey'])->name('settings.apikeys.store');
 Route::post('/settings/apikeys/{id}/regen', [PartnerSettingsController::class, 'regenApiKey'])->name('settings.apikeys.regen');
 Route::delete('/settings/apikeys/{id}', [PartnerSettingsController::class, 'destroyApiKey'])->name('settings.apikeys.destroy');
+
+//kalkulator
+Route::post('/calculate', [TollController::class, 'calculate']);
     
 
