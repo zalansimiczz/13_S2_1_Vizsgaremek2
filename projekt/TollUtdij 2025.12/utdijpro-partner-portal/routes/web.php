@@ -2,7 +2,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
-use App\Http\Controllers\Api\TollController;
+
 use App\Http\Controllers\PartnerAuthController;
 use App\Http\Controllers\PartnerDashboardController;
 use App\Http\Controllers\PartnerUserController;
@@ -132,19 +132,10 @@ Route::post('/reports', [\App\Http\Controllers\PartnerReportController::class, '
     ->name('partner.reports.generate');
 
 //settings
-// vedett routeok
 Route::middleware(['auth.partner', 'verified.partner'])
     ->prefix('partner')
     ->group(function () {
 
-<<<<<<< Updated upstream
-Route::post('/settings/apikeys', [PartnerSettingsController::class, 'storeApiKey'])->name('settings.apikeys.store');
-Route::post('/settings/apikeys/{id}/regen', [PartnerSettingsController::class, 'regenApiKey'])->name('settings.apikeys.regen');
-Route::delete('/settings/apikeys/{id}', [PartnerSettingsController::class, 'destroyApiKey'])->name('settings.apikeys.destroy');
-
-//kalkulator
-Route::post('/calculate', [TollController::class, 'calculate']);
-=======
         Route::get('/dashboard', [PartnerDashboardController::class, 'index'])
             ->name('partner.dashboard');
 
@@ -172,6 +163,5 @@ Route::post('/calculate', [TollController::class, 'calculate']);
         Route::put('/settings/company', [PartnerSettingsController::class, 'updateCompany'])
             ->name('partner.settings.company.update');
     });
->>>>>>> Stashed changes
     
 

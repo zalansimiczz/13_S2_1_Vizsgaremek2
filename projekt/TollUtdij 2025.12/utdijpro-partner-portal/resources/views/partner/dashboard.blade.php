@@ -718,7 +718,7 @@
             </div>
         </div>
 
-        <!--beallitasok-->
+         <!--beallitasok-->
 <div id="settingsContent" class="content-section">
     <div class="mb-6">
         <h2 class="font-poppins text-2xl font-semibold text-white mb-2">Beállítások</h2>
