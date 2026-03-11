@@ -3,31 +3,40 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Ceg;
 
 class PartnerSettingsController extends Controller
 {
-    public function updateProfile(Request $request) {
-        // TODO validate + mentés
-        return back()->with('success', 'Profil mentve.');
-    }
+    public function updateCompany(Request $request)
+    {
+        $cegId = session('ceg_id');
 
-    public function updateCompany(Request $request) {
-        // TODO validate + mentés
-        return back()->with('success', 'Cégadatok mentve.');
-    }
+        if (!$cegId) {
+            return back()->withErrors([
+                'company' => 'A bejelentkezett felhasználóhoz nincs cég rendelve.'
+            ]);
+        }
 
-    public function storeApiKey(Request $request) {
-        // TODO create key
-        return back()->with('success', 'API kulcs létrehozva.');
-    }
+        $ceg = Ceg::find($cegId);
 
-    public function regenApiKey($id) {
-        // TODO regenerate
-        return back()->with('success', 'API kulcs újragenerálva.');
-    }
+        if (!$ceg) {
+            return back()->withErrors([
+                'company' => 'A társított cég nem található.'
+            ]);
+        }
 
-    public function destroyApiKey($id) {
-        // TODO delete
-        return back()->with('success', 'API kulcs törölve.');
+        $validated = $request->validate([
+            'nev' => 'nullable|string|max:255',
+            'adoszam' => 'nullable|string|max:50',
+            'cim' => 'nullable|string|max:255',
+        ]);
+
+        $ceg->update([
+            'nev' => filled($request->nev) ? $request->nev : $ceg->nev,
+            'adoszam' => filled($request->adoszam) ? $request->adoszam : $ceg->adoszam,
+            'cim' => filled($request->cim) ? $request->cim : $ceg->cim,
+        ]);
+
+        return back()->with('success', 'A cégadatok sikeresen frissítve lettek.');
     }
 }

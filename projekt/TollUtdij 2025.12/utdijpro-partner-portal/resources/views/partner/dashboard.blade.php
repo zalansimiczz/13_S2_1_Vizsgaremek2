@@ -293,7 +293,6 @@
                     Új alkalmazott hozzáadása
                 </h3>
 
-                {{-- Itt most az EREDETI PHP-s feldolgozó marad, ahogy a régi rendszerben volt --}}
                 <form method="POST" action="{{ route('partner.users.store') }}" class="grid grid-cols-1 md:grid-cols-2 gap-6">
     @csrf
 
@@ -719,13 +718,108 @@
             </div>
         </div>
 
-        <!--beallitasok(meg nincsen keszen)-->
-        <div id="settingsContent" class="content-section">
-            <h2 class="font-poppins text-xl font-semibold text-white mb-6">Beállítások</h2>
-            <div class="glassmorphism-element p-6 rounded-xl">
-                <p class="text-muted">Felhasználói profil, cégadatok, API kulcsok kezelése és egyéb platformbeállítások. (Fejlesztés alatt)</p>
+        <!--beallitasok-->
+<div id="settingsContent" class="content-section">
+    <div class="mb-6">
+        <h2 class="font-poppins text-2xl font-semibold text-white mb-2">Beállítások</h2>
+        <p class="text-slate-400 text-sm">A partnercég adatainak kezelése.</p>
+    </div>
+
+    @if(session('success'))
+        <div class="mb-4 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-emerald-300">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if($errors->any())
+        <div class="mb-4 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-red-300">
+            <ul class="space-y-1 text-sm">
+                @foreach($errors->all() as $error)
+                    <li>• {{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <div class="glassmorphism-element p-6 md:p-8 rounded-2xl border border-cyan-500/10">
+        <div class="flex items-center justify-between mb-8">
+            <div>
+                <h3 class="font-poppins text-xl font-semibold text-white">Cégadatok</h3>
+                <p class="text-sm text-slate-400 mt-1">
+                    A bejelentkezett partnercég adatainak módosítása.
+                </p>
+            </div>
+
+            <div class="hidden md:flex items-center gap-2 px-3 py-2 rounded-lg bg-cyan-500/10 border border-cyan-400/20 text-cyan-300 text-sm">
+                <i class="fas fa-building"></i>
+                <span>Cégprofil</span>
             </div>
         </div>
+
+        <form action="{{ route('partner.settings.company.update') }}" method="POST" class="space-y-8">
+            @csrf
+            @method('PUT')
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="nev" class="block mb-2 text-sm font-medium text-slate-300">
+                        Cégnév
+                    </label>
+                    <input
+                        type="text"
+                        id="nev"
+                        name="nev"
+                        value="{{ old('nev', auth()->user()->ceg->nev ?? '') }}"
+                        placeholder="Pl. ÚtdíjPro Logisztika Kft."
+                        class="w-full rounded-xl border border-slate-700 bg-slate-900/70 px-4 py-3 text-white placeholder-slate-500 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/20"
+                    >
+                </div>
+
+                <div>
+                    <label for="adoszam" class="block mb-2 text-sm font-medium text-slate-300">
+                        Adószám
+                    </label>
+                    <input
+                        type="text"
+                        id="adoszam"
+                        name="adoszam"
+                        value="{{ old('adoszam', auth()->user()->ceg->adoszam ?? '') }}"
+                        placeholder="Pl. 12345678-1-26"
+                        class="w-full rounded-xl border border-slate-700 bg-slate-900/70 px-4 py-3 text-white placeholder-slate-500 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/20"
+                    >
+                </div>
+            </div>
+
+            <div>
+                <label for="cim" class="block mb-2 text-sm font-medium text-slate-300">
+                    Cím / székhely
+                </label>
+                <input
+                    type="text"
+                    id="cim"
+                    name="cim"
+                    value="{{ old('cim', auth()->user()->ceg->cim ?? '') }}"
+                    placeholder="Pl. 6724 Szeged, Példa utca 12."
+                    class="w-full rounded-xl border border-slate-700 bg-slate-900/70 px-4 py-3 text-white placeholder-slate-500 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/20"
+                >
+            </div>
+
+            <div class="border-t border-slate-700/60 pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div class="text-sm text-slate-400">
+                    Csak a bejelentkezett partnerhez tartozó cég adatai módosíthatók.
+                </div>
+
+                <button
+                    type="submit"
+                    class="inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-cyan-500 to-indigo-500 hover:opacity-90 transition shadow-lg shadow-cyan-500/10"
+                >
+                    <i class="fas fa-save mr-2"></i>
+                    Cégadatok mentése
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
     </main>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
