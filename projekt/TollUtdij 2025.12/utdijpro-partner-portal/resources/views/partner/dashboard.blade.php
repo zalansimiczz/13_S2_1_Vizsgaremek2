@@ -1029,7 +1029,7 @@
                 try {
                     const csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-const response = await fetch('/calculate', {
+    const response = await fetch('/calculate', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',

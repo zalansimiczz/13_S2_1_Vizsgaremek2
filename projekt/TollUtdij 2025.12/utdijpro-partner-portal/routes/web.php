@@ -2,7 +2,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
-
+use App\Http\Controllers\TollController;
 use App\Http\Controllers\PartnerAuthController;
 use App\Http\Controllers\PartnerDashboardController;
 use App\Http\Controllers\PartnerUserController;
@@ -163,5 +163,11 @@ Route::middleware(['auth.partner', 'verified.partner'])
         Route::put('/settings/company', [PartnerSettingsController::class, 'updateCompany'])
             ->name('partner.settings.company.update');
     });
-    
 
+    //kalkulator
+    Route::post('/api/calculate', [TollController::class, 'calculate']);
+    Route::post('/calculate', [TollController::class, 'calculate'])->name('partner.calculate');
+    //route védelem
+    Route::middleware(['auth.partner'])->group(function () {
+    Route::post('/calculate', [TollController::class, 'calculate']);
+});
