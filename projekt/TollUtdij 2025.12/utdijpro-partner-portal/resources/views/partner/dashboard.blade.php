@@ -710,13 +710,56 @@
     </div>
 </div>
 
-        <!--riportok (MEG NINCS KESZ)-->
-        <div id="reportsContent" class="content-section">
-            <h2 class="font-poppins text-xl font-semibold text-white mb-6">Riportok</h2>
-            <div class="glassmorphism-element p-6 rounded-xl">
-                <p class="text-muted">Részletes, személyre szabható riportok a kalkulációkról, költségekről és egyéb fontos adatokról. (Fejlesztés alatt)</p>
-            </div>
+       <!-- riportok -->
+<div id="reportsContent" class="content-section hidden">
+    <h2 class="font-poppins text-xl font-semibold text-white mb-6">Riportok</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <div class="glassmorphism-element p-6 rounded-xl">
+            <p class="text-gray-400">Sofőrök száma</p>
+            <h3 class="text-2xl text-white font-bold mt-2">
+                {{ collect($drivers ?? [])->count() }}
+            </h3>
         </div>
+
+        <div class="glassmorphism-element p-6 rounded-xl">
+            <p class="text-gray-400">Aktív sofőrök</p>
+            <h3 class="text-2xl text-green-400 font-bold mt-2">
+                {{ collect($drivers ?? [])->where('aktiv', 1)->count() }}
+            </h3>
+        </div>
+
+        <div class="glassmorphism-element p-6 rounded-xl">
+            <p class="text-gray-400">Járművek száma</p>
+            <h3 class="text-2xl text-white font-bold mt-2">
+                {{ collect($trucks ?? [])->count() }}
+            </h3>
+        </div>
+
+        <div class="glassmorphism-element p-6 rounded-xl">
+            <p class="text-gray-400">Aktív járművek</p>
+            <h3 class="text-2xl text-green-400 font-bold mt-2">
+                {{ collect($trucks ?? [])->where('aktiv', 1)->count() }}
+            </h3>
+        </div>
+
+        <div class="glassmorphism-element p-6 rounded-xl">
+            <p class="text-gray-400">Alkalmazottak száma</p>
+            <h3 class="text-2xl text-white font-bold mt-2">
+                {{ collect($employees ?? [])->count() }}
+            </h3>
+        </div>
+
+        <div class="glassmorphism-element p-6 rounded-xl">
+            <p class="text-gray-400">Aktív alkalmazottak</p>
+            <h3 class="text-2xl text-green-400 font-bold mt-2">
+                {{ collect($employees ?? [])->where('aktiv', 1)->count() }}
+            </h3>
+        </div>
+
+    </div>
+</div>
 
          <!--beallitasok-->
 <div id="settingsContent" class="content-section">
@@ -1040,7 +1083,7 @@ const response = await fetch('/calculate', {
                 } catch (err) {
                     console.error("Kalkulációs hiba a portálon:", err);
                     portalErrorMessages.textContent = err.message || "Ismeretlen hiba történt a kalkuláció során.";
-                    portalErrorMessages.sclassList.remove('hidden');
+                    portalErrorMessages.classList.remove('hidden');
                 } finally {
                     portalCalculateBtn.innerHTML = '<i class="fas fa-cogs mr-2"></i>Kalkuláció';
                     portalCalculateBtn.disabled = false;
@@ -1224,6 +1267,56 @@ modal.classList.replace('hidden', 'flex');
             modal.classList.replace('flex', 'hidden');
         });
     });
+});
+</script>
+<script>
+    //riportok
+document.addEventListener("DOMContentLoaded", function () {
+    const links = document.querySelectorAll(".sidebar-link");
+    const sections = document.querySelectorAll(".content-section");
+
+    links.forEach(link => {
+        link.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            const targetId = this.getAttribute("href").replace("#", "");
+
+            sections.forEach(section => section.classList.add("hidden"));
+            document.getElementById(targetId)?.classList.remove("hidden");
+
+            links.forEach(l => l.classList.remove("active"));
+            this.classList.add("active");
+        });
+    });
+});
+</script>
+<script>
+    //riportok
+document.addEventListener("DOMContentLoaded", function () {
+    const generateBtn = document.getElementById("generateReportBtn");
+    const tableBody = document.getElementById("reportTableBody");
+    const emptyState = document.getElementById("reportsEmptyState");
+
+    if (generateBtn) {
+        generateBtn.addEventListener("click", function () {
+            tableBody.innerHTML = `
+                <tr class="border-b border-white/10 hover:bg-white/5 transition">
+                    <td class="py-3 pr-4">Generált riport</td>
+                    <td class="py-3 pr-4">${document.getElementById("reportType").value}</td>
+                    <td class="py-3 pr-4">${document.getElementById("reportFrom").value} - ${document.getElementById("reportTo").value}</td>
+                    <td class="py-3 pr-4">
+                        <span class="px-2 py-1 rounded-md text-sm bg-green-600/25 text-green-200">Elkészült</span>
+                    </td>
+                    <td class="py-3 text-right space-x-2">
+                        <button type="button" class="text-sky-400 hover:text-sky-300"><i class="fas fa-eye"></i></button>
+                        <button type="button" class="text-amber-400 hover:text-amber-300"><i class="fas fa-download"></i></button>
+                        <button type="button" class="text-red-400 hover:text-red-300"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+            `;
+            emptyState.classList.add("hidden");
+        });
+    }
 });
 </script>
 </body>
