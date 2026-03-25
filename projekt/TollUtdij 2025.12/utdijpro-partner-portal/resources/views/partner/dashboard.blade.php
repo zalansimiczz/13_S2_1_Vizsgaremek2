@@ -457,7 +457,7 @@
             <form id="driverForm" method="POST" action="{{ route('partner.soforok.store') }}"
                   class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 @csrf
-                <div id="methodField"></div>
+                <div id="driverMethodField"></div>
 
                 <div>
                     <label class="block text-gray-300 mb-1">Aktív</label>
@@ -610,7 +610,7 @@
             <form id="truckForm" method="POST" action="{{ route('partner.jarmuvek.store') }}"
                   class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 @csrf
-                <div id="methodField"></div>
+                <div id="truckMethodField"></div>
 
                 <div>
                     <label class="block text-gray-300 mb-1">Aktív</label>
@@ -687,12 +687,14 @@
                            class="w-full bg-slate-800 border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20">
                 </div>
 
-                <label class="block text-gray-300 mb-1">Pótkocsi képes?</label>
+                                <div>
+                    <label class="block text-gray-300 mb-1">Pótkocsi képes?</label>
                     <select id="truckPotkocsikepes" name="potkocsi_kepes" required
                             class="w-full bg-slate-800 border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20">
                         <option value="1">Igen</option>
                         <option value="0">Nem</option>
                     </select>
+                </div>
 
                 <div class="md:col-span-2 flex justify-end gap-2 pt-2">
                     <button type="button" id="cancelTruckModal"
@@ -866,444 +868,377 @@
     </main>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script>
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const sidebar = document.getElementById('sidebar');
-        const mainContentArea = document.getElementById('mainContentArea');
-        const pageTitleContainer = document.getElementById('pageTitleContainer');
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const sidebar = document.getElementById('sidebar');
+    const mainContentArea = document.getElementById('mainContentArea');
+    const pageTitleContainer = document.getElementById('pageTitleContainer');
 
-        if (mobileMenuBtn && sidebar) {
-            mobileMenuBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                sidebar.classList.toggle('-translate-x-full');
-            });
-            document.addEventListener('click', (e) => {
-                if (window.innerWidth < 1024 && !sidebar.contains(e.target) && !mobileMenuBtn.contains(e.target) && !sidebar.classList.contains('-translate-x-full')) {
-                    sidebar.classList.add('-translate-x-full');
-                }
-            });
-        }
+    const sidebarLinks = document.querySelectorAll('.sidebar-link');
+    const contentSections = document.querySelectorAll('.content-section');
+    const sidebarLinkTriggers = document.querySelectorAll('.sidebar-link-trigger');
 
-        const sidebarLinks = document.querySelectorAll('.sidebar-link');
-        const contentSections = document.querySelectorAll('.content-section');
-        const sidebarLinkTriggers = document.querySelectorAll('.sidebar-link-trigger');
+    const portalCalculateBtn = document.getElementById('portalCalculateBtn');
+    const portalResultsSection = document.getElementById('portalResultsSection');
+    const portalErrorMessages = document.getElementById('portalErrorMessages');
+    const portalTollResult = document.getElementById('portalTollResult');
+    const portalDistanceResult = document.getElementById('portalDistanceResult');
+    const portalMapContainer = document.getElementById('portalMapContainer');
+    const portalExternalLinkContainer = document.getElementById('portalExternalLinkContainer');
+    const waypointsContainer = document.getElementById('waypointsContainer');
+    const addWaypointBtn = document.getElementById('addWaypointBtn');
+    const calculatorLink = document.getElementById('openCalculator');
 
-        function switchContent(targetId) {
-            const targetBaseId = targetId.startsWith('#') ? targetId.substring(1) : targetId;
-            
-            contentSections.forEach(section => {
-                if (section.id === targetBaseId) {
-                    section.classList.add('active');
-                    if (pageTitleContainer && section.querySelector('h2')) {
-                        pageTitleContainer.innerHTML = `<h1 class="font-poppins text-2xl md:text-3xl font-bold text-white">${section.querySelector('h2').textContent}</h1>`;
-                    } else if (pageTitleContainer && targetBaseId === 'dashboard-main-content') {
-                        pageTitleContainer.innerHTML = `<h1 class="font-poppins text-2xl md:text-3xl font-bold text-white">Irányítópult</h1>`;
-                    }
-                } else {
-                    section.classList.remove('active');
-                }
-            });
+    let waypointCounter = 0;
+    let map = null;
+    let routePolyline = null;
+    let markers = [];
 
-            sidebarLinks.forEach(l => {
-                l.classList.remove('active');
-                if (l.getAttribute('href') === '#' + targetBaseId) {
-                    l.classList.add('active');
-                }
-            });
+    // Mobil menü
+    if (mobileMenuBtn && sidebar) {
+        mobileMenuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            sidebar.classList.toggle('-translate-x-full');
+        });
 
-            if (!sidebar.classList.contains('-translate-x-full') && window.innerWidth < 1024) {
+        document.addEventListener('click', (e) => {
+            if (
+                window.innerWidth < 1024 &&
+                !sidebar.contains(e.target) &&
+                !mobileMenuBtn.contains(e.target) &&
+                !sidebar.classList.contains('-translate-x-full')
+            ) {
                 sidebar.classList.add('-translate-x-full');
             }
-            if (mainContentArea) mainContentArea.scrollTop = 0;
-        }
-        
-        sidebarLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                const targetId = this.getAttribute('href');
-                if (targetId && targetId.startsWith('#') && targetId.length > 1) {
-                    e.preventDefault();
-                    switchContent(targetId);
-                } else if (targetId === 'logout.php') {
-                    return true;
-                } else {
-                    e.preventDefault();
-                }
-            });
         });
+    }
 
-        sidebarLinkTriggers.forEach(link => {
-            link.addEventListener('click', function(e) {
-                const targetId = this.getAttribute('href');
-                if (targetId && targetId.startsWith('#') && targetId.length > 1) {
-                    e.preventDefault();
-                    switchContent(targetId);
+    // Tartalom váltás
+    function switchContent(targetId) {
+        const targetBaseId = targetId.startsWith('#') ? targetId.substring(1) : targetId;
+
+        contentSections.forEach(section => {
+            if (section.id === targetBaseId) {
+                section.classList.add('active');
+
+                if (pageTitleContainer && section.querySelector('h2')) {
+                    pageTitleContainer.innerHTML =
+                        `<h1 class="font-poppins text-2xl md:text-3xl font-bold text-white">${section.querySelector('h2').textContent}</h1>`;
+                } else if (pageTitleContainer && targetBaseId === 'dashboard-main-content') {
+                    pageTitleContainer.innerHTML =
+                        `<h1 class="font-poppins text-2xl md:text-3xl font-bold text-white">Irányítópult</h1>`;
                 }
-            });
-        });
-
-        //utdij kalkulator js (eredeti php-bol)
-        const portalCalculateBtn = document.getElementById('portalCalculateBtn');
-        const portalResultsSection = document.getElementById('portalResultsSection');
-        const portalErrorMessages = document.getElementById('portalErrorMessages');
-        const portalTollResult = document.getElementById('portalTollResult');
-        const portalDistanceResult = document.getElementById('portalDistanceResult');
-        const portalMapContainer = document.getElementById('portalMapContainer');
-        const portalExternalLinkContainer = document.getElementById('portalExternalLinkContainer');
-        const waypointsContainer = document.getElementById('waypointsContainer');
-        const addWaypointBtn = document.getElementById('addWaypointBtn');
-        let waypointCounter = 0; 
-
-        let map = null;
-        let routePolyline = null;
-        let markers = [];
-
-        function initMap() {
-            if (!map && portalMapContainer) {
-                map = L.map(portalMapContainer).setView([47.1625, 19.5033], 7);
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '&copy; OpenStreetMap contributors'
-                }).addTo(map);
+            } else {
+                section.classList.remove('active');
             }
-        }
-        
-        const calculatorLink = document.getElementById('openCalculator');
-        if (calculatorLink) {
-            calculatorLink.addEventListener('click', () => {
-                setTimeout(initMap, 0);
-            });
+        });
+
+        sidebarLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + targetBaseId) {
+                link.classList.add('active');
+            }
+        });
+
+        if (sidebar && !sidebar.classList.contains('-translate-x-full') && window.innerWidth < 1024) {
+            sidebar.classList.add('-translate-x-full');
         }
 
-        function clearMapAndResults() {
-            if (routePolyline) { map.removeLayer(routePolyline); routePolyline = null; }
+        if (mainContentArea) {
+            mainContentArea.scrollTop = 0;
+        }
+    }
+
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href');
+
+            if (targetId && targetId.startsWith('#') && targetId.length > 1) {
+                e.preventDefault();
+                switchContent(targetId);
+            }
+        });
+    });
+
+    sidebarLinkTriggers.forEach(link => {
+        link.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href');
+
+            if (targetId && targetId.startsWith('#') && targetId.length > 1) {
+                e.preventDefault();
+                switchContent(targetId);
+            }
+        });
+    });
+
+    // Kalkulátor térkép
+    function initMap() {
+        if (!map && portalMapContainer) {
+            map = L.map(portalMapContainer).setView([47.1625, 19.5033], 7);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(map);
+        }
+    }
+
+    function clearMapAndResults() {
+        if (routePolyline && map) {
+            map.removeLayer(routePolyline);
+            routePolyline = null;
+        }
+
+        if (map) {
             markers.forEach(marker => map.removeLayer(marker));
-            markers = [];
-            portalTollResult.textContent = "N/A";
-            portalDistanceResult.textContent = "N/A";
-            portalExternalLinkContainer.innerHTML = '';
-            portalResultsSection.classList.add('hidden');
+        }
+
+        markers = [];
+
+        if (portalTollResult) portalTollResult.textContent = 'N/A';
+        if (portalDistanceResult) portalDistanceResult.textContent = 'N/A';
+        if (portalExternalLinkContainer) portalExternalLinkContainer.innerHTML = '';
+
+        if (portalErrorMessages) {
+            portalErrorMessages.textContent = '';
             portalErrorMessages.classList.add('hidden');
         }
-        
-        function addWaypointInput() {
-            waypointCounter++;
-            const waypointDiv = document.createElement('div');
-            waypointDiv.classList.add('flex', 'items-center', 'space-x-2', 'mb-2', 'waypoint-entry', 'mt-2');
-            waypointDiv.innerHTML = `
-                <input type="text" placeholder="Köztes megálló ${waypointCounter}" class="flex-grow calculator-input waypoint-address">
-                <button class="remove-waypoint-btn text-red-500 hover:text-red-400 p-2 rounded-md hover:bg-red-500/10" title="Megálló törlése">
-                    <i class="fas fa-trash-alt"></i>
-                </button>
-            `;
-            waypointsContainer.appendChild(waypointDiv);
-            waypointDiv.querySelector('.remove-waypoint-btn').addEventListener('click', function() {
-                this.closest('.waypoint-entry').remove();
-            });
+
+        if (portalResultsSection) {
+            portalResultsSection.classList.add('hidden');
         }
+    }
 
-        if (addWaypointBtn) {
-            addWaypointBtn.addEventListener('click', addWaypointInput);
-        }
+    function addWaypointInput() {
+        if (!waypointsContainer) return;
 
-        if (portalCalculateBtn) {
-            portalCalculateBtn.addEventListener('click', async () => {
-                const from = document.getElementById('from-loc').value;
-                const to = document.getElementById('to-loc').value;
-                const truckType = document.getElementById('truck-type-select').value;
-                
-                const waypointInputs = document.querySelectorAll('#waypointsContainer .waypoint-address');
-                const waypoints = Array.from(waypointInputs)
-                                     .map(input => input.value.trim())
-                                     .filter(address => address !== '')
-                                     .map(address => ({ address }));
+        waypointCounter++;
 
-                if (!from || !to || !truckType) {
-                    portalErrorMessages.textContent = 'Kérjük, töltse ki az indulási hely, célhely és járműtípus mezőket!';
-                    portalErrorMessages.classList.remove('hidden');
-                    return;
+        const waypointDiv = document.createElement('div');
+        waypointDiv.className = 'flex items-center space-x-2 mb-2 waypoint-entry mt-2';
+        waypointDiv.innerHTML = `
+            <input type="text" placeholder="Köztes megálló ${waypointCounter}" class="flex-grow calculator-input waypoint-address">
+            <button type="button" class="remove-waypoint-btn text-red-500 hover:text-red-400 p-2 rounded-md hover:bg-red-500/10" title="Megálló törlése">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+        `;
+
+        waypointsContainer.appendChild(waypointDiv);
+
+        const removeBtn = waypointDiv.querySelector('.remove-waypoint-btn');
+        removeBtn?.addEventListener('click', () => waypointDiv.remove());
+    }
+
+    if (addWaypointBtn) {
+        addWaypointBtn.addEventListener('click', addWaypointInput);
+    }
+
+    if (calculatorLink) {
+        calculatorLink.addEventListener('click', () => {
+            setTimeout(() => {
+                initMap();
+                if (map) {
+                    map.invalidateSize();
+                }
+            }, 150);
+        });
+    }
+
+    if (portalCalculateBtn) {
+        portalCalculateBtn.addEventListener('click', async () => {
+            const from = document.getElementById('from-loc')?.value.trim() || '';
+            const to = document.getElementById('to-loc')?.value.trim() || '';
+            const truckType = document.getElementById('truck-type-select')?.value || '';
+
+            const waypointInputs = document.querySelectorAll('#waypointsContainer .waypoint-address');
+            const waypoints = Array.from(waypointInputs)
+                .map(input => input.value.trim())
+                .filter(address => address !== '')
+                .map(address => ({ address }));
+
+            if (!from || !to || !truckType) {
+                portalErrorMessages.textContent = 'Kérjük, töltse ki az indulási hely, célhely és járműtípus mezőket.';
+                portalErrorMessages.classList.remove('hidden');
+                return;
+            }
+
+            initMap();
+            clearMapAndResults();
+
+            portalCalculateBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Kalkuláció...';
+            portalCalculateBtn.disabled = true;
+
+            try {
+                const csrf = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+
+                const response = await fetch('/calculate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': csrf,
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        from,
+                        to,
+                        vehicleType: truckType,
+                        waypoints
+                    })
+                });
+
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(result.details?.message || result.error || `Hiba a szervertől: ${response.status}`);
                 }
 
-                clearMapAndResults();
-                portalCalculateBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Kalkuláció...';
-                portalCalculateBtn.disabled = true;
+                portalTollResult.textContent = `${Number(result.costHUF).toLocaleString('hu-HU')} ${result.currency}`;
+                portalDistanceResult.textContent = `${Number(result.distanceKm).toLocaleString('hu-HU')} km`;
 
-                try {
-                    const csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
-    const response = await fetch('/calculate', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-        'X-CSRF-TOKEN': csrf,
-        'Accept': 'application/json'
-    },
-    body: JSON.stringify({ from, to, vehicleType: truckType, waypoints })
-});
-
-
-                    const result = await response.json();
-
-                    if (!response.ok) {
-                        throw new Error(result.details?.serviceError || result.details?.message || result.error || `Hiba a szervertől: ${response.status}`);
-                    }
-
-                    portalTollResult.textContent = `${result.costHUF.toLocaleString('hu-HU')} ${result.currency}`;
-                    portalDistanceResult.textContent = `${result.distanceKm.toLocaleString('hu-HU')} km`;
-                    
-                    if (result.routeLink) {
-                        const link = document.createElement('a');
-                        link.href = result.routeLink;
-                        link.target = '_blank';
-                        link.rel = 'noopener noreferrer';
-                        link.classList.add('calculator-button-secondary', 'inline-flex', 'items-center', 'py-2', 'px-4', 'rounded-md', 'text-sm', 'font-medium');
-                        link.innerHTML = '<i class="fas fa-external-link-alt mr-2"></i>Útvonal megtekintése új ablakban';
-                        portalExternalLinkContainer.appendChild(link);
-                    }
-
-                    if (map) {
-                        if (result.locations && result.locations.length > 0) {
-                            const boundsArray = [];
-                            result.locations.forEach((loc) => {
-                                const marker = L.marker([loc.lat, loc.lng]).addTo(map)
-                                    .bindPopup(`<b>${loc.name}</b><br>${loc.displayName}`);
-                                markers.push(marker);
-                                boundsArray.push([loc.lat, loc.lng]);
-                            });
-                            if (boundsArray.length > 0) {
-                                map.fitBounds(boundsArray, {padding: [30,30], maxZoom: 14});
-                            }
-                        }
-                        
-                        if (result.routeCoords && result.routeCoords.length > 0) {
-                            routePolyline = L.polyline(result.routeCoords, { color: '#0ea5e9', weight: 6, opacity: 0.8 }).addTo(map);
-                            map.fitBounds(routePolyline.getBounds(), {padding: [30,30]});
-                        }
-                    }
-                    portalResultsSection.classList.remove('hidden');
-
-                } catch (err) {
-                    console.error("Kalkulációs hiba a portálon:", err);
-                    portalErrorMessages.textContent = err.message || "Ismeretlen hiba történt a kalkuláció során.";
-                    portalErrorMessages.classList.remove('hidden');
-                } finally {
-                    portalCalculateBtn.innerHTML = '<i class="fas fa-cogs mr-2"></i>Kalkuláció';
-                    portalCalculateBtn.disabled = false;
+                if (result.routeLink && portalExternalLinkContainer) {
+                    const link = document.createElement('a');
+                    link.href = result.routeLink;
+                    link.target = '_blank';
+                    link.rel = 'noopener noreferrer';
+                    link.className = 'calculator-button-secondary inline-flex items-center py-2 px-4 rounded-md text-sm font-medium';
+                    link.innerHTML = '<i class="fas fa-external-link-alt mr-2"></i>Útvonal megtekintése új ablakban';
+                    portalExternalLinkContainer.appendChild(link);
                 }
-            });
+
+                if (map && Array.isArray(result.locations)) {
+                    const boundsArray = [];
+
+                    result.locations.forEach((loc) => {
+                        const marker = L.marker([loc.lat, loc.lng])
+                            .addTo(map)
+                            .bindPopup(`<b>${loc.name}</b><br>${loc.displayName}`);
+                        markers.push(marker);
+                        boundsArray.push([loc.lat, loc.lng]);
+                    });
+
+                    if (Array.isArray(result.routeCoords) && result.routeCoords.length > 0) {
+                        routePolyline = L.polyline(result.routeCoords, {
+                            color: '#0ea5e9',
+                            weight: 6,
+                            opacity: 0.85
+                        }).addTo(map);
+
+                        map.fitBounds(routePolyline.getBounds(), { padding: [30, 30] });
+                    } else if (boundsArray.length > 0) {
+                        map.fitBounds(boundsArray, { padding: [30, 30], maxZoom: 12 });
+                    }
+
+                    setTimeout(() => {
+                        if (map) map.invalidateSize();
+                    }, 200);
+                }
+
+                portalResultsSection.classList.remove('hidden');
+            } catch (err) {
+                console.error('Kalkulációs hiba a portálon:', err);
+                portalErrorMessages.textContent = err.message || 'Ismeretlen hiba történt a kalkuláció során.';
+                portalErrorMessages.classList.remove('hidden');
+            } finally {
+                portalCalculateBtn.innerHTML = '<i class="fas fa-cogs mr-2"></i>Kalkuláció';
+                portalCalculateBtn.disabled = false;
+            }
+        });
+    }
+
+    // URL param alapján tab nyitás
+    const params = new URLSearchParams(window.location.search);
+    const tab = params.get('tab');
+
+    if (tab) {
+        switchContent('#' + tab);
+    } else if (sidebarLinks.length > 0) {
+        switchContent(sidebarLinks[0].getAttribute('href'));
+    }
+
+    // ===== SOFŐR MODAL =====
+    const driverModal = document.getElementById('driverModal');
+    const addDriverBtn = document.getElementById('addDriverBtn');
+    const closeDriverModal = document.getElementById('closeDriverModal');
+    const cancelDriverModal = document.getElementById('cancelDriverModal');
+    const driverModalBackdrop = document.getElementById('driverModalBackdrop');
+    const driverForm = document.getElementById('driverForm');
+
+    function openDriverModal() {
+        if (!driverModal) return;
+        driverModal.classList.remove('hidden');
+        driverModal.classList.add('flex');
+    }
+
+    function closeDriverModalFn() {
+        if (!driverModal) return;
+        driverModal.classList.add('hidden');
+        driverModal.classList.remove('flex');
+    }
+
+    addDriverBtn?.addEventListener('click', () => {
+        if (driverForm) driverForm.reset();
+        document.getElementById('driverModalTitle').innerText = 'Új sofőr hozzáadása';
+        driverForm.action = "{{ route('partner.soforok.store') }}";
+        document.getElementById('driverMethodField').innerHTML = '';
+        openDriverModal();
+    });
+
+    closeDriverModal?.addEventListener('click', closeDriverModalFn);
+    cancelDriverModal?.addEventListener('click', closeDriverModalFn);
+    driverModalBackdrop?.addEventListener('click', closeDriverModalFn);
+
+    // ===== JÁRMŰ MODAL =====
+    const truckModal = document.getElementById('truckModal');
+    const addTruckBtn = document.getElementById('addTruckBtn');
+    const closeTruckModal = document.getElementById('closeTruckModal');
+    const cancelTruckModal = document.getElementById('cancelTruckModal');
+    const truckModalBackdrop = document.getElementById('truckModalBackdrop');
+    const truckForm = document.getElementById('truckForm');
+
+    function openTruckModal() {
+        if (!truckModal) return;
+        truckModal.classList.remove('hidden');
+        truckModal.classList.add('flex');
+    }
+
+    function closeTruckModalFn() {
+        if (!truckModal) return;
+        truckModal.classList.add('hidden');
+        truckModal.classList.remove('flex');
+    }
+
+    addTruckBtn?.addEventListener('click', () => {
+        if (truckForm) truckForm.reset();
+        document.getElementById('truckModalTitle').innerText = 'Új jármű hozzáadása';
+        truckForm.action = "{{ route('partner.jarmuvek.store') }}";
+        document.getElementById('truckMethodField').innerHTML = '';
+        openTruckModal();
+    });
+
+    closeTruckModal?.addEventListener('click', closeTruckModalFn);
+    cancelTruckModal?.addEventListener('click', closeTruckModalFn);
+    truckModalBackdrop?.addEventListener('click', closeTruckModalFn);
+
+    // ESC bezárás
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeDriverModalFn();
+            closeTruckModalFn();
         }
-
-//base nezet a kalkulalas utan
-const params = new URLSearchParams(window.location.search);
-const tab = params.get('tab');
-if (tab) {
-    switchContent('#' + tab);
-} else if (sidebarLinks.length > 0) {
-    switchContent(sidebarLinks[0].getAttribute('href'));
-}
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const modal = document.getElementById('driverModal');
-  const openBtn = document.getElementById('addDriverBtn');
-  const closeBtn = document.getElementById('closeDriverModal');
-  const cancelBtn = document.getElementById('cancelDriverModal');
-  const backdrop = document.getElementById('driverModalBackdrop');
-
-  if (!modal || !openBtn) {
-    console.error("Driver modal elemek hiányoznak!", { modal, openBtn });
-    return;
-  }
-
-  function openModal() {
-    modal.classList.remove('hidden');
-    modal.classList.add('flex');
-  }
-
-  function closeModal() {
-    modal.classList.add('hidden');
-    modal.classList.remove('flex');
-  }
-
-  openBtn.addEventListener('click', () => {
-    console.log("Új sofőr gomb kattintva");
-    openModal();
-  });
-
-  closeBtn?.addEventListener('click', closeModal);
-  cancelBtn?.addEventListener('click', closeModal);
-  backdrop?.addEventListener('click', closeModal);
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeModal();
-  });
-});
-
-    //modal megnyitasa az adatok szerkesztesehez(soforok menuponthoz)
-    function editDriver(driver) {
-    const modal = document.getElementById('driverModal');
-    const form = document.getElementById('driverForm');
-    const title = document.getElementById('driverModalTitle');
-    const methodField = document.getElementById('methodField');
-
-    title.innerText = "Sofőr adatainak módosítása";
-    form.action = `/partner/soforok/${driver.id}/update`;
-    methodField.innerHTML = ''; 
-
-    //adatok betoltese
-    document.getElementById('driverName').value = driver.nev;
-    document.getElementById('driverPhone').value = driver.telefonszam;
-    document.getElementById('driverPersonalId').value = driver.szemelyi_azonosito || '';
-    document.getElementById('driverBirthDate').value = driver.szuletesi_datum || '';
-    document.getElementById('driverAddress').value = driver.cim || '';
-    document.getElementById('driverTax').value = driver.adoszam || '';
-    document.getElementById('driverActive').value = driver.aktiv;
-
-    modal.classList.replace('hidden', 'flex');
-}
-
-    //esemenykezelok
-    document.addEventListener('DOMContentLoaded', () => {
-    const addBtn = document.getElementById('addDriverBtn');
-    const modal = document.getElementById('driverModal');
-    const form = document.getElementById('driverForm');
-
-        //sofor hozzaadasa gomb, utana uritese a feluletnek
-        addBtn?.addEventListener('click', () => {
-        form.reset();
-        document.getElementById('driverModalTitle').innerText = "Új sofőr hozzáadása";
-        form.action = "{{ route('partner.soforok.store') }}";
-        document.getElementById('methodField').innerHTML = "";
-        modal.classList.replace('hidden', 'flex');
     });
 
-    //modal close buttons
-    [document.getElementById('closeDriverModal'), document.getElementById('cancelDriverModal'), document.getElementById('driverModalBackdrop')].forEach(el => {
-        el?.addEventListener('click', () => {
-            modal.classList.replace('flex', 'hidden');
-        });
-    });
-});
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const modal = document.getElementById('truckModal');
-  const openBtn = document.getElementById('addTruckBtn');
-  const closeBtn = document.getElementById('closeTruckModal');
-  const cancelBtn = document.getElementById('cancelTruckModal');
-  const backdrop = document.getElementById('truckModalBackdrop');
+    // Riport demo
+    const generateBtn = document.getElementById('generateReportBtn');
+    const tableBody = document.getElementById('reportTableBody');
+    const emptyState = document.getElementById('reportsEmptyState');
 
-  if (!modal || !openBtn) {
-    console.error("Driver modal elemek hiányoznak!", { modal, openBtn });
-    return;
-  }
-
-  function openModal() {
-    modal.classList.remove('hidden');
-    modal.classList.add('flex');
-  }
-
-  function closeModal() {
-    modal.classList.add('hidden');
-    modal.classList.remove('flex');
-  }
-
-  openBtn.addEventListener('click', () => {
-    console.log("Új jármű gomb kattintva");
-    openModal();
-  });
-
-  closeBtn?.addEventListener('click', closeModal);
-  cancelBtn?.addEventListener('click', closeModal);
-  backdrop?.addEventListener('click', closeModal);
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeModal();
-  });
-});
-
-    //modal megnyitasa az adatok szerkesztesehez(jarmuvek menuponthoz)
-    function editTruck(truck) {
-    const modal = document.getElementById('truckModal');
-    const form = document.getElementById('truckForm');
-    const title = document.getElementById('truckModalTitle');
-    const methodField = document.getElementById('methodField');
-
-    title.innerText = "Jármű adatainak módosítása";
-    form.action = `/partner/jarmuvek/${truck.id}/update`;
-    methodField.innerHTML = ''; 
-
-    // adatok betöltése
-document.getElementById('truckAktiv').value = truck.aktiv ? 1 : 0;
-document.getElementById('truckRendszam').value = truck.rendszam || '';
-document.getElementById('truckMarka').value = truck.marka || '';
-document.getElementById('truckKategoria').value = truck.kategoria || '';
-document.getElementById('truckTipus').value = truck.tipus || '';
-document.getElementById('truckTengelyszam').value = truck.tengelyszam || '';
-document.getElementById('truckAlvazszam').value = truck.vin || '';
-document.getElementById('truckEurobesorolas').value = truck.euro_besorolas || '';
-document.getElementById('truckÖssztömeg').value = truck.ossztomeg_kg || '';
-document.getElementById('truckPotkocsikepes').value = truck.potkocsi_kepes ? 1 : 0;
-
-modal.classList.replace('hidden', 'flex');
-}
-
-    //esemenykezelok
-    document.addEventListener('DOMContentLoaded', () => {
-    const addBtn = document.getElementById('addTruckBtn');
-    const modal = document.getElementById('truckModal');
-    const form = document.getElementById('truckForm');
-
-        //jarmu hozzaadasa gomb, utana uritese a feluletnek
-        addBtn?.addEventListener('click', () => {
-        form.reset();
-        document.getElementById('truckModalTitle').innerText = "Új jármű hozzáadása";
-        form.action = "{{ route('partner.jarmuvek.store') }}";
-        document.getElementById('methodField').innerHTML = "";
-        modal.classList.replace('hidden', 'flex');
-    });
-
-    //modal close buttons
-    [document.getElementById('closeTruckModal'), document.getElementById('cancelTruckModal'), document.getElementById('truckModalBackdrop')].forEach(el => {
-        el?.addEventListener('click', () => {
-            modal.classList.replace('flex', 'hidden');
-        });
-    });
-});
-</script>
-<script>
-    //riportok
-document.addEventListener("DOMContentLoaded", function () {
-    const links = document.querySelectorAll(".sidebar-link");
-    const sections = document.querySelectorAll(".content-section");
-
-    links.forEach(link => {
-        link.addEventListener("click", function (e) {
-            e.preventDefault();
-
-            const targetId = this.getAttribute("href").replace("#", "");
-
-            sections.forEach(section => section.classList.add("hidden"));
-            document.getElementById(targetId)?.classList.remove("hidden");
-
-            links.forEach(l => l.classList.remove("active"));
-            this.classList.add("active");
-        });
-    });
-});
-</script>
-<script>
-    //riportok
-document.addEventListener("DOMContentLoaded", function () {
-    const generateBtn = document.getElementById("generateReportBtn");
-    const tableBody = document.getElementById("reportTableBody");
-    const emptyState = document.getElementById("reportsEmptyState");
-
-    if (generateBtn) {
-        generateBtn.addEventListener("click", function () {
+    if (generateBtn && tableBody && emptyState) {
+        generateBtn.addEventListener('click', function () {
             tableBody.innerHTML = `
                 <tr class="border-b border-white/10 hover:bg-white/5 transition">
                     <td class="py-3 pr-4">Generált riport</td>
-                    <td class="py-3 pr-4">${document.getElementById("reportType").value}</td>
-                    <td class="py-3 pr-4">${document.getElementById("reportFrom").value} - ${document.getElementById("reportTo").value}</td>
+                    <td class="py-3 pr-4">${document.getElementById("reportType")?.value || ''}</td>
+                    <td class="py-3 pr-4">${document.getElementById("reportFrom")?.value || ''} - ${document.getElementById("reportTo")?.value || ''}</td>
                     <td class="py-3 pr-4">
                         <span class="px-2 py-1 rounded-md text-sm bg-green-600/25 text-green-200">Elkészült</span>
                     </td>
@@ -1314,10 +1249,58 @@ document.addEventListener("DOMContentLoaded", function () {
                     </td>
                 </tr>
             `;
-            emptyState.classList.add("hidden");
+            emptyState.classList.add('hidden');
         });
     }
 });
+
+// Globális edit függvények
+function editDriver(driver) {
+    const modal = document.getElementById('driverModal');
+    const form = document.getElementById('driverForm');
+    const title = document.getElementById('driverModalTitle');
+    const methodField = document.getElementById('driverMethodField');
+
+    title.innerText = 'Sofőr adatainak módosítása';
+    form.action = `/partner/soforok/${driver.id}/update`;
+    methodField.innerHTML = '';
+
+    document.getElementById('driverName').value = driver.nev || '';
+    document.getElementById('driverPhone').value = driver.telefonszam || '';
+    document.getElementById('driverPersonalId').value = driver.szemelyi_azonosito || '';
+    document.getElementById('driverBirthDate').value = driver.szuletesi_datum || '';
+    document.getElementById('driverAddress').value = driver.cim || '';
+    document.getElementById('driverTax').value = driver.adoszam || '';
+    document.getElementById('driverActive').value = driver.aktiv ? 1 : 0;
+
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+}
+
+function editTruck(truck) {
+    const modal = document.getElementById('truckModal');
+    const form = document.getElementById('truckForm');
+    const title = document.getElementById('truckModalTitle');
+    const methodField = document.getElementById('truckMethodField');
+
+    title.innerText = 'Jármű adatainak módosítása';
+    form.action = `/partner/jarmuvek/${truck.id}/update`;
+    methodField.innerHTML = '';
+
+    document.getElementById('truckAktiv').value = truck.aktiv ? 1 : 0;
+    document.getElementById('truckRendszam').value = truck.rendszam || '';
+    document.getElementById('truckMarka').value = truck.marka || '';
+    document.getElementById('truckKategoria').value = truck.kategoria || '';
+    document.getElementById('truckTipus').value = truck.tipus || '';
+    document.getElementById('truckTengelyszam').value = truck.tengelyszam || '';
+    document.getElementById('truckAlvazszam').value = truck.vin || '';
+    document.getElementById('truckEurobesorolas').value = truck.euro_besorolas || '';
+    document.getElementById('truckÖssztömeg').value = truck.ossztomeg_kg || '';
+    document.getElementById('truckPotkocsikepes').value = truck.potkocsi_kepes ? 1 : 0;
+
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+}
 </script>
 </body>
 </html>
