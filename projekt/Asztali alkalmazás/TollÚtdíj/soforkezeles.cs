@@ -21,6 +21,8 @@ namespace TollÚtdíj
 
         public soforkezeles(string role, int cegId)
         {
+
+            // Form inicializálása, szerepkör és cég azonosító tárolása, valamint a form elemeinek beállítása a szerepkör alapján
             InitializeComponent();
             cbbaktiv.Items.AddRange(new object[] { "Igen", "Nem" });
             cbbaktiv.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -44,7 +46,7 @@ namespace TollÚtdíj
                 txbnev.Enabled = true;
             }
         }
-
+        // Sofőrök betöltése az adatbázisból a szerepkör alapján, majd megjelenítése a sofőr listában
         private void soforkezeles_Load(object sender, EventArgs e)
         {
             MySqlConnectionStringBuilder build = new MySqlConnectionStringBuilder
@@ -68,7 +70,7 @@ namespace TollÚtdíj
                 }
 
                 var parancs = kapcsolat.CreateCommand();
-
+                // Rendszer admin esetén minden sofőrt és a hozzájuk tartozó cég nevét jelenítjük meg, egyébként csak a saját cég sofőrjeit
                 if (role == "rendszer_admin")
                 {
                     parancs.CommandText = @"
@@ -112,7 +114,7 @@ namespace TollÚtdíj
                 }
             }
         }
-
+        // Kiválasztott sofőr adatainak betöltése az adatbázisból és megjelenítése a form mezőiben
         private void BetoltSoforAdatok(string sofor)
         {
             MySqlConnectionStringBuilder build = new MySqlConnectionStringBuilder
@@ -172,11 +174,12 @@ namespace TollÚtdíj
             }
 
         }
+        // Vissza gomb eseménykezelője, amely bezárja a jelenlegi formot
         private void btnvissza_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
+        // Sofőr lista kiválasztásának eseménykezelője, amely betölti a kiválasztott sofőr adatait a form mezőibe
         private void cbbsoforlista_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbbsoforlista.SelectedItem == null)
@@ -186,7 +189,7 @@ namespace TollÚtdíj
 
             BetoltSoforAdatok(sofor);
         }
-
+        // Hozzáadás gomb eseménykezelője, amely váltogatja a hozzáadás módot, és ennek megfelelően állítja be a form elemeit
         private void btnhozzaadas_Click(object sender, EventArgs e)
         {
             hozzaadas = !hozzaadas;
@@ -221,7 +224,7 @@ namespace TollÚtdíj
                 if (cbbsoforlista.SelectedItem != null)
                 {
                     string r = cbbsoforlista.Text.Split('|')[0].Trim();
-                    // Restore enabled/read-only state for the name textbox based on role
+                    // visszaállítja a név mező engedélyezését a szerepkör alapján
                     if (role == "rendszer_admin")
                     {
                         txbnev.Enabled = true;
@@ -237,7 +240,7 @@ namespace TollÚtdíj
                 }
             }
         }
-
+        // Mentés gomb eseménykezelője, amely a hozzáadás módtól függően frissíti vagy új rekordot hoz létre az adatbázisban a form mezőiben megadott értékekkel
         private void btnmentes_Click(object sender, EventArgs e)
         {
             if (hozzaadas == false)
@@ -323,6 +326,7 @@ namespace TollÚtdíj
                     }
                 }
             }
+            // Hozzáadás módban új rekord létrehozása az adatbázisban a form mezőiben megadott értékekkel
             else
             {
                 try
@@ -405,8 +409,8 @@ namespace TollÚtdíj
             }
         }
 
-            
 
+        // Törlés gomb eseménykezelője, amely törli a kiválasztott sofőrt az adatbázisból, majd frissíti a sofőr listát
         private void btntorles_Click(object sender, EventArgs e)
         {
 

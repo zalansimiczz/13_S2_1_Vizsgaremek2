@@ -13,15 +13,14 @@ namespace TollÚtdíj
 {
     public partial class cegkezeles : Form
     {
+
+        
         private readonly string role;
         private readonly int cegId;
         public cegkezeles(string role, int cegId)
         {
-            
-        InitializeComponent();
-
-
-
+            // Form inicializálása, szerepkör és cég azonosító tárolása, valamint a form elemeinek beállítása a szerepkör alapján
+            InitializeComponent();
             lblhibas.Visible = false;
             this.role = role;
             this.cegId = cegId;
@@ -56,7 +55,7 @@ namespace TollÚtdíj
                 this.Text = "Cégkezelés - Rendszer adminisztrátor";
             }
         }
-
+        // Cégadatok betöltése az adatbázisból a kiválasztott cég neve alapján, majd megjelenítése a form mezőiben
         private void CegAdatokBetoltese(string cegNev)
         {
             MySqlConnectionStringBuilder build = new MySqlConnectionStringBuilder
@@ -66,7 +65,7 @@ namespace TollÚtdíj
                 Password = "mysql",
                 Database = "tollutdijadatbazis"
             };
-
+            // Adatbázis kapcsolat létrehozása és megnyitása, majd a cégadatok lekérdezése és megjelenítése a form mezőiben
             using (MySqlConnection kapcsolat = new MySqlConnection(build.ConnectionString))
             {
                 try
@@ -105,7 +104,7 @@ namespace TollÚtdíj
                 btnmentes.Visible = true;
             }
         }
-
+        // Form betöltésekor a céglista feltöltése az adatbázisból a szerepkör alapján, majd a cégadatok megjelenítése a form mezőiben
         private void Form3_Load(object sender, EventArgs e)
         {
 
@@ -129,7 +128,7 @@ namespace TollÚtdíj
                     lblhibas.Visible = true;
                     return;
                 }
-
+                // Szerepkör alapján a megfelelő céglista lekérdezése és feltöltése a ComboBox-ba
                 var parancs = kapcsolat.CreateCommand();
                 if (role == "ceg_admin")
                 {
@@ -174,8 +173,8 @@ namespace TollÚtdíj
             }
         }
 
-        
 
+        // Vissza gomb eseménykezelője, amely bezárja a jelenlegi formot
 
         private void btnvissza_Click(object sender, EventArgs e)
         {
@@ -183,7 +182,7 @@ namespace TollÚtdíj
         }
 
 
-        
+        // Mentés gomb eseménykezelője, amely frissíti a cégadatokat az adatbázisban a form mezőiben megadott értékekkel
         private void btnmentes_Click(object sender, EventArgs e)
         {
             MySqlConnectionStringBuilder build = new MySqlConnectionStringBuilder
@@ -236,7 +235,7 @@ namespace TollÚtdíj
                 }
             }
         }
-
+        // Céglista ComboBox eseménykezelője, amely a kiválasztott cég neve alapján betölti a cégadatokat a form mezőibe
         private void cbbceglista_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbbceglista.SelectedItem == null)

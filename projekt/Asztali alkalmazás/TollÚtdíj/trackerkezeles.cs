@@ -19,6 +19,7 @@ namespace TollÚtdíj
 
         public trackerkezeles(string role, int cegId)
         {
+            // Form inicializálása, szerepkör és cég azonosító tárolása, valamint a form elemeinek beállítása a szerepkör alapján
             InitializeComponent();
             this.role = role;
             this.cegId = cegId;
@@ -36,7 +37,7 @@ namespace TollÚtdíj
             txbjarmu.Enabled = false;
             lblhibas.Visible = false;
         }
-
+        // Form betöltésekor meghívódó eseménykezelő, amely betölti a trackerek listáját és beállítja a form címét a szerepkör alapján
         private void trackerkezeles_Load(object sender, EventArgs e)
         {
             BetoltTrackerLista();
@@ -56,7 +57,7 @@ namespace TollÚtdíj
                
             }
         }
-
+        // Trackerek listájának betöltése az adatbázisból a cég azonosítója alapján, majd megjelenítése a ComboBox-ban
         private void BetoltTrackerLista()
         {
             MySqlConnectionStringBuilder build = new MySqlConnectionStringBuilder
@@ -109,11 +110,13 @@ ORDER BY j.rendszam;
             }
         }
 
-
+        // Vissza gomb eseménykezelője, amely bezárja a jelenlegi formot
         private void btnvissza_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+        // A kiválasztott tracker adatait betöltő metódus,
+        // amely lekérdezi az adatbázisból a trackerhez tartozó adatokat a rendszám alapján, majd megjeleníti ezeket a form mezőiben
         private void BetoltTrackerAdatok(string rendszam)
         {
             MySqlConnectionStringBuilder build = new MySqlConnectionStringBuilder
@@ -165,7 +168,8 @@ LIMIT 1;
                 }
             }
         }
-
+        // A tracker listában történt kiválasztás változásának eseménykezelője,
+        // amely meghívja a BetoltTrackerAdatok metódust a kiválasztott tracker rendszáma alapján
         private void cbbTrackerLista_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbbTrackerLista.SelectedItem == null)

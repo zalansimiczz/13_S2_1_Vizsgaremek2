@@ -34,7 +34,8 @@ namespace TollÚtdíj
                 );
         }
 
-        // Segitő osztály a bejelentkezési form hibáinak kezelésére és a vezérlők láthatóságának állítására
+        
+
         public class Bejelentkezessegito
         {
             private Label lblhibas;
@@ -68,7 +69,7 @@ namespace TollÚtdíj
                 this.chkrememberme = chkrememberme;
                 this.logoPicture = logoPicture;
             }
-            // Metódus a hibaállapot megjelenítésére: elrejti a bejelentkezési vezérlőket és megjeleníti a hibaüzenetet
+
             public void ShowErrorState()
             {
                 lblhibas.Visible = true;
@@ -90,7 +91,7 @@ namespace TollÚtdíj
 
             public void RestoreLoginState()
             {
-                // elrejti a hibaüzenetet és visszaállítja a bejelentkezési vezérlők láthatóságát
+                // Hide the error label and restore the normal login controls
                 lblhibas.Visible = false;
                 lblUser.Visible = true;
                 lblPass.Visible = true;
@@ -104,15 +105,15 @@ namespace TollÚtdíj
                     logoPicture.Visible = true;
                 }
 
-                // kitörli a jelszó mezőt és visszahelyezi a fókuszt a felhasználónév mezőre
+                // Clear the password and set focus to the username field
                 txbPass.Text = string.Empty;
                 txbUsername.Focus();
             }
         }
-        // Bejelentkezés gomb eseménykezelője
+
         private void btnlogin_Click_1(object sender, EventArgs e)
         {
-            // Először ellenőrzi, hogy a felhasználónév és a jelszó mezők nincsenek-e üresen, és ha igen, akkor a fókuszt a hiányzó mezőre helyezi
+            
             if (txbusername.Text != "" && txbpass.Text == "")
             {
                 txbpass.Focus();
@@ -136,9 +137,9 @@ namespace TollÚtdíj
             lbl1.Visible = false;
             btnlogin.Visible = false;
             chkrememberme.Visible = false;
+            
+            
 
-
-            // Backend műveletek: adatbázis kapcsolat létrehozása, felhasználó ellenőrzése, jelszó validálása, session kezelés
             #region Backend
             MySqlConnectionStringBuilder build = new MySqlConnectionStringBuilder
             {
@@ -149,7 +150,7 @@ namespace TollÚtdíj
             };
 
 
-            // Kapcsolat létrehozása és megnyitása az adatbázissal, hiba esetén hibaüzenet megjelenítése
+
             using (MySqlConnection kapcsolat = new MySqlConnection(build.ConnectionString))
             {
                 try
@@ -172,8 +173,6 @@ namespace TollÚtdíj
 
                 var read = parancs.ExecuteReader();
 
-                // Ha nincs találat a megadott email címre, hibaüzenet megjelenítése
-
                 if (!read.HasRows)
                 {
                     lblhibas.Text = "Kérjük, ellenőrizze a jelszavát\r\nés az E-mail címét, majd próbálja újra.";
@@ -181,17 +180,12 @@ namespace TollÚtdíj
                     return;
                 }
 
-                // Ha van találat, jelszó validálása és további ellenőrzések (fiók aktiváltsága, szerepkör) elvégzése
-
                 read.Read();
                 string JelszoHash = read.GetString("jelszo_hash");
                 bool validjelszo = BCrypt.Net.BCrypt.Verify(jelszo, JelszoHash);
                 int aktiv = read.GetInt32("aktiv");
                 string szerep = read.GetString("role");
                 int cegId = read.GetInt32("ceg_id");
-
-
-                // Ha a jelszó helyes, de a fiók nincs aktiválva, hibaüzenet megjelenítése
 
                 if (validjelszo)
                 {
@@ -202,10 +196,6 @@ namespace TollÚtdíj
                         return;
                     }
 
-
-                    // Ha a jelszó helyes és a fiók aktiválva van, kezeljük a "remember me" funkciót:
-                    // ha be van jelölve, generálunk egy session tokent, elmentjük az adatbázisban és a helyi beállításokban;
-                    // ha nincs bejelölve, töröljük a session tokent a helyi beállításokból
                     if (chkrememberme.Checked)
                     {
                         string sessionToken = Guid.NewGuid().ToString("N");
@@ -249,15 +239,14 @@ namespace TollÚtdíj
                     var ui = new userinterface(szerep, cegId);
                     ui.FormClosed += (s, args) =>
                     {
-                        // ha a session token még mindig érvényes (pl. a "remember me" be volt jelölve),
-                        // akkor bezárjuk a bejelentkezési formot anélkül, hogy visszaállítanánk a vezérlők állapotát
+                        // If "remember me" was selected we stored a session token -> exit the app when main UI closes
                         if (!string.IsNullOrEmpty(Properties.Settings.Default.SessionToken))
                         {
                             this.Close();
                             return;
                         }
 
-                        // egyébként visszaállítjuk a bejelentkezési form vezérlőinek állapotát, megjelenítjük a logót és újra megjelenítjük a formot
+                        // Otherwise restore the login form controls and picture when the UI is closed
                         UIkisegito.RestoreLoginState();
                         pictureBox1.Visible = true;
                         this.Show();
@@ -278,6 +267,10 @@ namespace TollÚtdíj
 
 
 
-       
+        /* Jelenlegi hibák:
+         messageboxok átírása labelszövegre (jarmukezeles hianyos)
+        uj sofor hozzáadásnál szüldatum megfelelő kezelése
+        uj sofor hozzáadásnál engedélyez duplikált nevű sofőrt
+          */
     }
 }

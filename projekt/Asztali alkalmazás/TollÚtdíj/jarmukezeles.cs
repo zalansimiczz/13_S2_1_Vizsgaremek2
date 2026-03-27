@@ -15,16 +15,16 @@ namespace TollÚtdíj
 {
     public partial class jarmukezeles : Form
     {
+        
         bool hozzaadas = false;
         private readonly string role;
         private readonly int cegId;
         public jarmukezeles(string role, int cegId)
         {
+            // Form inicializálása, szerepkör és cég azonosító tárolása, valamint a form elemeinek beállítása a szerepkör alapján
             InitializeComponent();
             txbvin.MaxLength = 17;
             txbvin.CharacterCasing = CharacterCasing.Upper;
-
-
             this.role = role;
             this.cegId = cegId;
             lblcegid.Visible = false;
@@ -70,8 +70,9 @@ namespace TollÚtdíj
             }
         }
 
-        
 
+        // Járművek betöltése az adatbázisból a szerepkör alapján:
+        // rendszeradmin minden járművet lát, egyébként csak a saját cég járműveit, majd megjelenítése a combo boxban
         private void jarmukezeles_Load(object sender, EventArgs e)
         {
             MySqlConnectionStringBuilder build = new MySqlConnectionStringBuilder
@@ -95,7 +96,7 @@ namespace TollÚtdíj
                 var parancs = kapcsolat.CreateCommand();
                 if (role == "rendszer_admin")
                 {
-                    // mindent kiir
+                    // minden járművet listáz, rendszám és cég név szerint rendezve
                     parancs.CommandText = @"
                 SELECT j.rendszam, c.nev
                 FROM jarmuvek j
@@ -105,7 +106,7 @@ namespace TollÚtdíj
                 }
                 else
                 {
-                    // csak sajat ceget ir ki
+                    // csak a saját cég járműveit listázza, rendszám szerint rendezve
                     parancs.CommandText = @"
                 SELECT rendszam
                 FROM jarmuvek
@@ -139,7 +140,7 @@ namespace TollÚtdíj
 
             }
         }
-
+        // Kiválasztott jármű adatainak betöltése az adatbázisból és megjelenítése a form mezőiben, a kiválasztott rendszám alapján
         private void BetoltJarmuAdatok(string rendszam)
         {
             MySqlConnectionStringBuilder build = new MySqlConnectionStringBuilder
@@ -189,7 +190,8 @@ namespace TollÚtdíj
                             euro = reader.GetString("euro_besorolas");
                         }
 
-                        // Normalize and try to match the combo box items.
+                        // normalizált kiválasztás a comboboxban, hogy ne legyen gond,
+                        // ha az adatbázisban "EURO4" szerepel "EURO 4" helyett, vagy ha extra szóközök vannak
                         if (string.IsNullOrWhiteSpace(euro))
                         {
                             cbbeuro.SelectedIndex = -1;
@@ -198,7 +200,7 @@ namespace TollÚtdíj
                         {
                             string euroNorm = euro.Trim().ToUpperInvariant();
 
-                            // Build a normalized list of items from the combobox
+                            // épít egy robosztus keresést a combobox elemei között, hogy megtalálja a legjobb egyezést
                             int matchIndex = -1;
                             for (int i = 0; i < cbbeuro.Items.Count; i++)
                             {
@@ -208,7 +210,7 @@ namespace TollÚtdíj
                                     matchIndex = i;
                                     break;
                                 }
-                                // also tolerate strings like "EURO4" vs "EURO 4"
+                                // és tolerálja a szóközök hiányát is ("EURO4" == "EURO 4")
                                 if (item.Replace(" ", "") == euroNorm.Replace(" ", ""))
                                 {
                                     matchIndex = i;
@@ -216,10 +218,10 @@ namespace TollÚtdíj
                                 }
                             }
 
-                            // If still not found, try to extract a number and map to "EURO {n}"
+                            // ha nem talál pontos egyezést, megpróbálja kinyerni a számot és újra keresni "EURO X" formában
                             if (matchIndex == -1)
                             {
-                                // find first digit sequence
+                                // keres egy számot a szövegben, és ha talál, megpróbálja "EURO X" formában keresni újra
                                 var digits = System.Text.RegularExpressions.Regex.Match(euroNorm, "\\d+");
                                 if (digits.Success)
                                 {
@@ -245,13 +247,13 @@ namespace TollÚtdíj
             
         }
 
-        
 
+        // Vissza gomb eseménykezelője, amely bezárja a jelenlegi formot
         private void btnvissza_Click(object sender, EventArgs e)
         {
            this.Close();
         }
-
+        // Jármű kiválasztásának eseménykezelője, amely betölti a kiválasztott jármű adatait a form mezőibe
         private void cbbjarmulista_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbbjarmulista.SelectedItem == null)
@@ -264,7 +266,8 @@ namespace TollÚtdíj
 
             BetoltJarmuAdatok(rendszam);
         }
-
+        // Mentés gomb eseménykezelője, amely frissíti a jármű adatait az adatbázisban a form mezőiben megadott értékekkel,
+        // vagy új jármű hozzáadásakor beszúrja az új járművet az adatbázisba
         private void btnmentes_Click(object sender, EventArgs e)
         {
             if (hozzaadas == false)
@@ -404,9 +407,10 @@ namespace TollÚtdíj
                 }
             }
     }
-        
-        
 
+
+        // Új jármű hozzáadásának eseménykezelője, amely előkészíti a formot új jármű adatainak megadásához,
+        // vagy visszaállítja a formot a kiválasztott jármű adatainak megjelenítéséhez, ha a hozzáadás mód már aktív
         private void btnhozzaadas_Click(object sender, EventArgs e)
         {
             hozzaadas = !hozzaadas;
@@ -444,7 +448,7 @@ namespace TollÚtdíj
                 {
                     string r = cbbjarmulista.Text.Split('|')[0].Trim();
                     BetoltJarmuAdatok(r);
-                    // Ensure euro selection is restored as well (BetoltJarmuAdatok handles selection robustly)
+                    // megbizonyosodik róla, hogy a helyes jármű adatai töltődnek be, ha rendszeradmin több járművet lát egyszerre a listában
                 }
             }
         }
@@ -455,13 +459,16 @@ namespace TollÚtdíj
 
             string szoveg = cbbjarmulista.Text;
 
-            // ha rendszeradmin = "nev | ceg"
+            // ha rendszeradmin, akkor a szöveg formátuma "Rendszám | Cég név",
+            // ezért csak a rendszámot kell kinyerni a "|" karakter előtt, egyébként a teljes szöveg a rendszám
             if (role == "rendszer_admin" && szoveg.Contains("|"))
                 return szoveg.Split('|')[0].Trim();
 
 
             return szoveg.Trim();
         }
+        // Jármű törlésének eseménykezelője, amely törli a kiválasztott járművet az adatbázisból a kiválasztott rendszám alapján,
+        // majd frissíti a jármű listát a combo boxban
         private void btntorles_Click(object sender, EventArgs e)
         {
 

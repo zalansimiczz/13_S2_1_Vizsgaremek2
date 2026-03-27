@@ -24,6 +24,8 @@ namespace TollÚtdíj
 
         public jogsikezeles(string role, int cegId)
         {
+
+            // Form inicializálása, szerepkör és cég azonosító tárolása, valamint a form elemeinek beállítása a szerepkör alapján
             InitializeComponent();
             this.role = role;
             this.cegId = cegId;
@@ -46,9 +48,9 @@ namespace TollÚtdíj
                
             }
         }
-        
 
 
+        // Form betöltésekor a sofőrök listájának lekérése az adatbázisból és megjelenítése a comboboxban, valamint a kapcsolódó hibakezelés
         private void jogsikezeles_Load(object sender, EventArgs e)
         {
             MySqlConnectionStringBuilder build = new MySqlConnectionStringBuilder
@@ -75,7 +77,7 @@ namespace TollÚtdíj
                 }
 
                 var parancs = kapcsolat.CreateCommand();
-
+                // Rendszer admin esetén minden sofőr és a hozzájuk tartozó cég neve jelenik meg, egyébként csak a saját cég sofőrjei
                 if (role == "rendszer_admin")
                 {
                     parancs.CommandText = @"
@@ -120,6 +122,7 @@ namespace TollÚtdíj
                 
             }
         }
+        // A kiválasztott sofőr jogosítványainak betöltése a comboboxba, valamint a kapcsolódó hibakezelés
         private void BetoltJogositvanyok(int soforId)
         {
             cbbkateg.Items.Clear();
@@ -156,6 +159,7 @@ namespace TollÚtdíj
             if (cbbkateg.Items.Count > 0)
                 cbbkateg.SelectedIndex = 0;
         }
+        // A sofőr nevéből kinyeri az ID-t az adatbázisból, amely szükséges a további műveletekhez, például a jogosítványok kezeléséhez
         private int GetSoforId(string soforNev)
         {
             MySqlConnectionStringBuilder build = new MySqlConnectionStringBuilder
@@ -177,14 +181,14 @@ namespace TollÚtdíj
                 return Convert.ToInt32(parancs.ExecuteScalar());
             }
         }
-
+        // Vissza gomb eseménykezelője, amely bezárja a jelenlegi formot
         private void btnvissza_Click(object sender, EventArgs e)
         {
             this.Close();
 
         }
 
-        
+        // A sofőr kiválasztásakor a hozzá tartozó jogosítványok betöltése a form mezőibe, valamint a kapcsolódó hibakezelés
 
         private void cbbsoforlista_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -198,8 +202,9 @@ namespace TollÚtdíj
 
         }
 
-        
 
+        // A kategória kiválasztásakor a hozzá tartozó érvényességi időket tölti be a form mezőibe,
+        // vagy ha még nincs ilyen kategória, akkor alapértelmezetten a mai napot állítja be, valamint a kapcsolódó hibakezelés
         private void cbbkateg_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             if (cbbkateg.SelectedItem == null || hozzaadas)
@@ -239,7 +244,7 @@ namespace TollÚtdíj
                     }
                     else
                     {
-                        // nincs még ilyen kategória → új adat
+                        // nincs ilyen kategória, alapértelmezetten a mai napot állítja be
                         dtpErvTol.Value = DateTime.Today;
                         dtpErvIg.Value = DateTime.Today;
                         hozzaadas = true;
@@ -247,7 +252,8 @@ namespace TollÚtdíj
                 }
             }
         }
-
+        // Hozzáadás gomb eseménykezelője, amely váltogatja a hozzáadás módot,
+        // és ennek megfelelően frissíti a form elemeit, valamint a kapcsolódó hibakezelés
         private void btnhozzaadas_Click(object sender, EventArgs e)
         {
             if (!hozzaadas)
@@ -280,7 +286,8 @@ namespace TollÚtdíj
                 BetoltJogositvanyok(soforId);
             }
         }
-        
+        // Mentés gomb eseménykezelője, amely hozzáadja vagy frissíti a sofőr jogosítványának adatait az adatbázisban a form mezőiben megadott értékekkel,
+        // valamint a kapcsolódó hibakezelés
         private void btnmentes_Click(object sender, EventArgs e)
         {
             if (cbbsoforlista.SelectedItem == null || string.IsNullOrWhiteSpace(cbbkateg.Text))
@@ -293,7 +300,7 @@ namespace TollÚtdíj
             int soforId = GetSoforId(soforNev);
 
             string kategoria = cbbkateg.Text.Trim();
-
+            // Hozzáadás esetén ellenőrizzük, hogy már létezik-e ilyen kategória ennél a sofőrnél, és ha igen, akkor hibaüzenetet jelenítünk meg
             if (hozzaadas && VanMarIlyenKategoria(soforId, kategoria))
             {
                 lblhibas.Text = "Ez a kategória már létezik ennél a sofőrnél!";
@@ -314,7 +321,7 @@ namespace TollÚtdíj
             {
                 kapcsolat.Open();
                 var parancs = kapcsolat.CreateCommand();
-
+              
                 if (hozzaadas)
                 {
                  
@@ -350,6 +357,7 @@ namespace TollÚtdíj
             BetoltJogositvanyok(soforId);
             btnhozzaadas.Text = "Új kategória hozzáadása";
         }
+        // Ez a segédfüggvény ellenőrzi, hogy a megadott sofőrnek már van-e a megadott kategóriából jogosítványa az adatbázisban, és visszaadja az eredményt
         private bool VanMarIlyenKategoria(int soforId, string kategoria)
         {
             MySqlConnectionStringBuilder build = new MySqlConnectionStringBuilder
@@ -376,7 +384,7 @@ namespace TollÚtdíj
                 return Convert.ToInt32(parancs.ExecuteScalar()) > 0;
             }
         }
-        
+        // Törlés gomb eseménykezelője, amely törli a kiválasztott kategóriát a sofőr jogosítványai közül az adatbázisból, valamint a kapcsolódó hibakezelés
         private void btntorles_Click(object sender, EventArgs e)
         {
             if (cbbkateg.SelectedItem == null)

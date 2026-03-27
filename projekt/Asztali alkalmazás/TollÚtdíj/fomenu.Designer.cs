@@ -176,7 +176,6 @@
             this.Name = "userinterface";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TollÚtdíj";
-            this.Load += new System.EventHandler(this.userinterface_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
