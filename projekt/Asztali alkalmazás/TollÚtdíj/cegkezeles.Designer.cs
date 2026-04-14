@@ -45,7 +45,7 @@
             // 
             // btnvissza
             // 
-            this.btnvissza.Location = new System.Drawing.Point(460, 261);
+            this.btnvissza.Location = new System.Drawing.Point(389, 252);
             this.btnvissza.Name = "btnvissza";
             this.btnvissza.Size = new System.Drawing.Size(75, 23);
             this.btnvissza.TabIndex = 3;
@@ -60,10 +60,10 @@
             this.lblinfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblinfo.Location = new System.Drawing.Point(6, 252);
             this.lblinfo.Name = "lblinfo";
-            this.lblinfo.Size = new System.Drawing.Size(354, 40);
+            this.lblinfo.Size = new System.Drawing.Size(358, 40);
             this.lblinfo.TabIndex = 11;
-            this.lblinfo.Text = "ⓘ Amennyiben új céget szeretne létrehozni,\r\n a webes felületen van lehetősége ezt" +
-    " megteheti!";
+            this.lblinfo.Text = "ⓘ Amennyiben új céget szeretne létrehozni,\r\n a web felületünkön van lehetősége ez" +
+    "t megtenni!";
             // 
             // lblhibass
             // 
@@ -165,7 +165,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(547, 296);
+            this.ClientSize = new System.Drawing.Size(481, 297);
             this.Controls.Add(this.lblhibas);
             this.Controls.Add(this.cbbceglista);
             this.Controls.Add(this.lblinfo);
