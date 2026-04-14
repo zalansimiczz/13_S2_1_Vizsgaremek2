@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 
 class PartnerReportController extends Controller
 {
+    //partner riportok controller
     public function index()
     {
+        //report nezettel visszateres
         return view('partner.reports.index');
         return view('partner.dashboard', [
         'driverCount' => \App\Models\Sofor::count(),
@@ -22,6 +24,7 @@ class PartnerReportController extends Controller
 
     public function generate(Request $request)
     {
+        //report generator request validacio
         $request->validate([
             'report_type' => 'required|string',
             'date_from' => 'nullable|date',
@@ -32,9 +35,10 @@ class PartnerReportController extends Controller
         $dateFrom = $request->date_from;
         $dateTo = $request->date_to;
 
-        // Itt később jön az adatlekérés
+        //adatok lekerese kesobb kerul ide
         $results = [];
 
+        //eredmenyek atadasa a report nezettel
         return view('partner.reports.index', [
             'results' => $results,
             'reportType' => $reportType,

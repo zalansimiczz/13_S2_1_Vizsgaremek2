@@ -18,7 +18,7 @@ class PartnerVerified
 
         $user = User::find($userId);
 
-        // Ha nincs megerősítve az email
+        //ha nincs megerositve az email
         if (!$user || !$user->hasVerifiedEmail()) {
             return redirect()->route('verification.notice');
         }
