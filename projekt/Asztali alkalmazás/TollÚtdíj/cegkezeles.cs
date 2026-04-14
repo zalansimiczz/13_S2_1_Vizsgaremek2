@@ -74,7 +74,9 @@ namespace TollÚtdíj
                 }
                 catch
                 {
-                    MessageBox.Show("Adatlekérdezési hiba.", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    lblhibas.Text = "Adatlekérdezési hiba.\r\nEllenőrizze az internetkapcsolatot, majd próbálja újra.";
+                    lblhibas.ForeColor = Color.Red;
+                    lblhibas.Visible = true;
                     return;
                 }
 
@@ -185,6 +187,7 @@ namespace TollÚtdíj
         // Mentés gomb eseménykezelője, amely frissíti a cégadatokat az adatbázisban a form mezőiben megadott értékekkel
         private void btnmentes_Click(object sender, EventArgs e)
         {
+            lblhibas.Visible = false;
             MySqlConnectionStringBuilder build = new MySqlConnectionStringBuilder
             {
                 Server = "localhost",
