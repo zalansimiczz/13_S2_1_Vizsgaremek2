@@ -1,4 +1,4 @@
-{{-- resources/views/partner/dashboard.blade.php --}}
+﻿{{-- resources/views/partner/dashboard.blade.php --}}
 <!DOCTYPE html>
 <html lang="hu">
 <head>
@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ÚtdíjPro - Partner Irányítópult</title>
+    <title>Útdí­jPro - Partner Irányítópult</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
@@ -103,8 +103,6 @@
 <body class="flex h-screen overflow-hidden">
 
     @php
-    // A bejelentkezett partner nevét töltjük be, ha elérhető.
-    // Ha nincs userName változó, akkor a sessionből olvassa a nevet.
     $partnerName = $userName ?? session('user_name', 'Partner felhasználó');
     @endphp
 
@@ -153,56 +151,6 @@
         </div>
     </aside>
 
-    <!-- main content, a kivalasztott panel itt jelenik meg -->
-    <main class="flex-1 p-6 md:p-10 overflow-y-auto" id="mainContentArea">
-        <header class="mb-8 md:mb-10">
-            <div class="flex justify-between items-center">
-                <div id="pageTitleContainer">
-                    <h1 class="font-poppins text-2xl md:text-3xl font-bold text-white">Irányítópult</h1>
-                </div>
-
-    <button id="mobileMenuBtn" class="lg:hidden fixed top-4 left-4 p-3 bg-gray-800/80 text-white rounded-md backdrop-blur-sm shadow-lg">
-        <i class="fas fa-bars fa-lg"></i>
-    </button>
-
-    <!--sidebar-->
-    <aside id="sidebar" class="sidebar glassmorphism-element p-5 space-y-6 flex-shrink-0 h-full overflow-y-auto transform -translate-x-full lg:translate-x-0 fixed lg:static z-40">
-        <div class="logo-container text-center mb-6 pt-8 lg:pt-0">
-            <a href="/" class="flex items-center justify-center space-x-2" title="Vissza a főoldalra">
-                <i class="fas fa-road-bridge fa-2x text-[var(--color-primary)]"></i>
-                <span class="font-poppins self-center text-2xl font-bold whitespace-nowrap text-white">Útdíj<span class="text-[var(--color-primary)]">Pro</span></span>
-            </a>
-        </div>
-        <nav class="space-y-1.5">
-            <a href="#dashboard-main-content" id="dashboard" class="sidebar-link active flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
-                <i class="fas fa-tachometer-alt fa-fw w-5 text-center"></i><span class="font-medium">Irányítópult</span>
-            </a>
-            <a href="#calculatorSectionContent" id="openCalculator" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
-                <i class="fas fa-calculator fa-fw w-5 text-center"></i><span class="font-medium">Útdíj Kalkulátor</span>
-            </a>
-            <a href="#addUserContent" id="alkalmazottak" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
-                <i class="fas fa-users-cog fa-fw w-5 text-center"></i><span class="font-medium">Alkalmazottak</span>
-            </a>
-            <a href="#driversContent" id="soforok" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
-                <i class="fas fa-id-card fa-fw w-5 text-center"></i><span class="font-medium">Sofőrök</span>
-            </a>
-            <a href="#trucksContent" id="flotta" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
-                <i class="fas fa-truck fa-fw w-5 text-center"></i><span class="font-medium">Flotta</span>
-            </a>
-            <a href="#reportsContent" id="riportok" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
-                <i class="fas fa-chart-bar fa-fw w-5 text-center"></i><span class="font-medium">Riportok</span>
-            </a>
-            <a href="#settingsContent" id="beallitasok" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
-                <i class="fas fa-cog fa-fw w-5 text-center"></i><span class="font-medium">Beállítások</span>
-            </a>
-        </nav>
-        <div class="pt-6 mt-auto border-t border-[var(--color-border)]">
-            <a href="{{ route('partner.logout') }}" class="block px-4 py-2 text-sm text-red-400 hover:bg-red-500/20 hover:text-white">
-    Kijelentkezés
-</a>
-        </div>
-    </aside>
-
     <!--main content-->
     <main class="flex-1 p-6 md:p-10 overflow-y-auto" id="mainContentArea">
         <header class="mb-8 md:mb-10">
@@ -232,8 +180,7 @@
         </header>
 
         <!--iranyitopult-->
-        <div id="dashboard-main-content" class="content-section active">
-            <h2 class="font-poppins text-xl font-semibold text-white mb-6">Áttekintés</h2>
+        <div id="dashboard-main-content" class="content-section active" data-page-title="Irányítópult">
             <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
                 <div class="stat-card glassmorphism-element p-6 rounded-xl">
                     <div class="flex items-center justify-between">
@@ -279,10 +226,9 @@
         </div>
 
         <!--kalkulator-->
-        <div id="calculatorSectionContent" class="content-section">
+        <div id="calculatorSectionContent" class="content-section" data-page-title="Útdíj Kalkulátor">
             <section class="glassmorphism-element p-6 md:p-8 rounded-2xl">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="font-poppins text-2xl font-semibold text-white">Útdíj Kalkulátor</h2>
+                <div class="flex justify-end items-center mb-6">
                     <button class="text-sky-400 hover:text-sky-300 text-sm"><i class="fas fa-history mr-1"></i> Korábbi Kalkulációk</button>
                 </div>
                 <div class="calculator-container space-y-6">
@@ -321,7 +267,7 @@
                     </div>
                     <div id="portalResultsSection" class="mt-8 pt-6 border-t border-[var(--color-border)] space-y-4 hidden">
                         <h3 class="font-poppins text-xl font-semibold text-white mb-3">Eredmények:</h3>
-                        <p class="text-lg results-text"><strong>Becsült Útdíj:</strong> <span id="portalTollResult" class="font-bold text-white text-xl">N/A</span></p>
+                        <p class="text-lg results-text"><strong>Becsült útdíj:</strong> <span id="portalTollResult" class="font-bold text-white text-xl">N/A</span></p>
                         <p class="text-lg results-text"><strong>Távolság:</strong> <span id="portalDistanceResult" class="font-bold text-white text-xl">N/A</span></p>
                         <div id="portalMapContainer" class="w-full h-80 md:h-96 bg-gray-800 rounded-lg mt-4 border border-gray-700/50"></div>
                         <div id="portalExternalLinkContainer" class="mt-4 text-center"></div>
@@ -332,11 +278,7 @@
         </div>
 
         <!--alkalmazottak-->
-        <div id="addUserContent" class="content-section">
-            <h2 class="font-poppins text-xl font-semibold text-white mb-6">
-                Alkalmazottak kezelése
-            </h2>
-
+        <div id="addUserContent" class="content-section" data-page-title="Alkalmazottak kezelése">
             <div class="glassmorphism-element p-6 rounded-xl space-y-6">
 
                 @if (request('msg') === 'success_user_added')
@@ -424,9 +366,7 @@
             </div>
         </div>
    <!--soforok-->
-<div id="driversContent" class="content-section">
-    <h2 class="font-poppins text-xl font-semibold text-white mb-6">Sofőrök nyilvántartása</h2>
-
+<div id="driversContent" class="content-section" data-page-title="Sofőrök nyilvántartása">
     <div class="glassmorphism-element p-6 rounded-xl">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-5">
             <div class="flex-1">
@@ -468,7 +408,7 @@
                         <td class="py-3 text-right space-x-2">
                             <form action="{{ route('partner.soforok.toggle', $d->id) }}" method="POST" class="inline">
                                 @csrf
-                                <button type="submit" title="Státusz váltása" class="text-sky-400 hover:text-sky-300">
+                                <button type="submit" title="Státusz változtatása" class="text-sky-400 hover:text-sky-300">
                                     <i class="fas fa-power-off"></i>
                                 </button>
                             </form>
@@ -477,7 +417,7 @@
                                 <i class="fas fa-edit"></i>
                             </button>
 
-                            <form action="{{ route('partner.soforok.destroy', $d->id) }}" method="POST" class="inline" onsubmit="return confirm('Biztosan törölni szeretné ezt a sofőrt?')">
+                            <form action="{{ route('partner.soforok.destroy', $d->id) }}" method="POST" class="inline" onsubmit="return confirm('Biztosan törölni szeretnéd ezt a sofőrt?')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" title="Törlés" class="text-red-400 hover:text-red-300">
@@ -488,7 +428,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="py-10 text-center text-gray-500 italic">Nincs még rögzített sofőr.</td>
+                        <td colspan="5" class="py-10 text-center text-gray-500 italic">Nincs m még rögzített sofőr.</td>
                     </tr>
                 @endforelse
                 </tbody>
@@ -496,7 +436,7 @@
         </div>
 
         <div id="driversEmptyState" class="mt-6 text-gray-400 {{ (count($drivers) > 0) ? 'hidden' : '' }}">
-            Nincs még rögzített sofőr. Kattints az <b>Új sofőr</b> gombra a felvitelhez.
+            Nincs m még rögzített sofőr. Kattints az <b>Új sofőr</b> gombra a felvitelhez.
         </div>
     </div>
 
@@ -507,7 +447,7 @@
             <div class="flex items-center justify-between mb-4">
                 <h3 id="driverModalTitle" class="text-white text-lg font-semibold">Új sofőr</h3>
                 <button type="button" id="closeDriverModal"
-                        class="text-gray-300 hover:text-white text-xl leading-none">×</button>
+                        class="text-gray-300 hover:text-white text-xl leading-none">Ă—</button>
             </div>
 
             <form id="driverForm" method="POST" action="{{ route('partner.soforok.store') }}"
@@ -577,15 +517,13 @@
 
 
         <!--jarmuvek-->
-<div id="trucksContent" class="content-section">
-    <h2 class="font-poppins text-xl font-semibold text-white mb-6">Járművek nyilvántartása</h2>
-
+<div id="trucksContent" class="content-section" data-page-title="Járművek nyilvántartása">
     <div class="glassmorphism-element p-6 rounded-xl">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-5">
             <div class="flex-1">
                 <input id="truckSearch" type="text"
                        class="w-full bg-transparent border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20"
-                       placeholder="Keresés rendszám, márka alapján...">
+                       placeholder="Keresés rendszám, márká alapján...">
             </div>
 
             <button type="button" id="addTruckBtn"
@@ -621,7 +559,7 @@
                         <td class="py-3 text-right space-x-2">
                             <form action="{{ route('partner.jarmuvek.toggle', $t->id) }}" method="POST" class="inline">
                                 @csrf
-                                <button type="submit" title="Státusz váltása" class="text-sky-400 hover:text-sky-300">
+                                <button type="submit" title="Státusz változtatása" class="text-sky-400 hover:text-sky-300">
                                     <i class="fas fa-power-off"></i>
                                 </button>
                             </form>
@@ -660,7 +598,7 @@
             <div class="flex items-center justify-between mb-4">
                 <h3 id="truckModalTitle" class="text-white text-lg font-semibold">Új jármű</h3>
                 <button type="button" id="closeTruckModal"
-                        class="text-gray-300 hover:text-white text-xl leading-none">×</button>
+                        class="text-gray-300 hover:text-white text-xl leading-none">Ă—</button>
             </div>
 
             <form id="truckForm" method="POST" action="{{ route('partner.jarmuvek.store') }}"
@@ -739,7 +677,7 @@
 
                 <div class="md:col-span-2">
                     <label class="block text-gray-300 mb-1">Össztömeg</label>
-                    <input id="truckÖssztömeg" name="ossztomeg_kg" type="text"
+                    <input id="truckOssztomeg" name="ossztomeg_kg" type="text"
                            class="w-full bg-slate-800 border border-white/10 rounded-lg px-4 py-2 text-gray-200 outline-none focus:border-white/20">
                 </div>
 
@@ -769,9 +707,7 @@
 </div>
 
        <!--riportok-->
-<div id="reportsContent" class="content-section hidden">
-    <h2 class="font-poppins text-xl font-semibold text-white mb-6">Riportok</h2>
-
+<div id="reportsContent" class="content-section hidden" data-page-title="Riportok">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
         <div class="glassmorphism-element p-6 rounded-xl">
@@ -820,9 +756,8 @@
 </div>
 
          <!--beallitasok-->
-<div id="settingsContent" class="content-section">
+<div id="settingsContent" class="content-section" data-page-title="Beállítások">
     <div class="mb-6">
-        <h2 class="font-poppins text-2xl font-semibold text-white mb-2">Beállítások</h2>
         <p class="text-slate-400 text-sm">A partnercég adatainak kezelése.</p>
     </div>
 
@@ -836,7 +771,7 @@
         <div class="mb-4 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-red-300">
             <ul class="space-y-1 text-sm">
                 @foreach($errors->all() as $error)
-                    <li>• {{ $error }}</li>
+                    <li>â€˘ {{ $error }}</li>
                 @endforeach
             </ul>
         </div>
@@ -864,7 +799,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label for="nev" class="block mb-2 text-sm font-medium text-slate-300">
-                        Cégnév
+                        Cégneve
                     </label>
                     <input
                         type="text"
@@ -974,20 +909,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     //tartalomvaltas
+    function renderPageTitle(title) {
+        if (!pageTitleContainer || !title) {
+            return;
+        }
+
+        pageTitleContainer.innerHTML =
+            `<h1 class="font-poppins text-2xl md:text-3xl font-bold text-white">${title}</h1>`;
+    }
+
     function switchContent(targetId) {
         const targetBaseId = targetId.startsWith('#') ? targetId.substring(1) : targetId;
 
         contentSections.forEach(section => {
             if (section.id === targetBaseId) {
                 section.classList.add('active');
-
-                if (pageTitleContainer && section.querySelector('h2')) {
-                    pageTitleContainer.innerHTML =
-                        `<h1 class="font-poppins text-2xl md:text-3xl font-bold text-white">${section.querySelector('h2').textContent}</h1>`;
-                } else if (pageTitleContainer && targetBaseId === 'dashboard-main-content') {
-                    pageTitleContainer.innerHTML =
-                        `<h1 class="font-poppins text-2xl md:text-3xl font-bold text-white">Irányítópult</h1>`;
-                }
+                const pageTitle = section.dataset.pageTitle || 'Irányítópult';
+                renderPageTitle(pageTitle);
             } else {
                 section.classList.remove('active');
             }
@@ -1119,7 +1057,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 .map(address => ({ address }));
 
             if (!from || !to || !truckType) {
-                portalErrorMessages.textContent = 'Kérjük, töltse ki az indulási hely, célhely és járműtípus mezőket.';
+                portalErrorMessages.textContent = 'Kérem, töltse ki az indulási hely, célhely és járműtípus mezőket.';
                 portalErrorMessages.classList.remove('hidden');
                 return;
             }
@@ -1198,7 +1136,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 portalResultsSection.classList.remove('hidden');
             } catch (err) {
-                console.error('Kalkulációs hiba a portálon:', err);
+                console.error('Kalkuláció hiba a portálon:', err);
                 portalErrorMessages.textContent = err.message || 'Ismeretlen hiba történt a kalkuláció során.';
                 portalErrorMessages.classList.remove('hidden');
             } finally {
@@ -1298,7 +1236,7 @@ document.addEventListener('DOMContentLoaded', () => {
         generateBtn.addEventListener('click', function () {
             tableBody.innerHTML = `
                 <tr class="border-b border-white/10 hover:bg-white/5 transition">
-                    <td class="py-3 pr-4">Generált riport</td>
+                    <td class="py-3 pr-4">GenerĂˇlt riport</td>
                     <td class="py-3 pr-4">${document.getElementById("reportType")?.value || ''}</td>
                     <td class="py-3 pr-4">${document.getElementById("reportFrom")?.value || ''} - ${document.getElementById("reportTo")?.value || ''}</td>
                     <td class="py-3 pr-4">
@@ -1358,7 +1296,7 @@ function editTruck(truck) {
     document.getElementById('truckTengelyszam').value = truck.tengelyszam || '';
     document.getElementById('truckAlvazszam').value = truck.vin || '';
     document.getElementById('truckEurobesorolas').value = truck.euro_besorolas || '';
-    document.getElementById('truckÖssztömeg').value = truck.ossztomeg_kg || '';
+    document.getElementById('truckOssztomeg').value = truck.ossztomeg_kg || '';
     document.getElementById('truckPotkocsikepes').value = truck.potkocsi_kepes ? 1 : 0;
 
     modal.classList.remove('hidden');
