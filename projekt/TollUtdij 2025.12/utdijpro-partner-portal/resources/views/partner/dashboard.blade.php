@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
+    <!--fejlec-->
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
+        /*basic szinek*/
         :root {
             --color-primary: #0ea5e9; /* sky-500 */
             --color-secondary: #6366f1; /* indigo-500 */
@@ -21,6 +23,7 @@
             --color-text-muted: #94a3b8; /* slate-400 */
             --color-border: rgba(56, 189, 248, 0.2);
         }
+        
         body {
             font-family: 'Roboto', sans-serif;
             background-color: var(--color-background);
@@ -100,11 +103,64 @@
 <body class="flex h-screen overflow-hidden">
 
     @php
+    // A bejelentkezett partner nevét töltjük be, ha elérhető.
+    // Ha nincs userName változó, akkor a sessionből olvassa a nevet.
     $partnerName = $userName ?? session('user_name', 'Partner felhasználó');
     @endphp
 
 
-    <!--mobilos nezet menu gomb(hamburger)-->
+    <!-- mobilos nezethez hamburger gomb-->
+    <button id="mobileMenuBtn" class="lg:hidden fixed top-4 left-4 p-3 bg-gray-800/80 text-white rounded-md backdrop-blur-sm shadow-lg">
+        <i class="fas fa-bars fa-lg"></i>
+    </button>
+
+    <!--sidebar navi-->
+    <aside id="sidebar" class="sidebar glassmorphism-element p-5 space-y-6 flex-shrink-0 h-full overflow-y-auto transform -translate-x-full lg:translate-x-0 fixed lg:static z-40">
+        <div class="logo-container text-center mb-6 pt-8 lg:pt-0">
+            <a href="/" class="flex items-center justify-center space-x-2" title="Vissza a főoldalra">
+                <i class="fas fa-road-bridge fa-2x text-[var(--color-primary)]"></i>
+                <span class="font-poppins self-center text-2xl font-bold whitespace-nowrap text-white">Útdíj<span class="text-[var(--color-primary)]">Pro</span></span>
+            </a>
+        </div>
+        <nav class="space-y-1.5">
+            <a href="#dashboard-main-content" id="dashboard" class="sidebar-link active flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
+                <i class="fas fa-tachometer-alt fa-fw w-5 text-center"></i><span class="font-medium">Irányítópult</span>
+            </a>
+            <a href="#calculatorSectionContent" id="openCalculator" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
+                <i class="fas fa-calculator fa-fw w-5 text-center"></i><span class="font-medium">Útdíj Kalkulátor</span>
+            </a>
+            <a href="#addUserContent" id="alkalmazottak" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
+                <i class="fas fa-users-cog fa-fw w-5 text-center"></i><span class="font-medium">Alkalmazottak</span>
+            </a>
+            <a href="#driversContent" id="soforok" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
+                <i class="fas fa-id-card fa-fw w-5 text-center"></i><span class="font-medium">Sofőrök</span>
+            </a>
+            <a href="#trucksContent" id="flotta" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
+                <i class="fas fa-truck fa-fw w-5 text-center"></i><span class="font-medium">Flotta</span>
+            </a>
+            <a href="#reportsContent" id="riportok" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
+                <i class="fas fa-chart-bar fa-fw w-5 text-center"></i><span class="font-medium">Riportok</span>
+            </a>
+            <a href="#settingsContent" id="beallitasok" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
+                <i class="fas fa-cog fa-fw w-5 text-center"></i><span class="font-medium">Beállítások</span>
+            </a>
+        </nav>
+        <div class="pt-6 mt-auto border-t border-[var(--color-border)]">
+            <!--logout link-->
+            <a href="{{ route('partner.logout') }}" class="block px-4 py-2 text-sm text-red-400 hover:bg-red-500/20 hover:text-white">
+    Kijelentkezés
+</a>
+        </div>
+    </aside>
+
+    <!-- main content, a kivalasztott panel itt jelenik meg -->
+    <main class="flex-1 p-6 md:p-10 overflow-y-auto" id="mainContentArea">
+        <header class="mb-8 md:mb-10">
+            <div class="flex justify-between items-center">
+                <div id="pageTitleContainer">
+                    <h1 class="font-poppins text-2xl md:text-3xl font-bold text-white">Irányítópult</h1>
+                </div>
+
     <button id="mobileMenuBtn" class="lg:hidden fixed top-4 left-4 p-3 bg-gray-800/80 text-white rounded-md backdrop-blur-sm shadow-lg">
         <i class="fas fa-bars fa-lg"></i>
     </button>
@@ -712,7 +768,7 @@
     </div>
 </div>
 
-       <!-- riportok -->
+       <!--riportok-->
 <div id="reportsContent" class="content-section hidden">
     <h2 class="font-poppins text-xl font-semibold text-white mb-6">Riportok</h2>
 
@@ -869,7 +925,9 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
+//js: menu, tartalomvaltas(menupont), kalkulator, modalok.
 document.addEventListener('DOMContentLoaded', () => {
+    //gombok es panelok dom-bol
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const sidebar = document.getElementById('sidebar');
     const mainContentArea = document.getElementById('mainContentArea');
@@ -879,6 +937,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const contentSections = document.querySelectorAll('.content-section');
     const sidebarLinkTriggers = document.querySelectorAll('.sidebar-link-trigger');
 
+    //kalkulator dom elemek
     const portalCalculateBtn = document.getElementById('portalCalculateBtn');
     const portalResultsSection = document.getElementById('portalResultsSection');
     const portalErrorMessages = document.getElementById('portalErrorMessages');
@@ -895,7 +954,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let routePolyline = null;
     let markers = [];
 
-    // Mobil menü
+    //mobil menu, sidebar
     if (mobileMenuBtn && sidebar) {
         mobileMenuBtn.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -914,7 +973,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Tartalom váltás
+    //tartalomvaltas
     function switchContent(targetId) {
         const targetBaseId = targetId.startsWith('#') ? targetId.substring(1) : targetId;
 
@@ -972,7 +1031,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Kalkulátor térkép
+    //kalkulator: leaflet terkep inicializalasa
     function initMap() {
         if (!map && portalMapContainer) {
             map = L.map(portalMapContainer).setView([47.1625, 19.5033], 7);
@@ -983,6 +1042,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    //kalkulacio eredmenyek es terkep tisztitasa uj kalkulacio elott
     function clearMapAndResults() {
         if (routePolyline && map) {
             map.removeLayer(routePolyline);
@@ -1009,6 +1069,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    //uj waypoint hozzaadasa a kalkulatorhoz
     function addWaypointInput() {
         if (!waypointsContainer) return;
 
@@ -1044,6 +1105,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    //kalkulacio gomb es logika (adatgyujtes, szerverhivas, eredmeny megjelenites)
     if (portalCalculateBtn) {
         portalCalculateBtn.addEventListener('click', async () => {
             const from = document.getElementById('from-loc')?.value.trim() || '';
@@ -1071,6 +1133,7 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const csrf = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
 
+                //a szerveroldali kalkulacios endpoint '/calculate', ami a kalkulacio logikat kezeli es visszaadja az eredmenyeket JSON formatumban.
                 const response = await fetch('/calculate', {
                     method: 'POST',
                     headers: {
@@ -1145,7 +1208,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // URL param alapján tab nyitás
     const params = new URLSearchParams(window.location.search);
     const tab = params.get('tab');
 
@@ -1155,7 +1217,7 @@ document.addEventListener('DOMContentLoaded', () => {
         switchContent(sidebarLinks[0].getAttribute('href'));
     }
 
-    // ===== SOFŐR MODAL =====
+    //sofor modal (hozzaadas es szerkesztes) funkciok
     const driverModal = document.getElementById('driverModal');
     const addDriverBtn = document.getElementById('addDriverBtn');
     const closeDriverModal = document.getElementById('closeDriverModal');
@@ -1187,7 +1249,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cancelDriverModal?.addEventListener('click', closeDriverModalFn);
     driverModalBackdrop?.addEventListener('click', closeDriverModalFn);
 
-    // ===== JÁRMŰ MODAL =====
+    //jarmu modal (hozzaadas es szerkesztes) funkciok
     const truckModal = document.getElementById('truckModal');
     const addTruckBtn = document.getElementById('addTruckBtn');
     const closeTruckModal = document.getElementById('closeTruckModal');
@@ -1219,7 +1281,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cancelTruckModal?.addEventListener('click', closeTruckModalFn);
     truckModalBackdrop?.addEventListener('click', closeTruckModalFn);
 
-    // ESC bezárás
+    //esc gomb modal bezarasahoz
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             closeDriverModalFn();
@@ -1227,7 +1289,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Riport demo
+    //riport
     const generateBtn = document.getElementById('generateReportBtn');
     const tableBody = document.getElementById('reportTableBody');
     const emptyState = document.getElementById('reportsEmptyState');
@@ -1254,7 +1316,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Globális edit függvények
+//globalis fuggvenyek a modalok megnyitasa es adatokkal valo feltoltesehez szerkesztes eseten
+//soforok
 function editDriver(driver) {
     const modal = document.getElementById('driverModal');
     const form = document.getElementById('driverForm');
@@ -1276,7 +1339,7 @@ function editDriver(driver) {
     modal.classList.remove('hidden');
     modal.classList.add('flex');
 }
-
+//jarmu
 function editTruck(truck) {
     const modal = document.getElementById('truckModal');
     const form = document.getElementById('truckForm');

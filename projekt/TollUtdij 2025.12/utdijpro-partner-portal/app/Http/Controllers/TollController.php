@@ -8,8 +8,10 @@ use Illuminate\Support\Str;
 
 class TollController extends Controller
 {
+    //toll kalkulator vezeto controller
     public function calculate(Request $request)
     {
+        //request validacio es bemenet feldolgozas
         $validated = $request->validate([
             'from' => ['required', 'string', 'max:255'],
             'to' => ['required', 'string', 'max:255'],
@@ -32,6 +34,7 @@ class TollController extends Controller
             $locations = [];
             $routePoints = [];
 
+            //start es celpont geokodolas
             $start = $this->geocodeAddress($from);
             $locations[] = [
                 'name' => 'Indulás',
@@ -41,6 +44,7 @@ class TollController extends Controller
             ];
             $routePoints[] = [$start['lng'], $start['lat']];
 
+            //megallok geokodolas es utvonal pontok hozzaadasa
             foreach ($waypoints as $index => $waypoint) {
                 $geo = $this->geocodeAddress($waypoint);
                 $locations[] = [
@@ -63,12 +67,14 @@ class TollController extends Controller
 
             $route = $this->getRoute($routePoints);
 
+            //tavolsag es utdij becsles
             $distanceKm = round(($route['distance_m'] / 1000), 1);
             $costHUF = $this->estimateToll($distanceKm, $vehicleType);
 
+            //coordinate transzformacio leaflethez
             $routeCoords = collect($route['coordinates'])
                 ->map(function ($coord) {
-                    return [$coord[1], $coord[0]]; // [lat, lng] Leaflethez
+                    return [$coord[1], $coord[0]]; //[lat, lng] leaflethez
                 })
                 ->values()
                 ->all();
@@ -91,6 +97,7 @@ class TollController extends Controller
         }
     }
 
+    //cim geokodolas openstreetmapal (nominatim API)
     private function geocodeAddress(string $address): array
 {
     $response = Http::timeout(20)
@@ -99,7 +106,7 @@ class TollController extends Controller
             'Accept-Language' => 'hu',
         ])
         ->withOptions([
-            'verify' => false, // ideiglenes fix lokál fejlesztéshez
+            'verify' => false, //ideiglenes fix local fejleszteshez
         ])
         ->get('https://nominatim.openstreetmap.org/search', [
             'q' => $address,
@@ -124,6 +131,7 @@ class TollController extends Controller
     ];
 }
 
+    //utvonal lekerese a megadott pontok alapjan
     private function getRoute(array $points): array
 {
     if (count($points) < 2) {
@@ -136,7 +144,7 @@ class TollController extends Controller
 
     $response = Http::timeout(30)
         ->withOptions([
-            'verify' => false, // ideiglenes fix lokál fejlesztéshez
+            'verify' => false, //ideiglenes
         ])
         ->get("https://router.project-osrm.org/route/v1/driving/{$coordinates}", [
             'overview' => 'full',
@@ -163,6 +171,7 @@ class TollController extends Controller
     ];
 }
 
+    //utdij becsles tavolsag es jarmutipus szamara
     private function estimateToll(float $distanceKm, string $vehicleType): int
     {
         $rates = [
@@ -179,6 +188,7 @@ class TollController extends Controller
         return (int) round($distanceKm * $ratePerKm);
     }
 
+    //google maps utvonallink generalasa a felhasznalo reszere (!!!!!NEM KELL JELENLEG)
     private function buildGoogleMapsLink(string $from, string $to, array $waypoints = []): ?string
     {
         $params = [
