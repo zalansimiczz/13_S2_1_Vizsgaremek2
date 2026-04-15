@@ -98,6 +98,9 @@
         #mobileMenuBtn { z-index: 60; }
         .content-section { display: none; }
         .content-section.active { display: block; }
+        .notification-panel {
+            width: min(24rem, calc(100vw - 2rem));
+        }
     </style>
 </head>
 <body class="flex h-screen overflow-hidden">
@@ -159,10 +162,70 @@
                     <h1 class="font-poppins text-2xl md:text-3xl font-bold text-white">Irányítópult</h1>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <button class="text-gray-400 hover:text-[var(--color-primary)] relative" aria-label="Értesítések">
-                        <i class="fas fa-bell fa-lg"></i>
-                        <span class="absolute -top-1 -right-1 block h-2.5 w-2.5 rounded-full bg-red-500 ring-2 ring-[var(--color-background)]"></span>
-                    </button>
+                    <div class="relative">
+                        <button
+                            id="notificationBtn"
+                            type="button"
+                            class="text-gray-400 hover:text-[var(--color-primary)] relative transition-colors"
+                            aria-label="Értesítések"
+                            aria-expanded="false"
+                            aria-controls="notificationPanel"
+                        >
+                            <i class="fas fa-bell fa-lg"></i>
+                            <span id="notificationDot" class="absolute -top-1 -right-1 block h-2.5 w-2.5 rounded-full bg-red-500 ring-2 ring-[var(--color-background)]"></span>
+                        </button>
+
+                        <div
+                            id="notificationPanel"
+                            class="notification-panel hidden absolute right-0 top-full mt-3 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)]/95 shadow-2xl shadow-black/30 backdrop-blur-xl overflow-hidden z-50"
+                        >
+                            <div class="flex items-center justify-between px-5 py-4 border-b border-white/10">
+                                <div>
+                                    <p class="font-poppins text-sm font-semibold text-white">Értesítések</p>
+                                    <p id="notificationSummary" class="text-xs text-gray-400">3 olvasatlan értesítés</p>
+                                </div>
+                                <button
+                                    id="markNotificationsReadBtn"
+                                    type="button"
+                                    class="text-xs font-medium text-sky-400 hover:text-sky-300 transition-colors"
+                                >
+                                    Összes olvasottnak
+                                </button>
+                            </div>
+
+                            <div id="notificationList" class="max-h-80 overflow-y-auto divide-y divide-white/5">
+                                <button type="button" class="notification-item w-full text-left px-5 py-4 hover:bg-white/5 transition bg-sky-500/5" data-unread="true">
+                                    <div class="flex items-start gap-3">
+                                        <span class="mt-1 h-2.5 w-2.5 rounded-full bg-sky-400 shrink-0"></span>
+                                        <div>
+                                            <p class="text-sm font-semibold text-white">Új alkalmazott került rögzítésre</p>
+                                            <p class="mt-1 text-xs text-gray-400">Ellenőrizd az alkalmazotti listát és az aktív állapotot.</p>
+                                        </div>
+                                    </div>
+                                </button>
+
+                                <button type="button" class="notification-item w-full text-left px-5 py-4 hover:bg-white/5 transition bg-sky-500/5" data-unread="true">
+                                    <div class="flex items-start gap-3">
+                                        <span class="mt-1 h-2.5 w-2.5 rounded-full bg-sky-400 shrink-0"></span>
+                                        <div>
+                                            <p class="text-sm font-semibold text-white">Új jármű vár ellenőrzésre</p>
+                                            <p class="mt-1 text-xs text-gray-400">Nézd át a flotta adatlapját, mielőtt tovább lépsz.</p>
+                                        </div>
+                                    </div>
+                                </button>
+
+                                <button type="button" class="notification-item w-full text-left px-5 py-4 hover:bg-white/5 transition bg-sky-500/5" data-unread="true">
+                                    <div class="flex items-start gap-3">
+                                        <span class="mt-1 h-2.5 w-2.5 rounded-full bg-sky-400 shrink-0"></span>
+                                        <div>
+                                            <p class="text-sm font-semibold text-white">Partner cégadat módosítás elérhető</p>
+                                            <p class="mt-1 text-xs text-gray-400">A beállítások menüpontban frissítheted a cégprofil adatait.</p>
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                     <div class="hidden md:block text-right mr-2 text-sm text-gray-300">
                         <div class="font-semibold">{{ $partnerName }}</div>
                         <div class="text-xs text-gray-400">Partner felhasználó</div>
@@ -883,11 +946,47 @@ document.addEventListener('DOMContentLoaded', () => {
     const waypointsContainer = document.getElementById('waypointsContainer');
     const addWaypointBtn = document.getElementById('addWaypointBtn');
     const calculatorLink = document.getElementById('openCalculator');
+    const notificationBtn = document.getElementById('notificationBtn');
+    const notificationPanel = document.getElementById('notificationPanel');
+    const notificationDot = document.getElementById('notificationDot');
+    const notificationSummary = document.getElementById('notificationSummary');
+    const notificationItems = document.querySelectorAll('.notification-item');
+    const markNotificationsReadBtn = document.getElementById('markNotificationsReadBtn');
 
     let waypointCounter = 0;
     let map = null;
     let routePolyline = null;
     let markers = [];
+
+    //ertesitesek allapotanak frissitese
+    function updateNotificationState() {
+        const unreadItems = Array.from(notificationItems).filter(item => item.dataset.unread === 'true');
+        const unreadCount = unreadItems.length;
+
+        if (notificationSummary) {
+            notificationSummary.textContent = unreadCount > 0
+                ? `${unreadCount} olvasatlan ertesites`
+                : 'Nincs uj ertesites';
+        }
+
+        if (notificationDot) {
+            notificationDot.classList.toggle('hidden', unreadCount === 0);
+        }
+    }
+
+    //ertesitesi panel nyitasa es zarasa
+    function toggleNotificationPanel(forceOpen = null) {
+        if (!notificationBtn || !notificationPanel) {
+            return;
+        }
+
+        const shouldOpen = forceOpen === null
+            ? notificationPanel.classList.contains('hidden')
+            : forceOpen;
+
+        notificationPanel.classList.toggle('hidden', !shouldOpen);
+        notificationBtn.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
+    }
 
     //mobil menu, sidebar
     if (mobileMenuBtn && sidebar) {
@@ -907,6 +1006,56 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    //ertesitesi panel es olvasatlan elemek kezelese
+    if (notificationBtn && notificationPanel) {
+        notificationBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleNotificationPanel();
+        });
+
+        notificationPanel.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!notificationPanel.contains(e.target) && !notificationBtn.contains(e.target)) {
+                toggleNotificationPanel(false);
+            }
+        });
+    }
+
+    if (markNotificationsReadBtn) {
+        markNotificationsReadBtn.addEventListener('click', () => {
+            notificationItems.forEach(item => {
+                item.dataset.unread = 'false';
+                item.classList.remove('bg-sky-500/5');
+
+                const itemBadge = item.querySelector('span');
+                if (itemBadge) {
+                    itemBadge.classList.add('hidden');
+                }
+            });
+
+            updateNotificationState();
+        });
+    }
+
+    notificationItems.forEach(item => {
+        item.addEventListener('click', () => {
+            item.dataset.unread = 'false';
+            item.classList.remove('bg-sky-500/5');
+
+            const itemBadge = item.querySelector('span');
+            if (itemBadge) {
+                itemBadge.classList.add('hidden');
+            }
+
+            updateNotificationState();
+        });
+    });
+
+    updateNotificationState();
 
     //tartalomvaltas
     function renderPageTitle(title) {
