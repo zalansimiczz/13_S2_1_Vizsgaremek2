@@ -230,9 +230,21 @@
                         <div class="font-semibold">{{ $partnerName }}</div>
                         <div class="text-xs text-gray-400">Partner felhasználó</div>
                     </div>
-                    <div class="relative group">
-                        <img src="https://placehold.co/40x40/7F9CF5/E0E7FF?text=P" alt="Partner Profilkép" class="w-10 h-10 rounded-full cursor-pointer border-2 border-transparent group-hover:border-[var(--color-primary)] transition-colors">
-                        <div class="absolute right-0 mt-2 w-48 bg-[var(--color-surface-light)] rounded-md shadow-lg py-1 hidden group-hover:block z-50 border border-[var(--color-border)]">
+                    <div class="relative">
+                        <button
+                            id="profileMenuBtn"
+                            type="button"
+                            class="rounded-full border-2 border-transparent hover:border-[var(--color-primary)] transition-colors"
+                            aria-label="Profil menu"
+                            aria-expanded="false"
+                            aria-controls="profileMenuPanel"
+                        >
+                            <img src="https://placehold.co/40x40/7F9CF5/E0E7FF?text=P" alt="Partner Profilkép" class="w-10 h-10 rounded-full cursor-pointer">
+                        </button>
+                        <div
+                            id="profileMenuPanel"
+                            class="hidden absolute right-0 mt-2 w-48 bg-[var(--color-surface-light)] rounded-md shadow-lg py-1 z-50 border border-[var(--color-border)]"
+                        >
                             <span class="block px-4 py-2 text-xs text-gray-400">{{ $partnerName }}</span>
                             <a href="#settingsContent" class="sidebar-link-trigger block px-4 py-2 text-sm text-gray-300 hover:bg-[var(--color-primary)]/20 hover:text-white">Beállítások</a>
                             <a href="{{ route('partner.logout') }}" class="block px-4 py-2 text-sm text-red-400 hover:bg-red-500/20 hover:text-white">Kijelentkezés</a>
@@ -952,6 +964,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const notificationSummary = document.getElementById('notificationSummary');
     const notificationItems = document.querySelectorAll('.notification-item');
     const markNotificationsReadBtn = document.getElementById('markNotificationsReadBtn');
+    const profileMenuBtn = document.getElementById('profileMenuBtn');
+    const profileMenuPanel = document.getElementById('profileMenuPanel');
 
     let waypointCounter = 0;
     let map = null;
@@ -988,6 +1002,20 @@ document.addEventListener('DOMContentLoaded', () => {
         notificationBtn.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
     }
 
+    //profil menu nyitasa es zarasa
+    function toggleProfileMenu(forceOpen = null) {
+        if (!profileMenuBtn || !profileMenuPanel) {
+            return;
+        }
+
+        const shouldOpen = forceOpen === null
+            ? profileMenuPanel.classList.contains('hidden')
+            : forceOpen;
+
+        profileMenuPanel.classList.toggle('hidden', !shouldOpen);
+        profileMenuBtn.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
+    }
+
     //mobil menu, sidebar
     if (mobileMenuBtn && sidebar) {
         mobileMenuBtn.addEventListener('click', (e) => {
@@ -1011,6 +1039,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (notificationBtn && notificationPanel) {
         notificationBtn.addEventListener('click', (e) => {
             e.stopPropagation();
+            toggleProfileMenu(false);
             toggleNotificationPanel();
         });
 
@@ -1021,6 +1050,25 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('click', (e) => {
             if (!notificationPanel.contains(e.target) && !notificationBtn.contains(e.target)) {
                 toggleNotificationPanel(false);
+            }
+        });
+    }
+
+    //profil menu kezelese
+    if (profileMenuBtn && profileMenuPanel) {
+        profileMenuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleNotificationPanel(false);
+            toggleProfileMenu();
+        });
+
+        profileMenuPanel.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!profileMenuPanel.contains(e.target) && !profileMenuBtn.contains(e.target)) {
+                toggleProfileMenu(false);
             }
         });
     }
@@ -1113,6 +1161,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (targetId && targetId.startsWith('#') && targetId.length > 1) {
                 e.preventDefault();
+                toggleProfileMenu(false);
                 switchContent(targetId);
             }
         });
