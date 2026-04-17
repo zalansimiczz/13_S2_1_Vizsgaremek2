@@ -6,7 +6,8 @@
 -- Létrehozás ideje: 2026. Ápr 17. 06:59
 -- Kiszolgáló verziója: 8.0.44
 -- PHP verzió: 8.2.29
-
+CREATE DATABASE tollutdijadatbazis;
+USE tollutdijadatbazis;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -17,9 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
---
--- Adatbázis: `tollutdijadatbazis`
---
+
 
 -- --------------------------------------------------------
 
