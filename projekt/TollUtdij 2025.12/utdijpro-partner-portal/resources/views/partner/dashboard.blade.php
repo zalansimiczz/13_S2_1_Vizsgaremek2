@@ -161,6 +161,7 @@
                 <div id="pageTitleContainer">
                     <h1 class="font-poppins text-2xl md:text-3xl font-bold text-white">Irányítópult</h1>
                 </div>
+                <!--
                 <div class="flex items-center space-x-4">
                     <div class="relative">
                         <button
@@ -226,28 +227,31 @@
                             </div>
                         </div>
                     </div>
-                    <div class="hidden md:block text-right mr-2 text-sm text-gray-300">
-                        <div class="font-semibold">{{ $partnerName }}</div>
-                        <div class="text-xs text-gray-400">Partner felhasználó</div>
-                    </div>
-                    <div class="relative">
-                        <button
-                            id="profileMenuBtn"
-                            type="button"
-                            class="rounded-full border-2 border-transparent hover:border-[var(--color-primary)] transition-colors"
-                            aria-label="Profil menu"
-                            aria-expanded="false"
-                            aria-controls="profileMenuPanel"
-                        >
-                            <img src="https://placehold.co/40x40/7F9CF5/E0E7FF?text=P" alt="Partner Profilkép" class="w-10 h-10 rounded-full cursor-pointer">
-                        </button>
-                        <div
-                            id="profileMenuPanel"
-                            class="hidden absolute right-0 mt-2 w-48 bg-[var(--color-surface-light)] rounded-md shadow-lg py-1 z-50 border border-[var(--color-border)]"
-                        >
-                            <span class="block px-4 py-2 text-xs text-gray-400">{{ $partnerName }}</span>
-                            <a href="#settingsContent" class="sidebar-link-trigger block px-4 py-2 text-sm text-gray-300 hover:bg-[var(--color-primary)]/20 hover:text-white">Beállítások</a>
-                            <a href="{{ route('partner.logout') }}" class="block px-4 py-2 text-sm text-red-400 hover:bg-red-500/20 hover:text-white">Kijelentkezés</a>
+                    -->
+                    <div class="ml-auto flex items-center gap-4">
+                        <div class="hidden md:block text-right text-sm text-gray-300">
+                            <div class="font-semibold">{{ $partnerName }}</div>
+                            <div class="text-xs text-gray-400">Partner felhasználó</div>
+                        </div>
+                        <div class="relative">
+                            <button
+                                id="profileMenuBtn"
+                                type="button"
+                                class="rounded-full border-2 border-transparent hover:border-[var(--color-primary)] transition-colors"
+                                aria-label="Profil menu"
+                                aria-expanded="false"
+                                aria-controls="profileMenuPanel"
+                            >
+                                <img src="https://placehold.co/40x40/7F9CF5/E0E7FF?text=P" alt="Partner Profilkép" class="w-10 h-10 rounded-full cursor-pointer">
+                            </button>
+                            <div
+                                id="profileMenuPanel"
+                                class="hidden absolute right-0 mt-2 w-48 bg-[var(--color-surface-light)] rounded-md shadow-lg py-1 z-50 border border-[var(--color-border)]"
+                            >
+                                <span class="block px-4 py-2 text-xs text-gray-400">{{ $partnerName }}</span>
+                                <a href="#settingsContent" class="sidebar-link-trigger block px-4 py-2 text-sm text-gray-300 hover:bg-[var(--color-primary)]/20 hover:text-white">Beállítások</a>
+                                <a href="{{ route('partner.logout') }}" class="block px-4 py-2 text-sm text-red-400 hover:bg-red-500/20 hover:text-white">Kijelentkezés</a>
+                            </div>
                         </div>
                     </div>
                 </div>
