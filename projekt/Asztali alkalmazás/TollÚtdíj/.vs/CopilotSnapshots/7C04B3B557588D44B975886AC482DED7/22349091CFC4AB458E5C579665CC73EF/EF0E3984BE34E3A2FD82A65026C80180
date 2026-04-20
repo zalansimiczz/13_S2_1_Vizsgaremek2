@@ -270,28 +270,14 @@ namespace TollÚtdíj
         // vagy új jármű hozzáadásakor beszúrja az új járművet az adatbázisba
         private void btnmentes_Click(object sender, EventArgs e)
         {
-            txbtomeg.BackColor = Color.White;
-            txbtengely.BackColor = Color.White;
-
             if (hozzaadas == false)
             { 
             if (!int.TryParse(txbtomeg.Text.Replace("kg", "").Trim(), out int tomeg))
             {
-
+               
                 lblhibas.Text = "Hibás össztömeg érték!";
                     lblhibas.ForeColor = Color.Red;
                     lblhibas.Visible = true;
-                    txbtomeg.BackColor = Color.PaleVioletRed;
-                    return;
-            }
-
-            // Ellenőrizzük a tengelyszámot is frissítéskor — ha rossz formátum, jelezzük a hibát a címkén
-            if (!int.TryParse(txbtengely.Text.Trim(), out int tengely))
-            {
-                lblhibas.Text = "Hibás tengelyszám érték!";
-                lblhibas.ForeColor = Color.Red;
-                lblhibas.Visible = true;
-                txbtengely.BackColor = Color.PaleVioletRed;
                     return;
             }
 
@@ -342,7 +328,7 @@ namespace TollÚtdíj
                     int potkocsiKepes = (cbbpotkocsi.SelectedItem?.ToString() == "Igen") ? 1 : 0;
                     parancs.Parameters.AddWithValue("@potkocsi", potkocsiKepes);
                     parancs.Parameters.AddWithValue("@euro_besorolas", cbbeuro.Text);
-                    parancs.Parameters.AddWithValue("@tengelyszam", tengely);
+                    parancs.Parameters.AddWithValue("@tengelyszam", txbtengely.Text.Trim());
                     parancs.Parameters.AddWithValue("@marka", txbmarka.Text.Trim());
                     
 

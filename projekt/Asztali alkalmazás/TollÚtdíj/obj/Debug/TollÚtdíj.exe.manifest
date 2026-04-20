@@ -174,14 +174,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TollÚtdíj.exe" size="112056">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TollÚtdíj.exe" size="126904">
       <assemblyIdentity name="TollÚtdíj" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>LO0iLiZEx40HSkAvpQvyEVua1j6eluA+GaLpwJ8TOZk=</dsig:DigestValue>
+        <dsig:DigestValue>kqXvNPFTimpJ9OjLCALJi9RtGKI/Y3u3UXmIbb9ampk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

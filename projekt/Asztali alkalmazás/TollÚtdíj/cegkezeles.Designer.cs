@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(cegkezeles));
             this.btnvissza = new System.Windows.Forms.Button();
             this.lblinfo = new System.Windows.Forms.Label();
             this.lblhibass = new System.Windows.Forms.Label();
@@ -75,7 +76,7 @@
             // 
             // btnmentes
             // 
-            this.btnmentes.Location = new System.Drawing.Point(89, 195);
+            this.btnmentes.Location = new System.Drawing.Point(188, 203);
             this.btnmentes.Name = "btnmentes";
             this.btnmentes.Size = new System.Drawing.Size(101, 38);
             this.btnmentes.TabIndex = 2;
@@ -85,21 +86,21 @@
             // 
             // txbcegnev
             // 
-            this.txbcegnev.Location = new System.Drawing.Point(75, 73);
+            this.txbcegnev.Location = new System.Drawing.Point(174, 81);
             this.txbcegnev.Name = "txbcegnev";
             this.txbcegnev.Size = new System.Drawing.Size(134, 20);
             this.txbcegnev.TabIndex = 4;
             // 
             // txbcegszam
             // 
-            this.txbcegszam.Location = new System.Drawing.Point(75, 114);
+            this.txbcegszam.Location = new System.Drawing.Point(174, 122);
             this.txbcegszam.Name = "txbcegszam";
             this.txbcegszam.Size = new System.Drawing.Size(134, 20);
             this.txbcegszam.TabIndex = 5;
             // 
             // txbcegcim
             // 
-            this.txbcegcim.Location = new System.Drawing.Point(75, 155);
+            this.txbcegcim.Location = new System.Drawing.Point(174, 163);
             this.txbcegcim.Name = "txbcegcim";
             this.txbcegcim.Size = new System.Drawing.Size(134, 20);
             this.txbcegcim.TabIndex = 6;
@@ -107,7 +108,7 @@
             // lbladatok
             // 
             this.lbladatok.AutoSize = true;
-            this.lbladatok.Location = new System.Drawing.Point(116, 54);
+            this.lbladatok.Location = new System.Drawing.Point(215, 62);
             this.lbladatok.Name = "lbladatok";
             this.lbladatok.Size = new System.Drawing.Size(44, 13);
             this.lbladatok.TabIndex = 7;
@@ -116,7 +117,7 @@
             // lbl1
             // 
             this.lbl1.AutoSize = true;
-            this.lbl1.Location = new System.Drawing.Point(13, 76);
+            this.lbl1.Location = new System.Drawing.Point(112, 84);
             this.lbl1.Name = "lbl1";
             this.lbl1.Size = new System.Drawing.Size(47, 13);
             this.lbl1.TabIndex = 8;
@@ -125,7 +126,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 117);
+            this.label1.Location = new System.Drawing.Point(106, 125);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 13);
             this.label1.TabIndex = 9;
@@ -134,7 +135,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(31, 155);
+            this.label2.Location = new System.Drawing.Point(130, 163);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(29, 13);
             this.label2.TabIndex = 10;
@@ -154,7 +155,7 @@
             this.lblhibas.AutoSize = true;
             this.lblhibas.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblhibas.ForeColor = System.Drawing.Color.Red;
-            this.lblhibas.Location = new System.Drawing.Point(229, 17);
+            this.lblhibas.Location = new System.Drawing.Point(228, 13);
             this.lblhibas.Name = "lblhibas";
             this.lblhibas.Size = new System.Drawing.Size(68, 16);
             this.lblhibas.TabIndex = 15;
@@ -179,6 +180,7 @@
             this.Controls.Add(this.btnvissza);
             this.Controls.Add(this.btnmentes);
             this.Controls.Add(this.lblhibass);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "cegkezeles";

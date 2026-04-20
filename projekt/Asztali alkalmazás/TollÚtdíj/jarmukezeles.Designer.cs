@@ -60,7 +60,7 @@
             // 
             // btnvissza
             // 
-            this.btnvissza.Location = new System.Drawing.Point(12, 12);
+            this.btnvissza.Location = new System.Drawing.Point(393, 403);
             this.btnvissza.Name = "btnvissza";
             this.btnvissza.Size = new System.Drawing.Size(75, 23);
             this.btnvissza.TabIndex = 0;
@@ -71,7 +71,7 @@
             // lbladatok
             // 
             this.lbladatok.AutoSize = true;
-            this.lbladatok.Location = new System.Drawing.Point(123, 52);
+            this.lbladatok.Location = new System.Drawing.Point(125, 64);
             this.lbladatok.Name = "lbladatok";
             this.lbladatok.Size = new System.Drawing.Size(44, 13);
             this.lbladatok.TabIndex = 12;
@@ -79,28 +79,28 @@
             // 
             // txbkategoria
             // 
-            this.txbkategoria.Location = new System.Drawing.Point(85, 148);
+            this.txbkategoria.Location = new System.Drawing.Point(88, 150);
             this.txbkategoria.Name = "txbkategoria";
             this.txbkategoria.Size = new System.Drawing.Size(134, 20);
             this.txbkategoria.TabIndex = 11;
             // 
             // txbtipus
             // 
-            this.txbtipus.Location = new System.Drawing.Point(85, 113);
+            this.txbtipus.Location = new System.Drawing.Point(88, 115);
             this.txbtipus.Name = "txbtipus";
             this.txbtipus.Size = new System.Drawing.Size(134, 20);
             this.txbtipus.TabIndex = 10;
             // 
             // txbrendszam
             // 
-            this.txbrendszam.Location = new System.Drawing.Point(85, 78);
+            this.txbrendszam.Location = new System.Drawing.Point(88, 80);
             this.txbrendszam.Name = "txbrendszam";
             this.txbrendszam.Size = new System.Drawing.Size(134, 20);
             this.txbrendszam.TabIndex = 9;
             // 
             // btnmentes
             // 
-            this.btnmentes.Location = new System.Drawing.Point(256, 78);
+            this.btnmentes.Location = new System.Drawing.Point(256, 73);
             this.btnmentes.Name = "btnmentes";
             this.btnmentes.Size = new System.Drawing.Size(85, 38);
             this.btnmentes.TabIndex = 8;
@@ -110,7 +110,7 @@
             // 
             // txbtomeg
             // 
-            this.txbtomeg.Location = new System.Drawing.Point(85, 183);
+            this.txbtomeg.Location = new System.Drawing.Point(88, 185);
             this.txbtomeg.Name = "txbtomeg";
             this.txbtomeg.Size = new System.Drawing.Size(134, 20);
             this.txbtomeg.TabIndex = 13;
@@ -119,7 +119,7 @@
             // 
             this.txbcegid.Location = new System.Drawing.Point(85, 411);
             this.txbcegid.Name = "txbcegid";
-            this.txbcegid.Size = new System.Drawing.Size(117, 20);
+            this.txbcegid.Size = new System.Drawing.Size(52, 20);
             this.txbcegid.TabIndex = 14;
             // 
             // lblcegid
@@ -134,7 +134,7 @@
             // lblkategoria
             // 
             this.lblkategoria.AutoSize = true;
-            this.lblkategoria.Location = new System.Drawing.Point(33, 154);
+            this.lblkategoria.Location = new System.Drawing.Point(27, 153);
             this.lblkategoria.Name = "lblkategoria";
             this.lblkategoria.Size = new System.Drawing.Size(55, 13);
             this.lblkategoria.TabIndex = 18;
@@ -143,7 +143,7 @@
             // lbltipus
             // 
             this.lbltipus.AutoSize = true;
-            this.lbltipus.Location = new System.Drawing.Point(50, 120);
+            this.lbltipus.Location = new System.Drawing.Point(44, 120);
             this.lbltipus.Name = "lbltipus";
             this.lbltipus.Size = new System.Drawing.Size(38, 13);
             this.lbltipus.TabIndex = 17;
@@ -152,7 +152,7 @@
             // lblrendszam
             // 
             this.lblrendszam.AutoSize = true;
-            this.lblrendszam.Location = new System.Drawing.Point(28, 86);
+            this.lblrendszam.Location = new System.Drawing.Point(22, 83);
             this.lblrendszam.Name = "lblrendszam";
             this.lblrendszam.Size = new System.Drawing.Size(60, 13);
             this.lblrendszam.TabIndex = 16;
@@ -161,7 +161,7 @@
             // lbltomeg
             // 
             this.lbltomeg.AutoSize = true;
-            this.lbltomeg.Location = new System.Drawing.Point(28, 188);
+            this.lbltomeg.Location = new System.Drawing.Point(20, 188);
             this.lbltomeg.Name = "lbltomeg";
             this.lbltomeg.Size = new System.Drawing.Size(62, 13);
             this.lbltomeg.TabIndex = 19;
@@ -170,7 +170,7 @@
             // cbbjarmulista
             // 
             this.cbbjarmulista.FormattingEnabled = true;
-            this.cbbjarmulista.Location = new System.Drawing.Point(98, 25);
+            this.cbbjarmulista.Location = new System.Drawing.Point(81, 25);
             this.cbbjarmulista.Name = "cbbjarmulista";
             this.cbbjarmulista.Size = new System.Drawing.Size(152, 21);
             this.cbbjarmulista.TabIndex = 20;
@@ -179,9 +179,9 @@
             // btnhozzaadas
             // 
             this.btnhozzaadas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnhozzaadas.Location = new System.Drawing.Point(335, 398);
+            this.btnhozzaadas.Location = new System.Drawing.Point(228, 403);
             this.btnhozzaadas.Name = "btnhozzaadas";
-            this.btnhozzaadas.Size = new System.Drawing.Size(133, 33);
+            this.btnhozzaadas.Size = new System.Drawing.Size(113, 23);
             this.btnhozzaadas.TabIndex = 21;
             this.btnhozzaadas.Text = "Új jármű hozzáadása";
             this.btnhozzaadas.UseVisualStyleBackColor = true;
@@ -190,7 +190,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(122, 9);
+            this.label4.Location = new System.Drawing.Point(105, 9);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(97, 13);
             this.label4.TabIndex = 22;
@@ -198,14 +198,14 @@
             // 
             // txbmarka
             // 
-            this.txbmarka.Location = new System.Drawing.Point(85, 218);
+            this.txbmarka.Location = new System.Drawing.Point(88, 220);
             this.txbmarka.Name = "txbmarka";
             this.txbmarka.Size = new System.Drawing.Size(134, 20);
             this.txbmarka.TabIndex = 23;
             // 
             // txbtengely
             // 
-            this.txbtengely.Location = new System.Drawing.Point(85, 253);
+            this.txbtengely.Location = new System.Drawing.Point(88, 255);
             this.txbtengely.Name = "txbtengely";
             this.txbtengely.Size = new System.Drawing.Size(134, 20);
             this.txbtengely.TabIndex = 24;
@@ -213,7 +213,7 @@
             // lblmarka
             // 
             this.lblmarka.AutoSize = true;
-            this.lblmarka.Location = new System.Drawing.Point(48, 222);
+            this.lblmarka.Location = new System.Drawing.Point(42, 223);
             this.lblmarka.Name = "lblmarka";
             this.lblmarka.Size = new System.Drawing.Size(40, 13);
             this.lblmarka.TabIndex = 25;
@@ -222,7 +222,7 @@
             // lbltengely
             // 
             this.lbltengely.AutoSize = true;
-            this.lbltengely.Location = new System.Drawing.Point(16, 256);
+            this.lbltengely.Location = new System.Drawing.Point(10, 258);
             this.lbltengely.Name = "lbltengely";
             this.lbltengely.Size = new System.Drawing.Size(72, 13);
             this.lbltengely.TabIndex = 26;
@@ -231,7 +231,7 @@
             // cbbeuro
             // 
             this.cbbeuro.FormattingEnabled = true;
-            this.cbbeuro.Location = new System.Drawing.Point(85, 329);
+            this.cbbeuro.Location = new System.Drawing.Point(88, 328);
             this.cbbeuro.Name = "cbbeuro";
             this.cbbeuro.Size = new System.Drawing.Size(134, 21);
             this.cbbeuro.TabIndex = 27;
@@ -239,7 +239,7 @@
             // lblbesor
             // 
             this.lblbesor.AutoSize = true;
-            this.lblbesor.Location = new System.Drawing.Point(26, 332);
+            this.lblbesor.Location = new System.Drawing.Point(26, 331);
             this.lblbesor.Name = "lblbesor";
             this.lblbesor.Size = new System.Drawing.Size(56, 13);
             this.lblbesor.TabIndex = 28;
@@ -248,14 +248,14 @@
             // cbbpotkocsi
             // 
             this.cbbpotkocsi.FormattingEnabled = true;
-            this.cbbpotkocsi.Location = new System.Drawing.Point(85, 364);
+            this.cbbpotkocsi.Location = new System.Drawing.Point(88, 363);
             this.cbbpotkocsi.Name = "cbbpotkocsi";
             this.cbbpotkocsi.Size = new System.Drawing.Size(134, 21);
             this.cbbpotkocsi.TabIndex = 29;
             // 
             // txbvin
             // 
-            this.txbvin.Location = new System.Drawing.Point(85, 290);
+            this.txbvin.Location = new System.Drawing.Point(88, 292);
             this.txbvin.Name = "txbvin";
             this.txbvin.Size = new System.Drawing.Size(134, 20);
             this.txbvin.TabIndex = 30;
@@ -263,7 +263,7 @@
             // lblvin
             // 
             this.lblvin.AutoSize = true;
-            this.lblvin.Location = new System.Drawing.Point(22, 293);
+            this.lblvin.Location = new System.Drawing.Point(22, 295);
             this.lblvin.Name = "lblvin";
             this.lblvin.Size = new System.Drawing.Size(60, 13);
             this.lblvin.TabIndex = 31;
@@ -272,7 +272,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(5, 367);
+            this.label1.Location = new System.Drawing.Point(-1, 366);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(83, 13);
             this.label1.TabIndex = 32;

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(soforkezeles));
             this.btnvissza = new System.Windows.Forms.Button();
             this.cbbsoforlista = new System.Windows.Forms.ComboBox();
             this.lblcegid = new System.Windows.Forms.Label();
@@ -271,6 +272,7 @@
             this.Controls.Add(this.txbszul);
             this.Controls.Add(this.cbbsoforlista);
             this.Controls.Add(this.btnvissza);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(447, 489);
             this.MinimumSize = new System.Drawing.Size(447, 489);
             this.Name = "soforkezeles";
