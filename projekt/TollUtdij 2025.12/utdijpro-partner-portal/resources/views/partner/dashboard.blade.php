@@ -145,6 +145,9 @@
             <a href="#settingsContent" id="beallitasok" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300">
                 <i class="fas fa-cog fa-fw w-5 text-center"></i><span class="font-medium">Beállítások</span>
             </a>
+            <a href="#downloadsContent" id="letoltesek" class="sidebar-link flex items-center space-x-3 px-4 py-2.5 rounded-md text-gray-300 ml-4 text-sm">
+                <i class="fas fa-download fa-fw w-5 text-center"></i><span class="font-medium">Asztali alkalmazás</span>
+            </a>
         </nav>
         <div class="pt-6 mt-auto border-t border-[var(--color-border)]">
             <!--logout link-->
@@ -933,6 +936,67 @@
                 </button>
             </div>
         </form>
+    </div>
+</div>
+
+<div id="downloadsContent" class="content-section" data-page-title="Asztali alkalmazás letöltése">
+    <div class="mb-6">
+        <p class="text-slate-400 text-sm">
+            Innen tölthető le a TollÚtdíj Windows asztali alkalmazás telepítőcsomagja.
+        </p>
+    </div>
+
+    <div class="glassmorphism-element p-6 md:p-8 rounded-2xl border border-cyan-500/10 overflow-hidden relative">
+        <div class="absolute -right-12 -top-12 h-40 w-40 rounded-full bg-cyan-500/10 blur-2xl"></div>
+        <div class="absolute -left-10 -bottom-10 h-36 w-36 rounded-full bg-indigo-500/10 blur-2xl"></div>
+
+        <div class="relative grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 items-center">
+            <div>
+                <div class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-cyan-500/10 border border-cyan-400/20 text-cyan-300 text-sm mb-5">
+                    <i class="fas fa-desktop"></i>
+                    <span>Windows telepítő</span>
+                </div>
+
+                <h3 class="font-poppins text-2xl font-semibold text-white mb-3">
+                    TollÚtdíj asztali alkalmazás
+                </h3>
+
+                <p class="text-slate-400 leading-relaxed max-w-2xl">
+                    Az asztali alkalmazás a belső adminisztrációhoz használható Windows program.
+                    A letöltés gombra kattintva a böngésző letölti a ZIP csomagot, amelyből a telepítő elindítható.
+                </p>
+
+                <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm">
+                    <div class="rounded-xl border border-slate-700/70 bg-slate-900/60 p-4">
+                        <p class="text-slate-500 mb-1">Fájl</p>
+                        <p class="text-white font-semibold">TollUtdij_Setup.zip</p>
+                    </div>
+                    <div class="rounded-xl border border-slate-700/70 bg-slate-900/60 p-4">
+                        <p class="text-slate-500 mb-1">Platform</p>
+                        <p class="text-white font-semibold">Windows</p>
+                    </div>
+                    <div class="rounded-xl border border-slate-700/70 bg-slate-900/60 p-4">
+                        <p class="text-slate-500 mb-1">Típus</p>
+                        <p class="text-white font-semibold">Asztali alkalmazás</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative">
+                <a
+                    href="{{ asset('downloads/TollUtdij_Setup.zip') }}"
+                    download="TollUtdij_Setup.zip"
+                    class="inline-flex w-full sm:w-auto items-center justify-center px-8 py-4 rounded-2xl font-semibold text-white bg-gradient-to-r from-cyan-500 to-indigo-500 hover:opacity-90 transition shadow-lg shadow-cyan-500/20 text-lg"
+                >
+                    <i class="fas fa-download mr-3"></i>
+                    Letöltés
+                </a>
+
+                <p class="mt-4 text-xs text-slate-500 max-w-xs text-center lg:text-left">
+                    Letöltés után csomagolja ki a ZIP fájlt, majd indítsa el a telepítőt.
+                </p>
+            </div>
+        </div>
     </div>
 </div>
     </main>
