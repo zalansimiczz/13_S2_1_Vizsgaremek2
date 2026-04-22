@@ -1,7 +1,4 @@
 
-![Logo](logo.png)
-
-
 #  TollÚtDíj
 
 Az ÚtdíjPro egy fuvarozó és logisztikai cégek számára készült rendszer, amely webes partner portálból, Windows asztali alkalmazásból és mobil GPS-követő alkalmazásból áll. A webes felületen a partnercégek kezelhetik a felhasználóikat, sofőrjeiket, járműveiket, cégadataikat és útdíj-kalkulációikat. A mobilalkalmazás bejelentkezés után pozícióadatokat küld a rendszernek, az asztali alkalmazás pedig belső adminisztrációra használható.
