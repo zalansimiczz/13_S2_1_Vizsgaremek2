@@ -1,0 +1,775 @@
+{
+  "info": {
+    "_postman_id": "ba7ae506-6f28-4b7d-833f-df5d7ef867b7",
+    "name": "UtdijPro Partner Portal API Copy",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52659814",
+    "_collection_link": "https://go.postman.co/collection/52659814-ba7ae506-6f28-4b7d-833f-df5d7ef867b7?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "partner",
+      "item": [
+        {
+          "name": "login",
+          "item": [
+            {
+              "name": "login token",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://127.0.0.1:8000/partner/login",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "partner",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Partner bejelentkezés",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/html",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_token",
+                      "value": "X2dx0XgOtzGYHfGTqTrTreYe3ajzuddthuNqQYDC",
+                      "type": "text",
+                      "uuid": "0413ba68-3073-4b58-8874-df8ba2da4e85"
+                    },
+                    {
+                      "key": "email",
+                      "value": "zalansimicz@gmail.com"
+                    },
+                    {
+                      "key": "password",
+                      "value": "12345678"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/partner/login",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "partner",
+                    "login"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Sikeres login redirect",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "key": "email",
+                          "value": "string"
+                        },
+                        {
+                          "key": "password",
+                          "value": "string"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/partner/login",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "partner",
+                        "login"
+                      ]
+                    }
+                  },
+                  "status": "Found",
+                  "code": 302,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "register",
+          "item": [
+            {
+              "name": "Regisztráció oldal",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/partner/register",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "partner",
+                    "register"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Register oldal",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/partner/register",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "partner",
+                        "register"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "name": "Partner regisztráció",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "email",
+                      "value": "string"
+                    },
+                    {
+                      "key": "password",
+                      "value": "string"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/partner/register",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "partner",
+                    "register"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Sikeres regisztráció",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "key": "name",
+                          "value": "string"
+                        },
+                        {
+                          "key": "email",
+                          "value": "string"
+                        },
+                        {
+                          "key": "password",
+                          "value": "string"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/partner/register",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "partner",
+                        "register"
+                      ]
+                    }
+                  },
+                  "status": "Found",
+                  "code": 302,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "dashboard",
+          "item": [
+            {
+              "name": "Dashboard",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/partner/dashboard",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "partner",
+                    "dashboard"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Dashboard betölt",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/partner/dashboard",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "partner",
+                        "dashboard"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "users",
+          "item": [
+            {
+              "name": "Felhasználó létrehozás",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/partner/users",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "partner",
+                    "users"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Sikeres mentés",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/partner/users",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "partner",
+                        "users"
+                      ]
+                    }
+                  },
+                  "status": "Found",
+                  "code": 302,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "soforok",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "update",
+                  "item": [
+                    {
+                      "name": "Sofőr frissítés",
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "text/html",
+                            "type": "text"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "key": "_token",
+                              "value": "zVhzfORMsUXKrbWITek7p7Sp03kcpkAasjcSGdLC",
+                              "type": "text",
+                              "uuid": "a32be0cc-ec39-473c-b6f7-3181fdbb9f79"
+                            },
+                            {
+                              "key": "nev",
+                              "value": "Teszt Sofőr Frissítve",
+                              "type": "text",
+                              "uuid": "eed70548-e2e8-4688-9cc8-7c45e59e156f"
+                            },
+                            {
+                              "key": "szemelyi_azonosito",
+                              "value": "SZIG123456",
+                              "type": "text",
+                              "uuid": "091e580e-9229-426e-bf7a-4cbe1d31842f"
+                            },
+                            {
+                              "key": "szuletesi_datum",
+                              "value": "1990-05-21",
+                              "type": "text",
+                              "uuid": "f0e9712e-a146-4d94-b8d4-1de9cf0e125b"
+                            },
+                            {
+                              "key": "telefonszam",
+                              "value": "+36201234567",
+                              "type": "text",
+                              "uuid": "ffc298fa-39b4-4e75-a38f-8316f74d27f0"
+                            },
+                            {
+                              "key": "cim",
+                              "value": "6724 Szeged, Teszt utca 5.",
+                              "type": "text",
+                              "uuid": "348fb1f9-2756-49cb-ac22-0e224f3b1855"
+                            },
+                            {
+                              "key": "adoszam",
+                              "value": "87654321-1-12",
+                              "type": "text",
+                              "uuid": "9f0ea619-84e1-464c-94bd-427c725cff00"
+                            },
+                            {
+                              "key": "aktiv",
+                              "value": "1",
+                              "type": "text",
+                              "uuid": "aeb21062-e9ba-4cf4-8ad0-44d58eda40ce"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "http://127.0.0.1:8000/partner/soforok/1053/update",
+                          "protocol": "http",
+                          "host": [
+                            "127",
+                            "0",
+                            "0",
+                            "1"
+                          ],
+                          "port": "8000",
+                          "path": [
+                            "partner",
+                            "soforok",
+                            "1053",
+                            "update"
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "name": "Sikeres frissítés",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [],
+                            "url": {
+                              "raw": "{{baseUrl}}/partner/soforok/:id/update",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "partner",
+                                "soforok",
+                                ":id",
+                                "update"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id",
+                                  "value": "1053"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Found",
+                          "code": 302,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "body": ""
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "Sofőr törlés",
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/partner/soforok/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "partner",
+                        "soforok",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "1053"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "name": "Sikeres törlés",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/partner/soforok/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "partner",
+                            "soforok",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "1053"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Found",
+                      "code": 302,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "body": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Sofőr létrehozás",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/partner/soforok",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "partner",
+                    "soforok"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Sikeres mentés",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/partner/soforok",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "partner",
+                        "soforok"
+                      ]
+                    }
+                  },
+                  "status": "Found",
+                  "code": 302,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "settings",
+      "item": [
+        {
+          "name": "company",
+          "item": [
+            {
+              "name": "dashboard_token",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://127.0.0.1:8000/partner/dashboard",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "partner",
+                    "dashboard"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Cég frissítés",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/html",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_token",
+                      "value": "zVhzfORMsUXKrbWITek7p7Sp03kcpkAasjcSGdLC",
+                      "type": "text",
+                      "uuid": "a0f071f8-177c-40cc-9f2c-d32ec6d53b57"
+                    },
+                    {
+                      "key": "_method",
+                      "value": "\tPUT",
+                      "type": "text",
+                      "uuid": "9da3b22f-4685-4ff6-b450-e2a39ea70754"
+                    },
+                    {
+                      "key": "nev",
+                      "value": "Demo Trans Kft.",
+                      "type": "text",
+                      "uuid": "f5e99982-69fa-4dc4-9714-45ec2f5ade36"
+                    },
+                    {
+                      "key": "adoszam",
+                      "value": "\t12345678-1-12",
+                      "type": "text",
+                      "uuid": "07dfff00-11b2-4fbf-8fd0-6369df033bf8"
+                    },
+                    {
+                      "key": "cim",
+                      "value": "6724 Szeged, Példa utca 12.",
+                      "type": "text",
+                      "uuid": "bfbb7178-6a15-487b-a4c6-ce30de4c4497"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/partner/settings/company",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "partner",
+                    "settings",
+                    "company"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Cég frissítve",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/settings/company",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "settings",
+                        "company"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "calculate",
+      "item": [
+        {
+          "name": "utdij_kalkulacio",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-CSRF-TOKEN",
+                "value": "zVhzfORMsUXKrbWITek7p7Sp03kcpkAasjcSGdLC",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"from\": \"Szeged, Magyarország\",\r\n  \"to\": \"Győr, Magyarország\",\r\n  \"vehicleType\": \"2AxlesTruck\",\r\n  \"waypoints\": []\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/calculate",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "calculate"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:8000"
+    }
+  ]
+}

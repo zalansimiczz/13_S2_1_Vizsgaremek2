@@ -267,7 +267,7 @@
                 <div class="stat-card glassmorphism-element p-6 rounded-xl">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-sm text-sky-300 font-medium">Mai Kalkulációk</p>
+                            <p class="text-sm text-sky-300 font-medium">Mai kalkulációk</p>
                             <p class="text-3xl font-bold text-white">12</p>
                         </div>
                         <i class="fas fa-calculator fa-3x text-sky-500 opacity-30"></i>
@@ -276,7 +276,7 @@
                 <div class="stat-card glassmorphism-element p-6 rounded-xl">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-sm text-sky-300 font-medium">Megtakarítás (Havi)</p>
+                            <p class="text-sm text-sky-300 font-medium">Megtakarítás (havi)</p>
                             <p class="text-3xl font-bold text-white">~350e Ft</p>
                         </div>
                         <i class="fas fa-piggy-bank fa-3x text-green-500 opacity-30"></i>
@@ -285,8 +285,8 @@
                 <div class="stat-card glassmorphism-element p-6 rounded-xl">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-sm text-sky-300 font-medium">Aktív Járművek</p>
-                            <p class="text-3xl font-bold text-white">8</p>
+                            <p class="text-sm text-sky-300 font-medium">Aktív járművek</p>
+                            <p class="text-3xl font-bold text-white">{{ collect($trucks ?? [])->where('aktiv', 1)->count() }}</p>
                         </div>
                         <i class="fas fa-truck-moving fa-3x text-amber-500 opacity-30"></i>
                     </div>
@@ -294,10 +294,10 @@
                 <div class="stat-card glassmorphism-element p-6 rounded-xl">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-sm text-sky-300 font-medium">Nyitott Számlák</p>
-                            <p class="text-3xl font-bold text-white">3</p>
+                            <p class="text-sm text-sky-300 font-medium">Aktív alkalmazottak</p>
+                            <p class="text-3xl font-bold text-white">{{ collect($employees ?? [])->where('aktiv', 1)->count() }}</p>
                         </div>
-                        <i class="fas fa-file-invoice fa-3x text-red-500 opacity-30"></i>
+                        <i class="fa-solid fa-user-group fa-3x text-red-500 opacity-30"></i>
                     </div>
                 </div>
             </section>
@@ -310,9 +310,11 @@
         <!--kalkulator-->
         <div id="calculatorSectionContent" class="content-section" data-page-title="Útdíj Kalkulátor">
             <section class="glassmorphism-element p-6 md:p-8 rounded-2xl">
-                <div class="flex justify-end items-center mb-6">
+            <!--    
+            <div class="flex justify-end items-center mb-6">
                     <button class="text-sky-400 hover:text-sky-300 text-sm"><i class="fas fa-history mr-1"></i> Korábbi Kalkulációk</button>
                 </div>
+            -->
                 <div class="calculator-container space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 calculator-input-group">
                         <div>
