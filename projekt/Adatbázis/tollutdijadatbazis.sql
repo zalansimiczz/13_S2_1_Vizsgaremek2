@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 26, 2026 at 08:43 PM
+-- Generation Time: Apr 26, 2026 at 08:54 PM
 -- Server version: 8.0.45
 -- PHP Version: 8.2.30
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `tollutdijadatbazis`
 --
-CREATE DATABASE IF NOT EXISTS `tollutdijadatbazis` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `tollutdijadatbazis`;
 
 -- --------------------------------------------------------
 
@@ -89,7 +87,7 @@ INSERT INTO `felhasznalok` (`id`, `ceg_id`, `email`, `jelszo_hash`, `teljes_nev`
 (11, 4, 'tesztalkalmazott2@gmail.com', '$2y$12$kqD1lRlLZdOBAqn4GpfqcObzMJ1zhxA/u8.GTcCKZLJ/XiCP.e7MS', 'Teszt Alkalmazott', 1, '2026-02-24 07:21:01', 'operator', NULL),
 (12, 4, 'zalansimicz11@gmail.com', '$2y$12$Q1xX1GwLyXfjCnZqSU7RXOtr3TWYR0hR1OCrKFmOZr1l/m2mstlNG', 'Zalan Zoltan Simicz', 0, '2026-02-24 07:27:19', 'operator', NULL),
 (13, 4, 'zalansimicz111@gmail.com', '$2y$12$eAlqwQl1e5NgukfeaniaL.uCYXJaN64AHR0wcip5ufcXUyv2UC.EO', 'Zalan Zoltan Simicz', 0, '2026-02-24 07:39:53', 'operator', NULL),
-(15, 4, 'bela@gmail.com', '$2a$12$N0Am.tWe3VukUGLv25n/fO2edlEjOXx6AFfxP11zuTXV8c3sEq8nm', 'Kiss Belus', 1, '2026-03-25 07:24:36', 'operator', NULL);
+(15, 4, 'bela@gmail.com', '$2a$12$N0Am.tWe3VukUGLv25n/fO2edlEjOXx6AFfxP11zuTXV8c3sEq8nm', 'Kiss Belus', 1, '2026-03-25 07:24:36', 'rendszer_admin', NULL);
 
 -- --------------------------------------------------------
 
@@ -119,7 +117,8 @@ INSERT INTO `felhasznalo_sessionok` (`id`, `felhasznalo_id`, `token`, `created_a
 (7, 6, 'f3dbef1f7160409183b04e3fb5d4f055', '2026-04-26 18:20:00', '2026-04-26 18:50:00'),
 (8, 7, 'e10f77acb61a42c8a4c8d6f1b7ecb066', '2026-04-26 18:25:00', '2026-04-26 18:55:00'),
 (9, 8, 'a8d42aef41554e89b62f5f6ef9f5d077', '2026-04-26 18:30:00', '2026-04-26 19:00:00'),
-(10, 9, '18a2d70d85754caf95ca0b6f79c1a088', '2026-04-26 18:35:00', '2026-04-26 19:05:00');
+(10, 9, '18a2d70d85754caf95ca0b6f79c1a088', '2026-04-26 18:35:00', '2026-04-26 19:05:00'),
+(11, 15, '83e1d07e19dc407cb796b6c328129f10', '2026-04-26 20:49:46', '2026-04-26 21:19:46');
 
 -- --------------------------------------------------------
 
@@ -181,14 +180,16 @@ CREATE TABLE `jogositvanyok` (
 INSERT INTO `jogositvanyok` (`id`, `sofor_id`, `kategoria`, `erv_tol`, `erv_ig`) VALUES
 (1, 1, 'B', '2024-01-01', '2034-01-01'),
 (2, 6, 'C', '2023-05-15', '2028-05-15'),
-(3, 7, 'C+E', '2022-09-01', '2027-09-01'),
+(3, 7, 'C', '2022-09-01', '2027-09-01'),
 (4, 8, 'B', '2021-03-20', '2031-03-20'),
 (5, 9, 'B', '2020-07-11', '2030-07-11'),
 (6, 10, 'C', '2024-02-01', '2029-02-01'),
-(7, 11, 'C+E', '2023-11-10', '2028-11-10'),
+(7, 11, 'C', '2023-11-10', '2028-11-10'),
 (8, 12, 'B', '2022-04-18', '2032-04-18'),
 (9, 13, 'D', '2021-06-06', '2026-06-06'),
-(10, 14, 'C', '2024-08-22', '2029-08-22');
+(11, 1, 'C', '2026-04-26', '2026-04-26'),
+(12, 14, 'C1', '2026-04-26', '2026-04-26'),
+(13, 11, 'B', '2026-04-26', '2026-04-26');
 
 -- --------------------------------------------------------
 
@@ -649,7 +650,7 @@ ALTER TABLE `felhasznalok`
 -- AUTO_INCREMENT for table `felhasznalo_sessionok`
 --
 ALTER TABLE `felhasznalo_sessionok`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `jarmuvek`
@@ -661,7 +662,7 @@ ALTER TABLE `jarmuvek`
 -- AUTO_INCREMENT for table `jogositvanyok`
 --
 ALTER TABLE `jogositvanyok`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `menetlevelek`

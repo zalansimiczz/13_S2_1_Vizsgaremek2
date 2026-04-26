@@ -19,7 +19,7 @@ namespace TollÚtdíj
         private readonly string role;
         private readonly int cegId;
         bool hozzaadas = false;
-        private readonly string[] osszesKategoria = { "C", "C1", "C1E", "CE" };
+        private readonly string[] osszesKategoria = {"B", "C", "C1", "C1E", "CE" };
 
 
         public jogsikezeles(string role, int cegId)
